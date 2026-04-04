@@ -20,6 +20,7 @@ Rectangle {
     anchors.fill: parent
     anchors.leftMargin: 8
     anchors.rightMargin: 10
+    spacing: 8
     
     // --- Media Controls ---
     Row {
@@ -35,6 +36,7 @@ Rectangle {
         
         MouseArea {
           anchors.fill: parent
+          cursorShape: Qt.PointingHandCursor
           enabled: MprisService.canGoPrevious
           onClicked: MprisService.previous()
         }
@@ -49,6 +51,7 @@ Rectangle {
         
         MouseArea {
           anchors.fill: parent
+          cursorShape: Qt.PointingHandCursor
           onClicked: MprisService.togglePlaying()
         }
       }
@@ -62,6 +65,7 @@ Rectangle {
         
         MouseArea {
           anchors.fill: parent
+          cursorShape: Qt.PointingHandCursor
           enabled: MprisService.canGoNext
           onClicked: MprisService.next()
         }
