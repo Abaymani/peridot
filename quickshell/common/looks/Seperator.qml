@@ -9,8 +9,7 @@ Rectangle {
     property color separatorColor: Colors.palette.neutral90
     
     width: 1
-    // We use implicitHeight so RowLayout knows how to size it
-    implicitHeight: parent ? parent.height * verticalPadding : 14
+    height: parent ? parent.height * verticalPadding : 14
     color: separatorColor
     
     // Ensure it stays centered in layouts

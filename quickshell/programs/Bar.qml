@@ -13,6 +13,7 @@ Scope {
 		model: Quickshell.screens
 
 		PanelWindow {
+			id: rootWindow
 			required property var modelData
 			screen: modelData
 
@@ -47,6 +48,7 @@ Scope {
 					
 					Item { Layout.fillWidth: true }
 					Widgets.Mpris { Layout.fillWidth: false }
+					Widgets.Tray {Layout.alignment: Qt.AlignVCenter}
 					Widgets.ClockWidget { }
 				}
 			}

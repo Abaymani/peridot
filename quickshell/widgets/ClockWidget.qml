@@ -5,9 +5,7 @@ import "../services" as Services
 
 Rectangle {
     id: clockPill
-    
-    // Adjust width/height based on your font size
-    implicitWidth: dateText.contentWidth + clockText.contentWidth + 32
+    width: dateText.contentWidth + clockText.contentWidth + 32
     implicitHeight: Looks.Decorations.decor.elementHeight
     radius: Looks.Decorations.decor.radius
     
