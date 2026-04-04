@@ -41,9 +41,10 @@ Scope {
 					anchors.fill: parent
 					spacing: 8
 
+					Widgets.Updates { Layout.fillWidth: false }
 					Widgets.Workspaces { Layout.fillWidth: false }
 					Widgets.ActiveWindow { Layout.fillWidth: false}
-
+					
 					Item { Layout.fillWidth: true }
 					Widgets.Mpris { Layout.fillWidth: false }
 					Widgets.ClockWidget { }

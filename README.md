@@ -1,6 +1,6 @@
 # PERIDOT(s)
 
-Personal 'WIP' dotfiles for Hyprland using Quickshell.
+Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell.
 
 ## TODO
 
@@ -11,7 +11,7 @@ Personal 'WIP' dotfiles for Hyprland using Quickshell.
 - [x] MPRIS widget
 - [ ] Network widget
 - [ ] Resource monitor 
-- [ ] Update(s) widget
+- [x] Update(s) widget
 - [ ] Volume controls
 - [x] Active window title
 - [ ] [Workspace overview / alt-tab](https://www.windowslatest.com/wp-content/uploads/2020/07/Alt-Tab-with-browser-tabs.jpg)
@@ -55,7 +55,7 @@ yay -S breeze-icons breeze-gtk qt6ct-kde qt5ct-kde darkly-bin
 
 ___
 
-Since I don't have an install script (yet) and have multiple setups, here are all the packages I use.
+Since I don't have an install script (yet) and have multiple setups, here are all the packages I use. **Some are hard-referenced or assumed by scripts**.
 
 **Packages:**
 
@@ -73,6 +73,7 @@ fastfetch
 ffmpegthumbnailer
 firefox
 fish
+figlet
 flatpak
 font-manager
 frameworkintegration
