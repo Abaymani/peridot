@@ -13,7 +13,7 @@ Personal 'WIP' dotfiles for Hyprland using Quickshell.
 - [ ] Resource monitor 
 - [ ] Update(s) widget
 - [ ] Volume controls
-- [ ] Active window title
+- [x] Active window title
 - [ ] [Workspace overview / alt-tab](https://www.windowslatest.com/wp-content/uploads/2020/07/Alt-Tab-with-browser-tabs.jpg)
 
 **Calendar**
@@ -55,9 +55,10 @@ yay -S breeze-icons breeze-gtk qt6ct-kde qt5ct-kde darkly-bin
 
 ___
 
-Since I don't have an install script, here are all the packages I use if you have stumbled upon these dotfiles and want to try them yourself.
+Since I don't have an install script (yet) and have multiple setups, here are all the packages I use.
 
 **Packages:**
+
 7zip
 adw-gtk-theme
 awww

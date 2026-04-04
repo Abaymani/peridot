@@ -32,9 +32,9 @@ RowLayout {
 
             Layout.fillWidth: true
             Layout.preferredWidth: animWidth 
-            Layout.fillHeight: true
+            implicitHeight: Looks.Decorations.decor.elementHeight
             
-            radius: height / 2
+            radius: Looks.Decorations.decor.radius
             color: ws? Utils.setAlphaColor(Looks.Colors.md3.secondary, 0.4) : "#01000000"
 
             gradient: isActive ? activeGradient : null
@@ -51,6 +51,7 @@ RowLayout {
             Text {
                 id: wsText
                 anchors.centerIn: parent
+                anchors.horizontalCenterOffset: -1
                 text: index + 1
                 font.family: Looks.Fonts.family
                 font.pixelSize: Looks.Fonts.size 

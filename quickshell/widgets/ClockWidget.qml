@@ -7,9 +7,9 @@ Rectangle {
     id: clockPill
     
     // Adjust width/height based on your font size
-    implicitWidth: clockText.contentWidth + 24 
-    implicitHeight: 25
-    radius: height / 2
+    implicitWidth: dateText.contentWidth + sep.contentWidth + clockText.contentWidth + 40 
+    implicitHeight: Looks.Decorations.decor.elementHeight
+    radius: Looks.Decorations.decor.radius
     
     // Match the inactive workspace style or use a specific background
     gradient: gradient
@@ -23,16 +23,46 @@ Rectangle {
         
     }
 
-    Text {
-        id: clockText
+    RowLayout {
+        id: datetime
         anchors.centerIn: parent
-        
-        // Using the global font settings we discussed
-        font.family: Looks.Fonts.family
-        font.pixelSize: Looks.Fonts.size 
-        font.weight: Looks.Fonts.weight
-        
-        text: Qt.formatDateTime(Time.time, "yyyy-MM-dd  hh:mm")
-        color: Looks.Colors.palette.neutral100
+        spacing: 8
+
+        Text {
+            id: dateText
+            
+            // Using the global font settings we discussed
+            font.family: Looks.Fonts.family
+            font.pixelSize: Looks.Fonts.size 
+            font.weight: Looks.Fonts.weight
+            
+            text: Qt.formatDateTime(Time.time, "yyyy-MM-dd")
+            color: Looks.Colors.palette.neutral100
+        }
+
+        Text {
+            id: sep
+            
+
+            font.family: Looks.Fonts.family
+            font.pixelSize: Looks.Fonts.size 
+            font.weight: Looks.Fonts.weight
+            
+            text: "|"
+            color: Looks.Colors.palette.neutral90
+        }
+
+        Text {
+            id: clockText
+            
+
+            font.family: Looks.Fonts.family
+            font.pixelSize: Looks.Fonts.size 
+            font.weight: Looks.Fonts.weight
+            
+            text: Qt.formatDateTime(Time.time, "hh:mm")
+            color: Looks.Colors.palette.neutral100
+        }
     }
+    
 }

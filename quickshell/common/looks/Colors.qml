@@ -10,7 +10,7 @@ Singleton {
 	property alias palette: jsonAdapter.palette
 
 	FileView {
-		path: Quickshell.env("HOME") + "/.local/state/quickshell/generated/colors.json"
+		path: Quickshell.env("HOME") + "/.config/quickshell/common/looks/colors.json"
 		watchChanges: true
 		onFileChanged: reload()
 

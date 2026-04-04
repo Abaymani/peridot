@@ -6,49 +6,50 @@ import "../common/looks" as Looks
 import "../common/utils/functions.js" as Utils
 
 Scope {
-    id: root
-    property string time
+	id: root
+	property string time
 
-    Variants {
-        model: Quickshell.screens
+	Variants {
+		model: Quickshell.screens
 
-        PanelWindow {
-            required property var modelData
-            screen: modelData
+		PanelWindow {
+			required property var modelData
+			screen: modelData
 
-            anchors {
-                top: true
-                left: true
-                right: true
-            }
+			anchors {
+					top: true
+					left: true
+					right: true
+			}
 
-            margins {
-                top: 4
-                left: 10
-                right: 10
-            }
+			margins {
+					top: Looks.Decorations.decor.barMarginTop
+					left: Looks.Decorations.decor.barMarginLeft
+					right: Looks.Decorations.decor.barMarginRight
+			}
 
-            implicitHeight: 25
-            color: "transparent"   // must be transparent
+			implicitHeight: Looks.Decorations.decor.barHeight
+			color: "transparent"   
 
-            Rectangle {
-                anchors.fill: parent
-                radius: 10
-								color: "transparent"
-                clip: true
+			Rectangle {
+				anchors.fill: parent
+				radius: Looks.Decorations.decor.radius
+				color: "transparent"
+				clip: true
 
-                RowLayout {
-                    anchors.fill: parent
-                    spacing: 8
+				RowLayout {
+					anchors.fill: parent
+					spacing: 8
 
-										Widgets.Workspaces { Layout.fillWidth: false }
+					Widgets.Workspaces { Layout.fillWidth: false }
+					Widgets.ActiveWindow { Layout.fillWidth: false}
 
-                    Item { Layout.fillWidth: true }
-
-                    Widgets.ClockWidget { }
-                }
-            }
-        }
-    }
+					Item { Layout.fillWidth: true }
+					
+					Widgets.ClockWidget { }
+				}
+			}
+		}
+	}
 }
 

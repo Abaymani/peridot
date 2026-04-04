@@ -1,0 +1,10 @@
+{
+  "decor": {
+    "radius": 12,
+    "barHeight": 25,
+    "barMarginTop": 6,
+    "barMarginLeft": 10,
+    "barMarginRight": 10,
+    "elementHeight": 25
+  }
+}
