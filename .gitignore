@@ -21,3 +21,17 @@
 mimeapps.list
 pavucontrol.ini
 /kitty/kitty.conf.bak
+gtk-3.0/colors.css
+gtk-4.0/colors.css
+hypr/colors.conf
+hypr/decorations.conf
+yazi/theme.toml
+wofi/colors.css
+waypaper/config.ini
+waypaper/colors.css
+swaync/colors.css
+qt6ct/colors/matugen.conf
+qt5ct/colors/matugen.conf
+obs-studio/themes/matugen.obt
+kitty/themes/Matugen.conf
+kitty/current-theme.conf
