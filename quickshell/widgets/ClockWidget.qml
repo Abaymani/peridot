@@ -1,13 +1,14 @@
 import QtQuick
 import QtQuick.Layouts
 import "../common/looks" as Looks
+import "../services" as Services
 import "../common/utils/functions.js" as Utils
 
 Rectangle {
     id: clockPill
     
     // Adjust width/height based on your font size
-    implicitWidth: dateText.contentWidth + sep.contentWidth + clockText.contentWidth + 40 
+    implicitWidth: dateText.contentWidth + sep.contentWidth + clockText.contentWidth + 32
     implicitHeight: Looks.Decorations.decor.elementHeight
     radius: Looks.Decorations.decor.radius
     
@@ -18,7 +19,7 @@ Rectangle {
         id: gradient
         orientation: Gradient.Horizontal // Use Horizontal for a "pill" look
         GradientStop { position: -0.2; color: Looks.Colors.md3.primary }
-        GradientStop { position: 0.1; color: '#74ffffff'}
+        GradientStop { position: 0.2; color: '#14ffffff'}
         GradientStop { position: 1.0; color: Looks.Colors.md3.secondary } // Or any accent color
         
     }
@@ -26,7 +27,7 @@ Rectangle {
     RowLayout {
         id: datetime
         anchors.centerIn: parent
-        spacing: 8
+        spacing: 4
 
         Text {
             id: dateText
@@ -36,7 +37,7 @@ Rectangle {
             font.pixelSize: Looks.Fonts.size 
             font.weight: Looks.Fonts.weight
             
-            text: Qt.formatDateTime(Time.time, "yyyy-MM-dd")
+            text: Qt.formatDateTime(Services.Time.time, "yyyy-MM-dd")
             color: Looks.Colors.palette.neutral100
         }
 
@@ -60,7 +61,7 @@ Rectangle {
             font.pixelSize: Looks.Fonts.size 
             font.weight: Looks.Fonts.weight
             
-            text: Qt.formatDateTime(Time.time, "hh:mm")
+            text: Qt.formatDateTime(Services.Time.time, "hh:mm")
             color: Looks.Colors.palette.neutral100
         }
     }

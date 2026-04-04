@@ -8,7 +8,7 @@ Personal 'WIP' dotfiles for Hyprland using Quickshell.
 **Topbar**
 - [x] datetime display
 - [x] Workspaces widget
-- [ ] MPRIS widget
+- [x] MPRIS widget
 - [ ] Network widget
 - [ ] Resource monitor 
 - [ ] Update(s) widget

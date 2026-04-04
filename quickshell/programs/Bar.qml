@@ -45,7 +45,7 @@ Scope {
 					Widgets.ActiveWindow { Layout.fillWidth: false}
 
 					Item { Layout.fillWidth: true }
-					
+					Widgets.Mpris { Layout.fillWidth: false }
 					Widgets.ClockWidget { }
 				}
 			}
