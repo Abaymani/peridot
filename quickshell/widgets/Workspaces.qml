@@ -39,13 +39,8 @@ RowLayout {
 
             gradient: isActive ? activeGradient : null
             
-            Gradient {
+            Looks.Gradient {
                 id: activeGradient
-                orientation: Gradient.Horizontal // Use Horizontal for a "pill" look
-                GradientStop { position: -0.3; color: Looks.Colors.md3.primary }
-                GradientStop { position: 0.3; color: '#74ffffff'}
-                GradientStop { position: 1.0; color: Looks.Colors.md3.secondary } // Or any accent color
-                
             }
 
             Text {

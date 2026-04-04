@@ -12,16 +12,8 @@ Rectangle {
   width: mainLayout.implicitWidth + (mainLayout.anchors.leftMargin * 2)
 
   radius: Looks.Decorations.decor.radius
-  gradient: gradient
-            
-	Gradient {
-		id: gradient
-		orientation: Gradient.Horizontal // Use Horizontal for a "pill" look
-		GradientStop { position: -0.2; color: Looks.Colors.md3.primary }
-		GradientStop { position: .2; color: '#14ffffff'}
-		GradientStop { position: 1.0; color: Looks.Colors.md3.secondary } // Or any accent color
-	}
-  clip: true
+  gradient: Looks.Gradient { }
+
 
   RowLayout {
 		id: mainLayout

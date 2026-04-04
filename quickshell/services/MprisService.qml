@@ -81,7 +81,7 @@ Singleton {
       }
 
       function onPlaybackStateChanged() {
-        if (root.trackedPlayer !== modeldata) root.trackedPlayer = modelData;
+        if (root.trackedPlayer !== modelData) root.trackedPlayer = modelData;
       }
     }
   }
