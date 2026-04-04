@@ -3,8 +3,8 @@
     "radius": 12,
     "barHeight": 25,
     "barMarginTop": 6,
-    "barMarginLeft": 10,
-    "barMarginRight": 10,
+    "barMarginLeft": 12,
+    "barMarginRight": 12,
     "elementHeight": 25
   }
 }

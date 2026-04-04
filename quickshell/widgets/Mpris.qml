@@ -26,19 +26,19 @@ Rectangle {
   RowLayout {
 		id: mainLayout
     anchors.fill: parent
-    anchors.leftMargin: 12
-    anchors.rightMargin: 12
-    spacing: 10
+    anchors.leftMargin: 8
+    anchors.rightMargin: 10
     
     // --- Media Controls ---
     Row {
-      spacing: 6
+      spacing: 8
       Layout.alignment: Qt.AlignVCenter
 
       // Previous Button
       Text {
         text: "󰒮" // or "<<"
         font.pixelSize: Looks.Fonts.size * 1.2
+        bottomPadding: 2
         color: MprisService.canGoPrevious ? Looks.Colors.palette.neutral100 : "#66ffffff"
         
         MouseArea {
@@ -52,6 +52,7 @@ Rectangle {
       Text {
         text: MprisService.isPlaying ? "󰏤" : "󰐊" // or "||" : ">"
         font.pixelSize: Looks.Fonts.size * 1.2
+        bottomPadding: 2
         color: Looks.Colors.palette.neutral100
         
         MouseArea {
@@ -64,6 +65,7 @@ Rectangle {
       Text {
         text: "󰒭" // or ">>"
         font.pixelSize: Looks.Fonts.size * 1.2
+        bottomPadding: 2
         color: MprisService.canGoNext ? Looks.Colors.palette.neutral100 : "#66ffffff"
         
         MouseArea {
@@ -74,17 +76,12 @@ Rectangle {
       }
     }
 
-    // --- Vertical Divider ---
-    Rectangle {
-      width: 1
-      height: parent.height * 0.4
-      color: Looks.Colors.palette.neutral90
-    }
-
+    Looks.Seperator { }
+    
     // --- Track Title (Scrolling Marquee) ---
 		Item {
 			id: textContainer
-			width: 125
+			width: 120
 			height: parent.height
 			clip: true // Hide the text when it scrolls outside this box
 
@@ -123,5 +120,29 @@ Rectangle {
 				}
 			}
 		}
+
+    Text {
+      Layout.preferredWidth: 10
+      Layout.alignment: Text.AlignVCenter
+      horizontalAlignment: Text.AlignHCenter
+      bottomPadding: 2
+      
+      font.family: Looks.Fonts.family // Assuming this is a Nerd Font
+      font.pixelSize: Looks.Fonts.size + 2
+      color: Looks.Colors.palette.neutral100
+
+      // This logic switches the icon based on the app name
+      text: {
+        let entry = (MprisService.activePlayer?.desktopEntry ?? "").toLowerCase();
+        
+        if (entry.includes("spotify")) return "󰓇"; // Spotify icon
+        if (entry.includes("firefox")) return "󰈹"; // Firefox icon
+        if (entry.includes("chromium") || entry.includes("chrome")) return "󰊯"; 
+        if (entry.includes("vlc")) return "󰕼"; 
+        if (entry.includes("mpv")) return "󰕼";
+        
+        return "󰎆"; // Default Music Note icon
+      }
+    }
   }
 }

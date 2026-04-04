@@ -8,7 +8,7 @@ Rectangle {
     id: clockPill
     
     // Adjust width/height based on your font size
-    implicitWidth: dateText.contentWidth + sep.contentWidth + clockText.contentWidth + 32
+    implicitWidth: dateText.contentWidth + clockText.contentWidth + 32
     implicitHeight: Looks.Decorations.decor.elementHeight
     radius: Looks.Decorations.decor.radius
     
@@ -27,12 +27,10 @@ Rectangle {
     RowLayout {
         id: datetime
         anchors.centerIn: parent
-        spacing: 4
+        height: parent.height
 
         Text {
             id: dateText
-            
-            // Using the global font settings we discussed
             font.family: Looks.Fonts.family
             font.pixelSize: Looks.Fonts.size 
             font.weight: Looks.Fonts.weight
@@ -41,22 +39,11 @@ Rectangle {
             color: Looks.Colors.palette.neutral100
         }
 
-        Text {
-            id: sep
-            
-
-            font.family: Looks.Fonts.family
-            font.pixelSize: Looks.Fonts.size 
-            font.weight: Looks.Fonts.weight
-            
-            text: "|"
-            color: Looks.Colors.palette.neutral90
-        }
+        Looks.Seperator { }
 
         Text {
             id: clockText
             
-
             font.family: Looks.Fonts.family
             font.pixelSize: Looks.Fonts.size 
             font.weight: Looks.Fonts.weight

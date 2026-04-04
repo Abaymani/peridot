@@ -24,6 +24,23 @@ Singleton {
     p => p.dbusName?.startsWith('org.mpris.MediaPlayer2.plasma-browser-integration')
   )
 
+  readonly property string activePlayerIcon: {
+    let entry = root.activePlayer?.desktopEntry ?? "";
+    
+    // 1. Remove file path if it's a full path (e.g., /usr/share/applications/spotify.desktop)
+    if (entry.includes("/")) {
+        entry = entry.split("/").pop();
+    }
+    
+    // 2. Remove the .desktop extension
+    if (entry.endsWith(".desktop")) {
+        entry = entry.slice(0, -8);
+    }
+    
+    // 3. Fallback to a generic music icon if empty
+    return entry.toLowerCase() || "audio-x-generic";
+}
+
   function isRealPlayer(player) {
     return (
       // Remove native browser buses only if plasma-browser-integration is actually active on D-Bus
