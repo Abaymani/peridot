@@ -19,11 +19,11 @@ Singleton {
 	}
 
 	component Decorations: JsonObject {
-		property int radius: 0
-		property int barHeight: 0
+		property int radius: 10
+		property int barHeight: 25
 		property int barMarginTop: 0
 		property int barMarginLeft: 0
 		property int barMarginRight: 0
-		property int elementHeight: 0
+		property int elementHeight: 25
 	}
 }
