@@ -50,8 +50,8 @@ pacman -S adw-gtk-theme
 ```
 yay -S breeze-icons breeze-gtk qt6ct-kde qt5ct-kde darkly-bin
 ```
-[!CAUTION]
-Qt apps may display dark text on dark backgrounds when using dark themes.
+> [!CAUTION]
+> Qt apps may display dark text on dark backgrounds when using dark themes.
 
 ___
 
