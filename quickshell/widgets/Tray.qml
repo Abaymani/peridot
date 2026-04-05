@@ -7,8 +7,8 @@ import "../common/looks" as Looks
 
 RowLayout {
   id: trayRoot
-  spacing: 8
-  
+  Layout.fillWidth: false
+
   Repeater {
     model: SystemTray.items
 
@@ -36,6 +36,7 @@ RowLayout {
 
       MouseArea {
         anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
         acceptedButtons: Qt.LeftButton | Qt.RightButton
         hoverEnabled: true
         
