@@ -9,7 +9,6 @@ Singleton {
   id: root
 
   property int count: 0
-  property string currentStatus: "none"
 
   Process {
     id: updateProcess
@@ -19,10 +18,6 @@ Singleton {
     stdout: StdioCollector {
       onStreamFinished: {
         root.count = parseInt(this.text.trim()) || 0;
-        if (root.count > 100) root.currentStatus = "red";
-        else if (root.count > 50) root.currentStatus = "yellow";
-        else if (root.count > 0) root.currentStatus = "green";
-        else root.currentStatus = "none";
       }
     }
   }
@@ -38,7 +33,7 @@ Singleton {
   }
 
   Timer {
-    interval: 1000*60*15 // 15 minutes in miliseconds
+    interval: 1000 * 60 * 5 // 5 minutes in miliseconds
     running: true
     repeat: true
     onTriggered: updateProcess.running = true

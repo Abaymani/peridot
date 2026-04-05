@@ -9,7 +9,7 @@ Rectangle {
 	
 	
 	// 2. Dynamic Width: Hug the content + padding
-	width: mainLayout.implicitWidth + 24
+	implicitWidth: mainLayout.implicitWidth + 24
 	implicitHeight: Looks.Decorations.decor.elementHeight
 	radius: Looks.Decorations.decor.radius
 	clip: true
@@ -17,10 +17,10 @@ Rectangle {
 	// 3. The Reusable Gradient: Uses the Enum to pick the "glow" color
 	gradient: Looks.Gradient {
 		midColor: {
-			const current = Services.UpdateService.currentStatus;
+			const count = Services.UpdateService.count;
 
-			if (current === "red") return "#44ff4444";    // Transparent Red
-			if (current === "yellow") return '#44fafa12'; // Transparent Yellow
+			if (count >= 100) return "#44ff4444";    // Transparent Red
+			if (count >= 50) return '#44fafa12'; // Transparent Yellow
 			return '#0fffffff'
 		}
 	}
