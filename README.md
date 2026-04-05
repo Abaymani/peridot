@@ -14,7 +14,7 @@ Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell.
 - [x] Update(s) widget
 - [ ] Volume controls
 - [x] Active window title
-- [ ] Tray
+- [x] Tray
 - [ ] [Workspace overview / alt-tab](https://www.windowslatest.com/wp-content/uploads/2020/07/Alt-Tab-with-browser-tabs.jpg)
 
 **Calendar**
