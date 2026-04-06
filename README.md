@@ -10,7 +10,7 @@ Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell.
 - [x] Workspaces widget
 - [x] MPRIS widget
 - [ ] Network widget
-- [ ] Resource monitor 
+- [x] Resource monitor 
 - [x] Update(s) widget
 - [ ] Volume controls
 - [x] Active window title
@@ -107,6 +107,7 @@ networkmanager
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
+ttf-jetbrains-mono-nerd
 ntfs-3g
 nvidia-580xx-dkms
 nvidia-settings

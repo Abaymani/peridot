@@ -47,6 +47,7 @@ Scope {
 					Widgets.ActiveWindow { Layout.fillWidth: false}
 					
 					Item { Layout.fillWidth: true }
+					Widgets.ResourceMonitor {}
 					Widgets.Mpris { Layout.fillWidth: false }
 					Widgets.Tray {Layout.alignment: Qt.AlignVCenter}
 					Widgets.ClockWidget { }

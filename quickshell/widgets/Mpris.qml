@@ -123,7 +123,7 @@ Rectangle {
       horizontalAlignment: Text.AlignHCenter
       bottomPadding: 2
       
-      font.family: Looks.Fonts.family // Assuming this is a Nerd Font
+      font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size + 2
       color: Looks.Colors.palette.neutral100
 
