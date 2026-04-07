@@ -15,13 +15,15 @@ Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell.
 - [ ] Volume controls
 - [x] Active window title
 - [x] Tray
-- [ ] [Workspace overview / alt-tab](https://www.windowslatest.com/wp-content/uploads/2020/07/Alt-Tab-with-browser-tabs.jpg)
+- [ ] Logout / shutdown shortcur
+
 
 **Calendar**
 - [ ] Simple calendar view
 - [ ] Google calendar / ical integration
 
 **Misc.**
+- [ ] [Workspace overview / alt-tab](https://www.windowslatest.com/wp-content/uploads/2020/07/Alt-Tab-with-browser-tabs.jpg)
 - [ ] Notification center
 - [ ] Launcher (Rofi/Wofi replacement)
 - [ ] Unified settings app
