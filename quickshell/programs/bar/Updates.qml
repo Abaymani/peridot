@@ -1,8 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
-import "../common/looks" as Looks
-import "../services" as Services
-import "../widgets" as Widgets
+import qs.common.looks as Looks
+import qs.services as Services
 
 Rectangle {
 	id: root

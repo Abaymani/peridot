@@ -1,9 +1,9 @@
 //@ pragma UseQApplication
 import Quickshell
-import "programs" as Programs
+import qs.programs
 
 Scope {
-	Programs.Bar {}
+	Bar {}
 }
 
 

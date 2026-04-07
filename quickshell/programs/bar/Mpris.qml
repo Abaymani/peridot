@@ -1,8 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
-import "../services"
-import "../common/looks" as Looks
-import "../common/utils/functions.js" as Utils
+import qs.services
+import qs.common.looks as Looks
 
 Rectangle {
   id: root
@@ -121,7 +120,6 @@ Rectangle {
       Layout.preferredWidth: 10
       Layout.alignment: Text.AlignVCenter
       horizontalAlignment: Text.AlignHCenter
-      bottomPadding: 2
       
       font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size + 2

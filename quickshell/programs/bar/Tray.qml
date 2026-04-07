@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
-import "../common/looks" as Looks
+import qs.common.looks as Looks
 
 RowLayout {
   id: trayRoot
@@ -21,8 +21,8 @@ RowLayout {
 
       IconImage {
         anchors.centerIn: parent
-        width: parent.width - 2
-        height: parent.height - 2
+        width: parent.width 
+        height: parent.height 
         
         source: modelData.icon
       }

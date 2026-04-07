@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Hyprland
-import "../common/looks" as Looks
+import qs.common.looks as Looks
 
 // If this widget ITSELF is a RowLayout
 RowLayout {

@@ -3,8 +3,8 @@ import Quickshell.Wayland
 import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
-import "../common/looks" as Looks
-import "../common/utils/functions.js" as Utils
+import qs.common.looks as Looks
+import "../../common/utils/functions.js" as Utils
 
 RowLayout {
 	// Set a constant width for the entire module

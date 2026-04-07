@@ -1,9 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Io
-import "../common/looks" as Looks
-import "../services" as Services
-import "../common/utils/functions.js" as Utils
+import qs.common.looks as Looks
+import qs.services as Services
 
 Rectangle {
   id: root

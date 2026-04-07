@@ -1,9 +1,8 @@
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
-import "../widgets" as Widgets
-import "../common/looks" as Looks
-import "../common/utils/functions.js" as Utils
+import qs.programs.bar
+import qs.common.looks
 
 Scope {
 	id: root
@@ -24,17 +23,17 @@ Scope {
 			}
 
 			margins {
-					top: Looks.Decorations.decor.barMarginTop
-					left: Looks.Decorations.decor.barMarginLeft
-					right: Looks.Decorations.decor.barMarginRight
+					top: Decorations.decor.barMarginTop
+					left: Decorations.decor.barMarginLeft
+					right: Decorations.decor.barMarginRight
 			}
 
-			implicitHeight: Looks.Decorations.decor.barHeight
+			implicitHeight: Decorations.decor.barHeight
 			color: "transparent"   
 
 			Rectangle {
 				anchors.fill: parent
-				radius: Looks.Decorations.decor.radius
+				radius: Decorations.decor.radius
 				color: "transparent"
 				clip: true
 
@@ -42,15 +41,15 @@ Scope {
 					anchors.fill: parent
 					spacing: 8
 
-					Widgets.Updates { Layout.fillWidth: false }
-					Widgets.Workspaces { Layout.fillWidth: false }
-					Widgets.ActiveWindow { Layout.fillWidth: false}
+					Updates { Layout.fillWidth: false }
+					Workspaces { Layout.fillWidth: false }
+					ActiveWindow { Layout.fillWidth: false}
 					
 					Item { Layout.fillWidth: true }
-					Widgets.ResourceMonitor {}
-					Widgets.Mpris { Layout.fillWidth: false }
-					Widgets.Tray {Layout.alignment: Qt.AlignVCenter}
-					Widgets.ClockWidget { }
+					ResourceMonitor {}
+					Mpris { Layout.fillWidth: false }
+					Tray {Layout.alignment: Qt.AlignVCenter}
+					ClockWidget { }
 				}
 			}
 		}
