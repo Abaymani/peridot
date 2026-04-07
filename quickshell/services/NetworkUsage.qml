@@ -1,3 +1,5 @@
+// Credits: https://github.com/caelestia-dots
+
 pragma Singleton
 
 import QtQuick

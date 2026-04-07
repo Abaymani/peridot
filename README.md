@@ -9,7 +9,7 @@ Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell.
 - [x] datetime display
 - [x] Workspaces widget
 - [x] MPRIS widget
-- [ ] Network widget
+- [x] Network widget
 - [x] Resource monitor 
 - [x] Update(s) widget
 - [ ] Volume controls

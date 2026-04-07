@@ -17,8 +17,27 @@ Rectangle {
     height: parent.height
     spacing: 4
 
+    // Icon Logic: Shows Ethernet icon if wired, otherwise WiFi icon
+    Text {
+      font.family: Looks.Fonts.family
+      font.pixelSize: Looks.Fonts.size
+      color: Looks.Colors.palette.neutral100 // Highlight the connection
+      text: Services.Network.activeEthernet ? "󰈀" : "" 
+    }
+
+    // Name Logic: Shows "Wired" or the SSID of the WiFi
+    Text {
+      font.family: Looks.Fonts.family
+      font.pixelSize: Looks.Fonts.size - 2
+      color: Looks.Colors.palette.neutral100
+      text: {
+        if (Services.Network.activeEthernet) return "Wired";
+        if (Services.Network.active) return Services.Network.active.ssid;
+        return "Offline";
+      }
+    }
+
     Looks.Seperator {}
-    
 
     // Download speed
     Text {

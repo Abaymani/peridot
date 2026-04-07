@@ -34,3 +34,4 @@ obs-studio/themes/matugen.obt
 kitty/themes/Matugen.conf
 kitty/current-theme.conf
 quickshell/common/looks/colors.json
+/quickshell/.qmlls.ini
