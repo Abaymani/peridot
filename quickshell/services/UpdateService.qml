@@ -36,6 +36,7 @@ Singleton {
     interval: 1000 * 60 * 5 // 5 minutes in miliseconds
     running: true
     repeat: true
+    triggeredOnStart: true
     onTriggered: updateProcess.running = true
   }
 }

@@ -3,3 +3,42 @@ import QtQuick.Layouts
 import Quickshell.Io
 import qs.common.looks as Looks
 import qs.services as Services
+
+Rectangle {
+  id: root
+  height: Looks.Decorations.decor.elementHeight
+  implicitWidth: mainLayout.implicitWidth + 20
+  radius: Looks.Decorations.decor.radius
+  gradient: Looks.Gradient { }
+
+  RowLayout {
+    id: mainLayout
+    anchors.centerIn: parent
+    height: parent.height
+    spacing: 4
+
+    Looks.Seperator {}
+    
+
+    // Download speed
+    Text {
+      font.family: Looks.Fonts.family 
+      font.pixelSize: Looks.Fonts.size -2
+      color: Looks.Colors.palette.neutral100
+      property var stats: Services.NetworkUsage.formatBytes(Services.NetworkUsage.downloadSpeed)
+      text: `${stats.value.toFixed(1)} ` + stats.unit + "⬇" 
+    }
+
+    Looks.Seperator {}
+
+    // Upload speed
+    Text {
+      font.family: Looks.Fonts.family 
+      font.pixelSize: Looks.Fonts.size -2
+      color: Looks.Colors.palette.neutral100
+      property var stats: Services.NetworkUsage.formatBytes(Services.NetworkUsage.uploadSpeed)
+      text: `${stats.value.toFixed(1)} ` + stats.unit + "⬆"
+    }
+    
+  }
+}
