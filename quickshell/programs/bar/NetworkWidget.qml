@@ -15,7 +15,7 @@ Rectangle {
     id: mainLayout
     anchors.centerIn: parent
     height: parent.height
-    spacing: 4
+    spacing: 6
 
     // Icon Logic: Shows Ethernet icon if wired, otherwise WiFi icon
     Text {
