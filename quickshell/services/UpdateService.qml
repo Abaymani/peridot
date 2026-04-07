@@ -32,8 +32,12 @@ Singleton {
     runUpdateScript.running = true
   }
 
+  function checkUpdates(){
+    updateProcess.running = true
+  }
+
   Timer {
-    interval: 1000 * 60 * 5 // 5 minutes in miliseconds
+    interval: 1000 * 60 * 10 // 10 minutes in miliseconds
     running: true
     repeat: true
     triggeredOnStart: true

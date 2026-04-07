@@ -58,6 +58,9 @@ Rectangle {
 		hoverEnabled: true
 
 		// Update on click
-		onClicked: Services.UpdateService.runUpdate()
+		onClicked: (mouse) => {
+			if (mouse.button === Qt.LeftButton) {Services.UpdateService.runUpdate()}
+			else if (mouse.button === Qt.RightButton) {Services.UpdateService.checkUpdates()}
+		}
 	}
 }
