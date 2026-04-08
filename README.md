@@ -36,7 +36,8 @@ Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell.
 - [ ] Matugen dark/light choice *(currently always dark)*
 
 ### Other
-- [ ] Lockscreen / wlogout
+- [ ] hyprlock rice
+- [ ] wlogout
 - [ ] Greeter themeing
 
 ___
@@ -89,6 +90,7 @@ grim
 gum
 htop
 hyprland
+hyprlock
 hyprpicker
 iwd
 jq
