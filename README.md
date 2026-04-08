@@ -36,8 +36,8 @@ Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell. With bits and pieces
 - [ ] Matugen dark/light choice *(currently always dark)*
 
 ### Other
-- [ ] hyprlock rice
-- [ ] wlogout rice
+- [x] hyprlock rice
+- [x] wlogout rice
 - [ ] Greeter themeing
 
 ___

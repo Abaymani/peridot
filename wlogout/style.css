@@ -1,0 +1,158 @@
+@import "colors.css";
+
+* {
+	box-shadow: none;
+}
+
+window {
+	background-color: rgba(0, 0, 0, 0.201);
+}
+
+button {
+	all: unset;
+	min-width: 96px;
+	min-height: 96px;
+	margin: 4px;
+	border-radius: 12px;
+	color: white;
+	transition: 0.2s;
+}
+
+button:active, button:hover {
+	
+	outline-style: none;
+}
+
+#lock {
+	background-image:
+		linear-gradient(
+			to right,
+			alpha(@primary, 0.2) -20%,
+			alpha(#ffffff, 0.10) 30%,
+			alpha(@secondary, 0.4) 100%),
+		image(url("icons/lock_white.png"));
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover, 25%;
+}
+
+#lock:hover {
+	background-image:
+		linear-gradient(to right,
+			alpha(@primary, 0.5) -20%,
+			alpha(#ffffff, 0.15) 30%,
+			alpha(@secondary, 0.5) 100%),
+	image(url("icons/lock_white.png"));
+	background-size: cover, 28%;
+}
+
+#logout {
+	background-image: 
+		linear-gradient(
+			to right,
+			alpha(@primary, 0.2) -20%,
+			alpha(#ffffff, 0.10) 30%,
+			alpha(@secondary, 0.4) 100%),
+		image(url("icons/logout_white.png"));
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover, 25%;
+}
+
+#logout:hover {
+	background-image:
+		linear-gradient(to right,
+			alpha(@primary, 0.5) -20%,
+			alpha(#ffffff, 0.15) 30%,
+			alpha(@secondary, 0.5) 100%),
+	image(url("icons/logout_white.png"));
+	background-size: cover, 28%;
+}
+
+#suspend {
+	background-image:
+		linear-gradient(to right,
+			alpha(@primary, 0.2) -20%,
+			alpha(#ffffff, 0.10) 30%,
+			alpha(@secondary, 0.4) 100%),
+		image(url("icons/suspend_white.png"));
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover, 25%;
+}
+
+#suspend:hover {
+	background-image:
+		linear-gradient(to right,
+			alpha(@primary, 0.5) -20%,
+			alpha(#ffffff, 0.15) 30%,
+			alpha(@secondary, 0.5) 100%),
+	image(url("icons/suspend_white.png"));
+	background-size: cover, 28%;
+}
+
+#hibernate {
+	background-image:
+		linear-gradient(to right,
+			alpha(@primary, 0.2) -20%,
+			alpha(#ffffff, 0.10) 30%,
+			alpha(@secondary, 0.4) 100%),
+		image(url("icons/hibernate_white.png"));
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover, 25%;
+}
+
+#hibernate:hover {
+	background-image:
+		linear-gradient(to right,
+			alpha(@primary, 0.5) -20%,
+			alpha(#ffffff, 0.15) 30%,
+			alpha(@secondary, 0.5) 100%),
+	image(url("icons/hibernate_white.png"));
+	background-size: cover, 28%;
+}
+
+#shutdown {
+	background-image:
+		linear-gradient(to right,
+			alpha(@primary, 0.2) -20%,
+			alpha(#ffffff, 0.10) 30%,
+			alpha(@secondary, 0.4) 100%),
+		image(url("icons/shutdown_white.png"));
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover, 25%;
+}
+
+#shutdown:hover {
+	background-image:
+		linear-gradient(to right,
+			alpha(@primary, 0.5) -20%,
+			alpha(#ffffff, 0.15) 30%,
+			alpha(@secondary, 0.5) 100%),
+	image(url("icons/shutdown_white.png"));
+	background-size: cover, 28%;
+}
+
+#reboot {
+	background-image:
+		linear-gradient(to right,
+			alpha(@primary, 0.2) -20%,
+			alpha(#ffffff, 0.10) 30%,
+			alpha(@secondary, 0.4) 100%),
+		image(url("icons/reboot_white.png"));
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover, 25%;
+}
+
+#reboot:hover {
+	background-image:
+		linear-gradient(to right,
+			alpha(@primary, 0.5) -20%,
+			alpha(#ffffff, 0.15) 30%,
+			alpha(@secondary, 0.5) 100%),
+	image(url("icons/reboot_white.png"));
+	background-size: cover, 28%;
+}

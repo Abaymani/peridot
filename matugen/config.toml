@@ -57,3 +57,7 @@ output_path = '~/.config/obs-studio/themes/matugen.obt'
 [templates.waypaper]
 input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/waypaper/colors.css'
+
+[templates.wlogout]
+input_path = "./colors.css"
+output_path = '~/.config/wlogout/colors.css'
