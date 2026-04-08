@@ -77,19 +77,14 @@ Slider {
 
         MouseArea {
             id: handleMouseArea
-            anchors.fill: root
             hoverEnabled: true
             acceptedButtons: Qt.NoButton
         }
 
         Circle {
             anchors.centerIn: parent
-            diameter: root.pressed ? 10 : handleMouseArea.containsMouse ? 14 : 12
+            diameter: root.pressed ? 10 : handleMouseArea.containsMouse ? 10 : 10
             color: Looks.Colors.md3.primary
-
-            Behavior on diameter {
-                animation: Looks.transition.enter.createObject(this)
-            }
         }
 
         /*WToolTip {

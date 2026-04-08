@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Io
 import qs.common.looks as Looks
 import qs.services as Services
@@ -17,7 +18,7 @@ Rectangle {
     height: parent.height
     spacing: 6
 
-    // Icon Logic: Shows Ethernet icon if wired, otherwise WiFi icon
+  // Icon Logic: Shows Ethernet icon if wired, otherwise WiFi icon
     Text {
       font.family: Looks.Fonts.family
       font.pixelSize: Looks.Fonts.size
@@ -58,6 +59,11 @@ Rectangle {
       property var stats: Services.NetworkUsage.formatBytes(Services.NetworkUsage.uploadSpeed)
       text: `${stats.value.toFixed(1)} ` + stats.unit + "⬆"
     }
-    
+  }
+
+  MouseArea{
+      anchors.fill: parent
+      cursorShape: Qt.PointingHandCursor
+      onClicked: {Quickshell.execDetached(["hyprctl", "dispatch", "exec", "nm-connection-editor"])}
   }
 }

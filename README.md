@@ -5,10 +5,12 @@ Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell. With bits and pieces
 ## Setup
 To make git tracking easier, clone this repo to a folder separate from *~/.config* and create a symlink instead. This way, your git repo won't start tracking random app config folders.
 
+If you clone the repo to the home folder:
+
 ```
-ln -s ~/<REPO LOCATION> ~/.config
+ln -s ~/peditot/* ~/.config
 ```
-... Or use a dotfiles manager!
+... Or you can skip manual linking and use a dotfiles manager!
 
 ## TODO
 
@@ -32,6 +34,7 @@ ln -s ~/<REPO LOCATION> ~/.config
 
 **Misc.**
 - [ ] [Workspace overview / alt-tab](https://www.windowslatest.com/wp-content/uploads/2020/07/Alt-Tab-with-browser-tabs.jpg)
+- [ ] Control Center
 - [ ] Notification center
 - [ ] Launcher (Rofi/Wofi replacement)
 - [ ] Unified settings app
