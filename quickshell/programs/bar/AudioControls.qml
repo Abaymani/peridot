@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell
-import Quickshell.Io
 import Quickshell.Widgets
 import qs.common.looks as Looks
 import qs.services as Services
@@ -16,7 +15,6 @@ Rectangle {
   gradient: Looks.Gradient { }
 
   property bool volReveal: false
-  property string activePortName: ""
 
   MouseArea {
     anchors.fill: parent
@@ -94,7 +92,7 @@ Rectangle {
             return "";
           }; 
 
-          const name = root.activePortName.toLowerCase();
+          const name = Services.Audio.activePortName;
           if (name.includes("headphone") || name.includes("headset")) return "";
           return "";
         }
@@ -112,33 +110,5 @@ Rectangle {
         }
       }
     }
-  }
-
-  Process {
-    id: portUpdateProcess
-    // This is a condensed version of your bash script logic
-    command: ["sh", "-c", "pactl list sinks | awk -v tgt=\"$(pactl get-default-sink)\" '$0 ~ \"Name: \"tgt {f=1} f && /Active Port:/ {print $3; exit} /^$/ {f=0}'"]    
-    running: true
-
-    stdout: StdioCollector {
-      onStreamFinished: { 
-        root.activePortName = this.text.trim();
-      }
-    }
-    
-  }
-
-  Connections {
-    target: Services.Audio.sink?.audio ?? null
-    function onVolumeChanged() { portUpdateProcess.running = true }
-    function onMutedChanged() { portUpdateProcess.running = true }
-  }
-
-  Timer {
-    interval: 3000
-    running: true
-    repeat: true
-    triggeredOnStart: true
-    onTriggered: portUpdateProcess.running = true;
   }
 }

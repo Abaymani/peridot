@@ -2,6 +2,7 @@ pragma Singleton
 pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.Pipewire
 
 Singleton {
@@ -13,6 +14,7 @@ Singleton {
   readonly property real hardMaxValue: 2.00
   //property string audioTheme: Config.options.sounds.theme
   property real value: sink?.audio.volume ?? 0
+  property string activePortName: ""
 
   function friendlyDeviceName(node) {
     return (node.nickname || node.description || Translation.tr("Unknown"));
@@ -49,7 +51,6 @@ Singleton {
 
   // Controls
   function toggleMute() {
-    console.log("Tried!")
     Audio.sink.audio.muted = !Audio.sink.audio.muted
   }
 
@@ -79,6 +80,26 @@ Singleton {
 
   PwObjectTracker {
       objects: [sink, source]
+  }
+
+
+  Connections {
+    target: sink?.audio ?? null
+    function onVolumeChanged() { portUpdateProcess.running = true }
+    function onMutedChanged() { portUpdateProcess.running = true }
+  }
+
+    Process {
+    id: portUpdateProcess
+    // This is a condensed version of your bash script logic
+    command: ["sh", "-c", "pactl list sinks | awk -v tgt=\"$(pactl get-default-sink)\" '$0 ~ \"Name: \"tgt {f=1} f && /Active Port:/ {print $3; exit} /^$/ {f=0}'"]    
+    running: true
+
+    stdout: StdioCollector {
+      onStreamFinished: { 
+        root.activePortName = this.text.trim().toLowerCase();
+      }
+    }
   }
 
   /*
