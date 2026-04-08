@@ -52,6 +52,7 @@ Scope {
 					Mpris { Layout.fillWidth: false }
 					Tray {Layout.alignment: Qt.AlignVCenter}
 					ClockWidget { }
+					Logout {}
 				}
 			}
 		}

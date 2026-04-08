@@ -1,6 +1,6 @@
 # PERIDOT(s)
 
-Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell.
+Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell. With bits and pieces taken/inspired from [end4-dots](https://github.com/end-4/dots-hyprland), [ML4W](https://github.com/mylinuxforwork/dotfiles) and [Celestia](https://github.com/caelestia-dots/shell).
 
 ## TODO
 
@@ -15,7 +15,7 @@ Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell.
 - [x] Volume controls
 - [x] Active window title
 - [x] Tray
-- [ ] Logout / shutdown shortcut
+- [x] Logout / shutdown shortcut
 
 
 **Calendar**
@@ -37,7 +37,7 @@ Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell.
 
 ### Other
 - [ ] hyprlock rice
-- [ ] wlogout
+- [ ] wlogout rice
 - [ ] Greeter themeing
 
 ___
@@ -144,6 +144,7 @@ vulkan-tools
 waypaper-git
 wget
 wl-clipboard
+wlogout
 wlr-randr
 wofi
 xclip
