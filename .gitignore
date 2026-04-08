@@ -22,7 +22,6 @@ pavucontrol.ini
 gtk-3.0/colors.css
 gtk-4.0/colors.css
 hypr/colors.conf
-hypr/decorations.conf
 yazi/theme.toml
 wofi/colors.css
 waypaper/config.ini

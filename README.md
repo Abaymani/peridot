@@ -30,7 +30,7 @@ Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell.
 - [ ] On-screen Keyboard
 
 ### Scripts & Utils
-- [ ] Screenshot utility
+- [x] Screenshot utility
 - [ ] Brightness utility
 - [ ] Battery utility
 - [ ] Matugen dark/light choice *(currently always dark)*
@@ -70,6 +70,7 @@ base-devel
 bibata-cursor-theme-bin
 breeze-gtk
 breeze-icons
+cliphist
 cmake
 darkly-bin
 fastfetch
@@ -140,9 +141,11 @@ visual-studio-code-bin
 vulkan-tools
 waypaper-git
 wget
+wl-clipboard
 wlr-randr
 wofi
 xclip
+xdg-desktop-portal-hyprland
 yay
 yay-debug
 yazi
