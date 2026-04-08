@@ -56,6 +56,7 @@ Rectangle {
 		anchors.fill: parent
 		cursorShape: Qt.PointingHandCursor
 		hoverEnabled: true
+		acceptedButtons: Qt.LeftButton | Qt.RightButton
 
 		// Update on click
 		onClicked: (mouse) => {

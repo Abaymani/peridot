@@ -12,10 +12,10 @@ Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell.
 - [x] Network widget
 - [x] Resource monitor 
 - [x] Update(s) widget
-- [ ] Volume controls
+- [x] Volume controls
 - [x] Active window title
 - [x] Tray
-- [ ] Logout / shutdown shortcur
+- [ ] Logout / shutdown shortcut
 
 
 **Calendar**

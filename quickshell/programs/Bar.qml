@@ -48,6 +48,7 @@ Scope {
 					Item { Layout.fillWidth: true }
 					NetworkWidget {}
 					ResourceMonitor {}
+					AudioControls {}
 					Mpris { Layout.fillWidth: false }
 					Tray {Layout.alignment: Qt.AlignVCenter}
 					ClockWidget { }
