@@ -11,7 +11,7 @@ RowLayout {
 	spacing: 6
 
 	Repeater {
-		model: 5
+		model: 6
 
 		Rectangle {
 			id: wsRect

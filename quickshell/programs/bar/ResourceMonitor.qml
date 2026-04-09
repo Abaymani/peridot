@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Io
 import qs.common.looks as Looks
 import qs.services as Services
@@ -59,5 +60,11 @@ Rectangle {
         return `${usage.padEnd(4, ' ')}%`;
       }
     }
+  }
+
+  MouseArea{
+    anchors.fill: parent
+    cursorShape: Qt.PointingHandCursor
+    onClicked: {Quickshell.execDetached(["kitty", "htop"])}
   }
 }
