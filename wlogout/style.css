@@ -28,7 +28,7 @@ button:active, button:hover {
 		linear-gradient(
 			to right,
 			alpha(@primary, 0.2) -20%,
-			alpha(#ffffff, 0.10) 30%,
+			alpha(#ffffff, 0.20) 30%,
 			alpha(@secondary, 0.4) 100%),
 		image(url("icons/lock_white.png"));
 	background-repeat: no-repeat;
@@ -40,7 +40,7 @@ button:active, button:hover {
 	background-image:
 		linear-gradient(to right,
 			alpha(@primary, 0.5) -20%,
-			alpha(#ffffff, 0.15) 30%,
+			alpha(#ffffff, 0.25) 30%,
 			alpha(@secondary, 0.5) 100%),
 	image(url("icons/lock_white.png"));
 	background-size: cover, 28%;
@@ -51,7 +51,7 @@ button:active, button:hover {
 		linear-gradient(
 			to right,
 			alpha(@primary, 0.2) -20%,
-			alpha(#ffffff, 0.10) 30%,
+			alpha(#ffffff, 0.20) 30%,
 			alpha(@secondary, 0.4) 100%),
 		image(url("icons/logout_white.png"));
 	background-repeat: no-repeat;
@@ -63,7 +63,7 @@ button:active, button:hover {
 	background-image:
 		linear-gradient(to right,
 			alpha(@primary, 0.5) -20%,
-			alpha(#ffffff, 0.15) 30%,
+			alpha(#ffffff, 0.25) 30%,
 			alpha(@secondary, 0.5) 100%),
 	image(url("icons/logout_white.png"));
 	background-size: cover, 28%;
@@ -73,7 +73,7 @@ button:active, button:hover {
 	background-image:
 		linear-gradient(to right,
 			alpha(@primary, 0.2) -20%,
-			alpha(#ffffff, 0.10) 30%,
+			alpha(#ffffff, 0.20) 30%,
 			alpha(@secondary, 0.4) 100%),
 		image(url("icons/suspend_white.png"));
 	background-repeat: no-repeat;
@@ -85,7 +85,7 @@ button:active, button:hover {
 	background-image:
 		linear-gradient(to right,
 			alpha(@primary, 0.5) -20%,
-			alpha(#ffffff, 0.15) 30%,
+			alpha(#ffffff, 0.25) 30%,
 			alpha(@secondary, 0.5) 100%),
 	image(url("icons/suspend_white.png"));
 	background-size: cover, 28%;
@@ -95,7 +95,7 @@ button:active, button:hover {
 	background-image:
 		linear-gradient(to right,
 			alpha(@primary, 0.2) -20%,
-			alpha(#ffffff, 0.10) 30%,
+			alpha(#ffffff, 0.20) 30%,
 			alpha(@secondary, 0.4) 100%),
 		image(url("icons/hibernate_white.png"));
 	background-repeat: no-repeat;
@@ -107,7 +107,7 @@ button:active, button:hover {
 	background-image:
 		linear-gradient(to right,
 			alpha(@primary, 0.5) -20%,
-			alpha(#ffffff, 0.15) 30%,
+			alpha(#ffffff, 0.25) 30%,
 			alpha(@secondary, 0.5) 100%),
 	image(url("icons/hibernate_white.png"));
 	background-size: cover, 28%;
@@ -117,7 +117,7 @@ button:active, button:hover {
 	background-image:
 		linear-gradient(to right,
 			alpha(@primary, 0.2) -20%,
-			alpha(#ffffff, 0.10) 30%,
+			alpha(#ffffff, 0.20) 30%,
 			alpha(@secondary, 0.4) 100%),
 		image(url("icons/shutdown_white.png"));
 	background-repeat: no-repeat;
@@ -129,7 +129,7 @@ button:active, button:hover {
 	background-image:
 		linear-gradient(to right,
 			alpha(@primary, 0.5) -20%,
-			alpha(#ffffff, 0.15) 30%,
+			alpha(#ffffff, 0.25) 30%,
 			alpha(@secondary, 0.5) 100%),
 	image(url("icons/shutdown_white.png"));
 	background-size: cover, 28%;
@@ -139,7 +139,7 @@ button:active, button:hover {
 	background-image:
 		linear-gradient(to right,
 			alpha(@primary, 0.2) -20%,
-			alpha(#ffffff, 0.10) 30%,
+			alpha(#ffffff, 0.20) 30%,
 			alpha(@secondary, 0.4) 100%),
 		image(url("icons/reboot_white.png"));
 	background-repeat: no-repeat;
@@ -151,7 +151,7 @@ button:active, button:hover {
 	background-image:
 		linear-gradient(to right,
 			alpha(@primary, 0.5) -20%,
-			alpha(#ffffff, 0.15) 30%,
+			alpha(#ffffff, 0.25) 30%,
 			alpha(@secondary, 0.5) 100%),
 	image(url("icons/reboot_white.png"));
 	background-size: cover, 28%;
