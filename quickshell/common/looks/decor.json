@@ -1,10 +1,14 @@
 {
   "decor": {
     "radius": 12,
+    "elementHeight": 25,
+
     "barHeight": 25,
     "barMarginTop": 6,
     "barMarginLeft": 12,
     "barMarginRight": 12,
-    "elementHeight": 25
+
+    "controlCenterMarginRight": 12,
+    "controlCenterMarginTop": 8
   }
 }

@@ -27,10 +27,9 @@ Scope {
 		implicitHeight: 600
 		implicitWidth: 360
 
-		//TODO: move to settings
 		margins{
-			right: 11 
-			top: 7
+			right: Looks.Decorations.decor.controlCenterMarginRight
+			top: Looks.Decorations.decor.controlCenterMarginTop
 		}
 
 		color: "transparent"

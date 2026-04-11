@@ -25,5 +25,7 @@ Singleton {
 		property int barMarginLeft: 0
 		property int barMarginRight: 0
 		property int elementHeight: 25
+		property int controlCenterMarginRight: 0
+		property int controlCenterMarginTop: 0
 	}
 }
