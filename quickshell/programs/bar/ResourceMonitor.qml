@@ -39,7 +39,10 @@ Rectangle {
       }
     }
 
-    Looks.Seperator { }
+    Looks.Seperator { 
+      Layout.leftMargin: 2 
+      Layout.rightMargin: 3
+    }
 
     Text {
       font.family: Looks.Fonts.family 
