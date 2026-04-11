@@ -68,6 +68,13 @@ yay -S breeze-icons breeze-gtk qt6ct-kde qt5ct-kde darkly-bin
 > [!CAUTION]
 > Qt apps may display dark text on dark backgrounds when using dark themes.
 
+#### Icons
+
+Peridot uses [YAMIS](https://store.kde.org/p/2303161) for icons. It is bundled but a symlink is required.
+``` 
+ln -sfn ~/peridot/peridot/icons/YAMIS/ ~/.local/share/icons/YAMIS
+```
+
 ___
 
 Since I don't have an install script (yet) and have multiple setups, here are all the packages I use. **Some are hard-referenced or assumed by scripts**.
