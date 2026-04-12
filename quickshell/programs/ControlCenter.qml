@@ -36,7 +36,7 @@ Scope {
 
 		Rectangle{
 			anchors.fill: parent
-			gradient: Looks.Gradient {}
+			gradient: Looks.Gradients.library[Settings.activeGradient].createObject() 
 			radius: Looks.Decorations.decor.radius
 		}
 		

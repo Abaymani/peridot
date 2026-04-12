@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
+import qs
 import qs.common.looks as Looks
 import qs.services as Services
 
@@ -10,7 +11,7 @@ Rectangle {
   height: Looks.Decorations.decor.elementHeight
   implicitWidth: mainLayout.implicitWidth + 20
   radius: Looks.Decorations.decor.radius
-  gradient: Looks.Gradient { }
+  gradient: Looks.Gradients.library[Settings.activeGradient].createObject()
   
 
   RowLayout {

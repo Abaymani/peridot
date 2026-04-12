@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import qs.common.looks as Looks
 import qs.services as Services
+import qs
 
 Rectangle {
 	id: clockPill
@@ -10,7 +11,7 @@ Rectangle {
 	radius: Looks.Decorations.decor.radius
 	
 	// Match the inactive workspace style or use a specific background
-	gradient: Looks.Gradient {}
+	gradient: Looks.Gradients.library[Settings.activeGradient].createObject()
 	
 
 	RowLayout {

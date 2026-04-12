@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.services
+import qs
 import qs.common.looks as Looks
 
 Rectangle {
@@ -11,7 +12,7 @@ Rectangle {
   width: mainLayout.implicitWidth + (mainLayout.anchors.leftMargin * 2)
 
   radius: Looks.Decorations.decor.radius
-  gradient: Looks.Gradient { }
+  gradient: Looks.Gradients.library[Settings.activeGradient].createObject()
 
 
   RowLayout {

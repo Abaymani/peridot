@@ -4,6 +4,7 @@ import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
 import qs.common.looks as Looks
+import qs
 import "../../common/utils/functions.js" as Utils
 
 RowLayout {
@@ -36,11 +37,8 @@ RowLayout {
 			radius: Looks.Decorations.decor.radius
 			color: ws? Utils.setAlphaColor(Looks.Colors.md3.secondary, 0.4) : "#01000000"
 
-			gradient: isActive ? activeGradient : null
-			
-			Looks.Gradient {
-				id: activeGradient
-			}
+			gradient: isActive ? Looks.Gradients.library[Settings.activeGradient].createObject()  : null
+
 
 			Text {
 				id: wsText

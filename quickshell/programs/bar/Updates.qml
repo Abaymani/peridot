@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import qs.common.looks as Looks
 import qs.services as Services
+import qs
 
 Rectangle {
 	id: root
@@ -13,17 +14,10 @@ Rectangle {
 	radius: Looks.Decorations.decor.radius
 	clip: true
 
-	// 3. The Reusable Gradient: Uses the Enum to pick the "glow" color
-	gradient: Looks.Gradient {
-		midColor: {
-			const count = Services.UpdateService.count;
+	
+	gradient: Looks.Gradients.library[Settings.activeGradient].createObject()
 
-			if (count >= 100) return "#44ff4444";    // Transparent Red
-			if (count >= 50) return '#44fafa12'; // Transparent Yellow
-			return '#0fffffff'
-		}
-	}
-
+	
 	// Smooth transition when the pill grows/shrinks or changes color
 	Behavior on width { NumberAnimation { duration: 200 } }
 

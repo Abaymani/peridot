@@ -6,13 +6,14 @@ import Quickshell.Widgets
 import qs.common.looks as Looks
 import qs.services as Services
 import qs.widgets
+import qs
 
 Rectangle {
   id: root
   height: Looks.Decorations.decor.elementHeight
   implicitWidth: mainLayout.implicitWidth + 20
   radius: Looks.Decorations.decor.radius
-  gradient: Looks.Gradient { }
+  gradient: Looks.Gradients.library[Settings.activeGradient].createObject()
 
   property bool volReveal: false
 
