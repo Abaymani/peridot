@@ -9,6 +9,7 @@
     "barMarginRight": 12,
 
     "controlCenterMarginRight": 12,
-    "controlCenterMarginTop": 8
+    "controlCenterMarginTop": 8,
+    "controlCenterWidth": 360
   }
 }

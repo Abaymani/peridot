@@ -1,12 +1,11 @@
 # PERIDOT(s)
 
-Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell. With bits and pieces taken/inspired from [end4-dots](https://github.com/end-4/dots-hyprland), [ML4W](https://github.com/mylinuxforwork/dotfiles) and [Celestia](https://github.com/caelestia-dots/shell).
+Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell. With bits and pieces taken/inspired from [end4-dots](https://github.com/end-4/dots-hyprland), [ML4W](https://github.com/mylinuxforwork/dotfiles) and [Caelestia](https://github.com/caelestia-dots/shell).
 
 ## Setup
 To make git tracking easier, clone this repo to a folder separate from *~/.config* and create a symlink instead. This way, your git repo won't start tracking random app config folders.
 
-If you clone the repo to the home folder:
-
+Clone the repo to the home folder:
 ```
 ln -s ~/peditot/* ~/.config
 ```
@@ -39,6 +38,7 @@ ln -s ~/peditot/* ~/.config
 - [ ] Launcher (Rofi/Wofi replacement)
 - [ ] Unified settings app
 - [ ] On-screen Keyboard
+- [ ] Greeter (move to greetd and rice it with Quickshell)
 
 ### Scripts & Utils
 - [x] Screenshot utility
@@ -49,7 +49,6 @@ ln -s ~/peditot/* ~/.config
 ### Other
 - [x] hyprlock rice
 - [x] wlogout rice
-- [ ] Greeter themeing
 
 ___
 
@@ -87,6 +86,7 @@ awww
 base
 base-devel
 bibata-cursor-theme-bin
+blueman
 breeze-gtk
 breeze-icons
 cliphist
@@ -138,6 +138,7 @@ nwg-displays
 nwg-look
 obs-studio
 openssh
+pacman-contrib
 pavucontrol
 pipewire-pulse
 polkit-kde-agent

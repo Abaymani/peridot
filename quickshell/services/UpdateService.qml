@@ -12,12 +12,16 @@ Singleton {
 
   Process {
     id: updateProcess
-    command: ["sh", "-c", "yay -Qu | wc -l"]
+      command: [
+        "sh",
+        "-c",
+        "echo $(( $(checkupdates 2>/dev/null | wc -l) + $(yay -Qum --refresh 2>/dev/null | wc -l) ))"
+      ]
     running: true
     
     stdout: StdioCollector {
       onStreamFinished: {
-        root.count = parseInt(this.text.trim()) || 0;
+        root.count = parseInt(this.text.trim())|| 0;
       }
     }
   }
@@ -37,10 +41,10 @@ Singleton {
   }
 
   Timer {
-    interval: 1000 * 60 * 10 // 10 minutes in miliseconds
+    interval: 1000 * 60 * 5 // 5 minutes in miliseconds
     running: true
     repeat: true
     triggeredOnStart: true
-    onTriggered: updateProcess.running = true
+    onTriggered: {updateProcess.running = true}
   }
 }

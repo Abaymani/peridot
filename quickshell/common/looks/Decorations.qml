@@ -18,6 +18,7 @@ Singleton {
 		}
 	}
 
+	//defaults
 	component Decorations: JsonObject {
 		property int radius: 10
 		property int barHeight: 25
@@ -27,5 +28,6 @@ Singleton {
 		property int elementHeight: 25
 		property int controlCenterMarginRight: 0
 		property int controlCenterMarginTop: 0
+		property int controlCenterWidth: 360
 	}
 }

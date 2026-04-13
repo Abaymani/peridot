@@ -1,11 +1,12 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import Quickshell
+import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import qs.common.looks as Looks
 import qs
+import qs.programs.controlcenter
 
 Scope {
 	id: controlCenterRoot
@@ -25,7 +26,7 @@ Scope {
 
 		//TODO: move to settings
 		implicitHeight: 600
-		implicitWidth: 360
+		implicitWidth: Looks.Decorations.decor.controlCenterWidth
 
 		margins{
 			right: Looks.Decorations.decor.controlCenterMarginRight
@@ -36,9 +37,22 @@ Scope {
 
 		Rectangle{
 			anchors.fill: parent
-			gradient: Looks.Gradients.library[Settings.activeGradient].createObject() 
+			gradient: Looks.Gradients.library[Settings.activebackgroundGradient].createObject() 
 			radius: Looks.Decorations.decor.radius
+
+			RowLayout{
+				id: quicktools
+				anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+				anchors.margins: 8
+				spacing: 6
+
+				Uptime {}
+				Item { Layout.fillWidth: true }
+				Screenshot {}
+				Bluetooth {}
+			}
 		}
-		
 	}
 }

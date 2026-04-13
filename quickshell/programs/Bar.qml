@@ -46,6 +46,7 @@ Scope {
 					ActiveWindow { Layout.fillWidth: false}
 					
 					Item { Layout.fillWidth: true }
+					
 					NetworkWidget {}
 					ResourceMonitor {}
 					AudioControls {}
