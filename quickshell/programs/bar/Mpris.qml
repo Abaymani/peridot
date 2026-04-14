@@ -12,7 +12,10 @@ Rectangle {
   width: mainLayout.implicitWidth + (mainLayout.anchors.leftMargin * 2)
 
   radius: Looks.Decorations.decor.radius
-  gradient: Looks.Gradients.library[Settings.activeGradient].createObject()
+  color: Looks.Colors.md3.secondary_container
+  gradient: Settings.gradientBgEnabled 
+    ? Looks.Gradients.library[Settings.activeGradient].createObject()
+    : null
 
 
   RowLayout {
@@ -31,8 +34,8 @@ Rectangle {
       Text {
         text: "󰒮" // or "<<"
         font.pixelSize: Looks.Fonts.size * 1.2
-        bottomPadding: 2
-        color: MprisService.canGoPrevious ? Looks.Colors.palette.neutral100 : "#66ffffff"
+        topPadding: 1
+        color: MprisService.canGoPrevious ? Settings.textColorOnContainer : "#66ffffff"
         
         MouseArea {
           anchors.fill: parent
@@ -46,8 +49,8 @@ Rectangle {
       Text {
         text: MprisService.isPlaying ? "󰏤" : "󰐊" // or "||" : ">"
         font.pixelSize: Looks.Fonts.size * 1.2
-        bottomPadding: 2
-        color: Looks.Colors.palette.neutral100
+        topPadding: 1
+        color: Settings.textColorOnContainer
         
         MouseArea {
           anchors.fill: parent
@@ -60,8 +63,8 @@ Rectangle {
       Text {
         text: "󰒭" // or ">>"
         font.pixelSize: Looks.Fonts.size * 1.2
-        bottomPadding: 2
-        color: MprisService.canGoNext ? Looks.Colors.palette.neutral100 : "#66ffffff"
+        topPadding: 1
+        color: MprisService.canGoNext ? Settings.textColorOnContainer : "#66ffffff"
         
         MouseArea {
           anchors.fill: parent
@@ -91,7 +94,7 @@ Rectangle {
 				font.family: Looks.Fonts.family
 				font.pixelSize: Looks.Fonts.size - 2
 				font.weight: Looks.Fonts.weight
-				color: Looks.Colors.palette.neutral100
+				color: Settings.textColorOnContainer
 
 				// The Animation
 				NumberAnimation on x {
@@ -124,7 +127,7 @@ Rectangle {
       
       font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size + 2
-      color: Looks.Colors.palette.neutral100
+      color: Settings.textColorOnContainer
 
       // This logic switches the icon based on the app name
       text: {

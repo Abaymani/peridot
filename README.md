@@ -25,6 +25,7 @@ ln -s ~/peditot/* ~/.config
 - [x] Active window title
 - [x] Tray
 - [x] Logout / shutdown shortcut
+- [ ] Battery indicator
 
 
 **Calendar**
@@ -38,12 +39,11 @@ ln -s ~/peditot/* ~/.config
 - [ ] Launcher (Rofi/Wofi replacement)
 - [ ] Unified settings app
 - [ ] On-screen Keyboard
-- [ ] Greeter (move to greetd and rice it with Quickshell)
 
 ### Scripts & Utils
 - [x] Screenshot utility
 - [ ] Brightness utility
-- [ ] Battery utility
+- [ ] Battery utility (performance modes)
 - [ ] Matugen dark/light choice *(currently always dark)*
 
 ### Other

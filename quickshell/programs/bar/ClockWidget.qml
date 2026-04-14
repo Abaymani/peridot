@@ -6,7 +6,7 @@ import qs
 
 Rectangle {
 	id: clockPill
-	width: dateText.contentWidth + clockText.contentWidth + 32
+	width: datetime.implicitWidth + 20
 	implicitHeight: Looks.Decorations.decor.elementHeight
 	radius: Looks.Decorations.decor.radius
 	
