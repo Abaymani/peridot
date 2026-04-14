@@ -25,7 +25,7 @@ Scope {
 		}
 
 		//TODO: move to settings
-		implicitHeight: 600
+		implicitHeight: 800
 		implicitWidth: Looks.Decorations.decor.controlCenterWidth
 
 		margins{
@@ -39,19 +39,68 @@ Scope {
 			anchors.fill: parent
 			gradient: Looks.Gradients.library[Settings.activebackgroundGradient].createObject() 
 			radius: Looks.Decorations.decor.radius
-
-			RowLayout{
-				id: quicktools
-				anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
+			
+			ColumnLayout {
+				anchors.fill: parent
+				spacing: 12 // Space between your rows
 				anchors.margins: 8
-				spacing: 6
 
-				Uptime {}
-				Item { Layout.fillWidth: true }
-				Screenshot {}
-				Bluetooth {}
+				RowLayout {
+					id: quicktools
+					anchors.top: parent.top
+					anchors.left: parent.left
+					anchors.right: parent.right
+					spacing: 6
+
+					Uptime {}
+					Item { Layout.fillWidth: true }
+					ColorPicker {}
+					Screenshot {}
+					Bluetooth {}
+					PeridotSettings {}
+				}
+
+				RowLayout {
+					id: dashboard
+					Layout.fillWidth: true
+					
+					// Your new content here
+					Rectangle { 
+						height: 80; Layout.fillWidth: true; 
+						gradient: Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
+						radius: Looks.Decorations.decor.radius
+						Text {
+							anchors.centerIn: parent
+							font.family: Looks.Fonts.family
+							font.pixelSize: Looks.Fonts.size
+							font.weight: Looks.Fonts.weight
+							color: Looks.Colors.palette.neutral100
+							text: "Placeholder: Dashboard\n->Resource-usage (detailed and with temps)\n->Battery\n->Brightness"
+						}
+					}
+				}
+
+				RowLayout {
+					id: notifications
+					Layout.fillWidth: true
+					
+					// Your new content here
+					Rectangle { 
+						height: 400; Layout.fillWidth: true; 
+						gradient: Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
+						radius: Looks.Decorations.decor.radius
+						Text {
+							anchors.centerIn: parent
+							font.family: Looks.Fonts.family
+							font.pixelSize: Looks.Fonts.size
+							font.weight: Looks.Fonts.weight
+							color: Looks.Colors.palette.neutral100
+							text: "Placeholder: Notifications"
+						}
+					}
+				}
+
+				Item { Layout.fillHeight: true }
 			}
 		}
 	}
