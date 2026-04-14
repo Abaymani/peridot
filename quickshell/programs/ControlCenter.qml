@@ -37,8 +37,12 @@ Scope {
 
 		Rectangle{
 			anchors.fill: parent
-			gradient: Looks.Gradients.library[Settings.activebackgroundGradient].createObject() 
 			radius: Looks.Decorations.decor.radius
+
+			color: Looks.Colors.md3.surface_container
+			gradient: Settings.gradientBgEnabled 
+				? Looks.Gradients.library[Settings.activebackgroundGradient].createObject() 
+				: null
 			
 			ColumnLayout {
 				anchors.fill: parent
@@ -67,14 +71,17 @@ Scope {
 					// Your new content here
 					Rectangle { 
 						height: 80; Layout.fillWidth: true; 
-						gradient: Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
+						color: Looks.Colors.md3.secondary_container
+						gradient: Settings.gradientBgEnabled 
+    					? Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
+							: null
 						radius: Looks.Decorations.decor.radius
 						Text {
 							anchors.centerIn: parent
 							font.family: Looks.Fonts.family
 							font.pixelSize: Looks.Fonts.size
 							font.weight: Looks.Fonts.weight
-							color: Looks.Colors.palette.neutral100
+							color: Settings.textColorOnContainer
 							text: "Placeholder: Dashboard\n->Resource-usage (detailed and with temps)\n->Battery\n->Brightness"
 						}
 					}
@@ -87,14 +94,17 @@ Scope {
 					// Your new content here
 					Rectangle { 
 						height: 400; Layout.fillWidth: true; 
-						gradient: Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
+						color: Looks.Colors.md3.secondary_container
+						gradient: Settings.gradientBgEnabled 
+    					? Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
+							: null
 						radius: Looks.Decorations.decor.radius
 						Text {
 							anchors.centerIn: parent
 							font.family: Looks.Fonts.family
 							font.pixelSize: Looks.Fonts.size
 							font.weight: Looks.Fonts.weight
-							color: Looks.Colors.palette.neutral100
+							color: Settings.textColorOnContainer
 							text: "Placeholder: Notifications"
 						}
 					}

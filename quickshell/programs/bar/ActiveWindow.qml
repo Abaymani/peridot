@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import qs.common.looks as Looks
+import qs
 
 RowLayout {
   id: root
@@ -13,7 +14,7 @@ RowLayout {
   
   Text {
     text: ">"
-    color: Looks.Colors.palette.neutral100
+    color: Settings.textColorNotContainer
     font.family: Looks.Fonts.family
     font.pixelSize: Looks.Fonts.size
     Layout.fillWidth: false
@@ -21,7 +22,7 @@ RowLayout {
 
   Text {
     id: titleText
-    color: Looks.Colors.palette.neutral100
+    color: Settings.textColorNotContainer
     text: activeWindow?.title ?? "Desktop"
     
     Layout.fillWidth: true      

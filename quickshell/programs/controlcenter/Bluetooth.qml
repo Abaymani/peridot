@@ -5,7 +5,10 @@ import qs.common.looks as Looks
 import qs
 
 Rectangle{
-  gradient: Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
+  color: Looks.Colors.md3.secondary_container
+  gradient: Settings.gradientBgEnabled 
+    ? Looks.Gradients.library[Settings.activeGradient].createObject()
+    : null
   implicitWidth: bluetoothIcon.implicitWidth + 20
   radius: Looks.Decorations.decor.radius
   height: Looks.Decorations.decor.elementHeight
@@ -17,7 +20,7 @@ Rectangle{
     font.pixelSize: Looks.Fonts.size+8
     font.weight: Looks.Fonts.weight
     text: "󰂯"
-    color: Looks.Colors.palette.neutral100
+    color: Settings.textColorOnContainer
   }
 
   MouseArea {

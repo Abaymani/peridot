@@ -6,7 +6,10 @@ import qs
 
 
 Rectangle{
-  gradient: Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
+  color: Looks.Colors.md3.secondary_container
+  gradient: Settings.gradientBgEnabled 
+    ? Looks.Gradients.library[Settings.activeGradient].createObject()
+    : null
   implicitWidth: uptimeTextContainer.implicitWidth + 20
   radius: Looks.Decorations.decor.radius
   height: Looks.Decorations.decor.elementHeight
@@ -24,7 +27,7 @@ Rectangle{
       font.italic: true
       
       text: "Up:"
-      color: Looks.Colors.palette.neutral100
+      color: Settings.textColorOnContainer
     }
 
     Text {
@@ -34,7 +37,7 @@ Rectangle{
       font.weight: Looks.Fonts.weight
       
       text: "0"
-      color: Looks.Colors.palette.neutral100
+      color: Settings.textColorOnContainer
     }
   }
 

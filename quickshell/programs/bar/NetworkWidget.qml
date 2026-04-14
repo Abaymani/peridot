@@ -11,7 +11,11 @@ Rectangle {
   height: Looks.Decorations.decor.elementHeight
   implicitWidth: mainLayout.implicitWidth + 20
   radius: Looks.Decorations.decor.radius
-  gradient: Looks.Gradients.library[Settings.activeGradient].createObject()
+  
+  color: Looks.Colors.md3.secondary_container
+  gradient: Settings.gradientBgEnabled 
+    ? Looks.Gradients.library[Settings.activeGradient].createObject()
+    : null
 
   RowLayout {
     id: mainLayout
@@ -23,7 +27,7 @@ Rectangle {
     Text {
       font.family: Looks.Fonts.family
       font.pixelSize: Looks.Fonts.size
-      color: Looks.Colors.palette.neutral100 // Highlight the connection
+      color: Settings.textColorOnContainer
       text: Services.Network.activeEthernet ? "󰈀" : "" 
     }
 
@@ -31,7 +35,7 @@ Rectangle {
     Text {
       font.family: Looks.Fonts.family
       font.pixelSize: Looks.Fonts.size - 2
-      color: Looks.Colors.palette.neutral100
+      color: Settings.textColorOnContainer
       text: {
         if (Services.Network.activeEthernet) return "Wired";
         if (Services.Network.active) return Services.Network.active.ssid;
@@ -39,24 +43,28 @@ Rectangle {
       }
     }
 
-    Looks.Seperator {}
+    Looks.Seperator {
+      color: Settings.textColorOnContainer
+    }
 
     // Download speed
     Text {
       font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size -2
-      color: Looks.Colors.palette.neutral100
+      color: Settings.textColorOnContainer
       property var stats: Services.NetworkUsage.formatBytes(Services.NetworkUsage.downloadSpeed)
       text: `${stats.value.toFixed(1)} ` + stats.unit + "⬇" 
     }
 
-    Looks.Seperator {}
+    Looks.Seperator {
+      color: Settings.textColorOnContainer
+    }
 
     // Upload speed
     Text {
       font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size -2
-      color: Looks.Colors.palette.neutral100
+      color: Settings.textColorOnContainer
       property var stats: Services.NetworkUsage.formatBytes(Services.NetworkUsage.uploadSpeed)
       text: `${stats.value.toFixed(1)} ` + stats.unit + "⬆"
     }

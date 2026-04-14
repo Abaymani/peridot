@@ -35,10 +35,15 @@ RowLayout {
 			implicitHeight: Looks.Decorations.decor.elementHeight
 			
 			radius: Looks.Decorations.decor.radius
-			color: ws? Utils.setAlphaColor(Looks.Colors.md3.secondary, 0.4) : "#01000000"
+			color: isActive
+				? Looks.Colors.md3.secondary_container
+				: ws 
+					? Settings.gradientBgEnabled ? Utils.setAlphaColor(Looks.Colors.md3.secondary, 0.3) : Looks.Colors.md3.secondary_container
+					: Settings.gradientBgEnabled ? "#01000000" : Utils.setAlphaColor(Looks.Colors.md3.surface_bright, 0.3)
 
-			gradient: isActive ? Looks.Gradients.library[Settings.activeGradient].createObject()  : null
-
+			gradient: Settings.gradientBgEnabled && isActive
+				? Looks.Gradients.library[Settings.activeGradient].createObject()
+				: null
 
 			Text {
 				id: wsText
@@ -46,9 +51,9 @@ RowLayout {
 				anchors.horizontalCenterOffset: -1
 				text: index + 1
 				font.family: Looks.Fonts.family
-				font.pixelSize: Looks.Fonts.size 
+				font.pixelSize: Looks.Fonts.size
 				font.weight: Looks.Fonts.weight
-				color: isActive ? Looks.Colors.palette.neutral100 : Looks.Colors.palette.neutral100
+				color: ws ? Settings.textColorOnContainer : Settings.textColorNotContainer
 			}
 
 			MouseArea {

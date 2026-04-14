@@ -10,8 +10,10 @@ Rectangle {
 	implicitHeight: Looks.Decorations.decor.elementHeight
 	radius: Looks.Decorations.decor.radius
 	
-	// Match the inactive workspace style or use a specific background
-	gradient: Looks.Gradients.library[Settings.activeGradient].createObject()
+	color: Looks.Colors.md3.secondary_container
+  gradient: Settings.gradientBgEnabled 
+    ? Looks.Gradients.library[Settings.activeGradient].createObject()
+    : null
 	
 
 	RowLayout {
@@ -26,10 +28,12 @@ Rectangle {
 			font.weight: Looks.Fonts.weight
 			
 			text: Qt.formatDateTime(Services.Time.time, "dddd, MM/dd")
-			color: Looks.Colors.palette.neutral100
+			color: Settings.textColorOnContainer
 		}
 
-		Looks.Seperator { }
+		Looks.Seperator {
+			color: Settings.textColorOnContainer
+		}
 
 		Text {
 			id: clockText
@@ -39,7 +43,7 @@ Rectangle {
 			font.weight: Looks.Fonts.weight
 			
 			text: Qt.formatDateTime(Services.Time.time, "hh:mm")
-			color: Looks.Colors.palette.neutral100
+			color: Settings.textColorOnContainer
 		}
 	}
 }

@@ -2,13 +2,14 @@ import QtQuick
 import Quickshell
 import QtQuick.Layouts
 import qs.common.looks as Looks
+import qs
 
 RowLayout {
   id: root
 
   Text {
     text: ""
-    color: Looks.Colors.palette.neutral100
+    color: Settings.textColorNotContainer
     font.family: Looks.Fonts.family
     font.pixelSize: Looks.Fonts.size + 4
     

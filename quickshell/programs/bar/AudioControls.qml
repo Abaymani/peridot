@@ -13,7 +13,10 @@ Rectangle {
   height: Looks.Decorations.decor.elementHeight
   implicitWidth: mainLayout.implicitWidth + 20
   radius: Looks.Decorations.decor.radius
-  gradient: Looks.Gradients.library[Settings.activeGradient].createObject()
+  color: Looks.Colors.md3.secondary_container
+  gradient: Settings.gradientBgEnabled 
+    ? Looks.Gradients.library[Settings.activeGradient].createObject()
+    : null
 
   property bool volReveal: false
 
@@ -70,7 +73,7 @@ Rectangle {
           anchors.centerIn: parent
           font.family: Looks.Fonts.family
           font.pixelSize: Looks.Fonts.size - 2
-          color: Looks.Colors.palette.neutral100
+          color: Settings.textColorOnContainer
           text: Math.round((Services.Audio.sink?.audio.volume ?? 0) * 100) + "%"
         }
       }
@@ -78,13 +81,13 @@ Rectangle {
       Looks.Seperator {
         Layout.leftMargin: 8 
         Layout.rightMargin: 8
+        color: Settings.textColorOnContainer
       }
 
-      // Audio Icon Button
       Text {
         font.family: Looks.Fonts.family
         font.pixelSize: Looks.Fonts.size
-        color: Services.Audio.sink?.audio.muted ? Looks.Colors.palette.neutral100 : Looks.Colors.palette.neutral100
+        color: Services.Audio.sink?.audio.muted ? Settings.textColorOnContainer : Settings.textColorOnContainer
 
         text: {
           const sink = Services.Audio.sink;
