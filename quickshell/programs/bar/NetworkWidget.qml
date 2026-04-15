@@ -23,7 +23,7 @@ Rectangle {
     height: parent.height
     spacing: 6
 
-  // Icon Logic: Shows Ethernet icon if wired, otherwise WiFi icon
+    // Icon Logic: Shows Ethernet icon if wired, otherwise WiFi icon
     Text {
       font.family: Looks.Fonts.family
       font.pixelSize: Looks.Fonts.size
@@ -31,11 +31,12 @@ Rectangle {
       text: Services.Network.activeEthernet ? "󰈀" : "" 
     }
 
-    // Name Logic: Shows "Wired" or the SSID of the WiFi
+    //Shows "Wired" or the SSID of the WiFi
     Text {
       font.family: Looks.Fonts.family
       font.pixelSize: Looks.Fonts.size - 2
       color: Settings.textColorOnContainer
+      renderType: Text.NativeRendering
       text: {
         if (Services.Network.activeEthernet) return "Wired";
         if (Services.Network.active) return Services.Network.active.ssid;
@@ -52,6 +53,7 @@ Rectangle {
       font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size -2
       color: Settings.textColorOnContainer
+      renderType: Text.NativeRendering
       property var stats: Services.NetworkUsage.formatBytes(Services.NetworkUsage.downloadSpeed)
       text: `${stats.value.toFixed(1)} ` + stats.unit + "⬇" 
     }
@@ -65,6 +67,7 @@ Rectangle {
       font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size -2
       color: Settings.textColorOnContainer
+      renderType: Text.NativeRendering
       property var stats: Services.NetworkUsage.formatBytes(Services.NetworkUsage.uploadSpeed)
       text: `${stats.value.toFixed(1)} ` + stats.unit + "⬆"
     }

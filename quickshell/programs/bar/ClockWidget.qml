@@ -26,7 +26,8 @@ Rectangle {
 			font.family: Looks.Fonts.family
 			font.pixelSize: Looks.Fonts.size 
 			font.weight: Looks.Fonts.weight
-			
+			renderType: Text.NativeRendering
+
 			text: Qt.formatDateTime(Services.Time.time, "dddd, MM/dd")
 			color: Settings.textColorOnContainer
 		}
@@ -41,6 +42,7 @@ Rectangle {
 			font.family: Looks.Fonts.family
 			font.pixelSize: Looks.Fonts.size 
 			font.weight: Looks.Fonts.weight
+			renderType: Text.NativeRendering
 			
 			text: Qt.formatDateTime(Services.Time.time, "hh:mm")
 			color: Settings.textColorOnContainer

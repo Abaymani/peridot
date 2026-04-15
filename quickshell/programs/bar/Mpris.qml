@@ -95,6 +95,7 @@ Rectangle {
 				font.pixelSize: Looks.Fonts.size - 2
 				font.weight: Looks.Fonts.weight
 				color: Settings.textColorOnContainer
+        renderType: Text.NativeRendering
 
 				// The Animation
 				NumberAnimation on x {
@@ -128,7 +129,7 @@ Rectangle {
       font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size + 2
       color: Settings.textColorOnContainer
-
+      
       // This logic switches the icon based on the app name
       text: {
         let entry = (MprisService.activePlayer?.desktopEntry ?? "").toLowerCase();

@@ -8,10 +8,14 @@ RowLayout {
   id: root
 
   Text {
-    text: ""
+    text: " "
     color: Settings.textColorNotContainer
     font.family: Looks.Fonts.family
     font.pixelSize: Looks.Fonts.size + 4
+
+    renderTypeQuality: 16 // Helps with legibility on light wallpapers
+    style: Text.Outline
+    styleColor: Looks.Colors.palette.secondary60
     
     MouseArea{
       anchors.fill: parent

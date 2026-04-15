@@ -41,9 +41,10 @@ Rectangle {
 		Text {
 			text: Services.UpdateService.isChecking ? "..." : Services.UpdateService.count
 			font.family: Looks.Fonts.family
-			font.pixelSize: Looks.Fonts.size -2
+			font.pixelSize: Looks.Fonts.size -1
 			font.weight: Looks.Fonts.weight
 			color: Settings.textColorOnContainer
+			renderType: Text.NativeRendering
 		}
 	}
 

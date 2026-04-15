@@ -54,6 +54,7 @@ RowLayout {
 				font.pixelSize: Looks.Fonts.size
 				font.weight: Looks.Fonts.weight
 				color: ws ? Settings.textColorOnContainer : Settings.textColorNotContainer
+				renderType: Text.NativeRendering
 			}
 
 			MouseArea {

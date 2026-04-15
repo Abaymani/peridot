@@ -5,7 +5,7 @@ import qs.common.looks as Looks
 
 Singleton {
     id: root
-    property bool gradientBgEnabled: false
+    property bool gradientBgEnabled: true
 
     property string activeGradient: "PrimaryH3C"
     property string activeSecondaryGradient: "PrimaryV2C"

@@ -35,6 +35,7 @@ Rectangle {
       font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size -2
       color: Settings.textColorOnContainer
+      renderType: Text.NativeRendering
 
       text: {
         let usage = Services.ResourceUsage.memoryUsed.toFixed(2).padStart(5, ' ');
@@ -62,6 +63,7 @@ Rectangle {
       font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size -2
       color: Settings.textColorOnContainer
+      renderType: Text.NativeRendering
 
       text: {
         let usage = (Services.ResourceUsage.cpuUsage * 100).toFixed(1);

@@ -18,6 +18,11 @@ RowLayout {
     font.family: Looks.Fonts.family
     font.pixelSize: Looks.Fonts.size
     Layout.fillWidth: false
+
+    renderTypeQuality: 16 // Helps with legibility on light wallpapers
+    renderType: Text.NativeRendering
+    style: Text.Outline
+    styleColor: Looks.Colors.palette.secondary60
   }
 
   Text {
@@ -32,5 +37,10 @@ RowLayout {
     font.family: Looks.Fonts.family
     font.pixelSize: Looks.Fonts.size
     font.weight: Looks.Fonts.weight
+
+    renderTypeQuality: 16 // Helps with legibility on light wallpapers
+    renderType: Text.NativeRendering
+    style: Text.Outline
+    styleColor: Looks.Colors.palette.secondary60
   }
 }
