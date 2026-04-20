@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import QtQuick.Layouts
 import qs.common.looks as Looks
+import qs.common.functions
 import qs
 
 RowLayout {
@@ -15,7 +16,7 @@ RowLayout {
 
     renderTypeQuality: 16 // Helps with legibility on light wallpapers
     style: Text.Outline
-    styleColor: Looks.Colors.palette.secondary60
+    styleColor: ColorUtils.setAlphaColor(Looks.Colors.palette.neutral0, 0.1)
     
     MouseArea{
       anchors.fill: parent

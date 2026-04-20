@@ -5,10 +5,9 @@ import QtQuick
 import QtQuick.Layouts
 import qs.common.looks as Looks
 import qs
-import "../../common/utils/functions.js" as Utils
+import qs.common.functions
 
 RowLayout {
-	// Set a constant width for the entire module
 	spacing: 6
 
 	Repeater {
@@ -38,8 +37,8 @@ RowLayout {
 			color: isActive
 				? Looks.Colors.md3.secondary_container
 				: ws 
-					? Settings.gradientBgEnabled ? Utils.setAlphaColor(Looks.Colors.md3.secondary, 0.3) : Looks.Colors.md3.secondary_container
-					: Settings.gradientBgEnabled ? "#01000000" : Utils.setAlphaColor(Looks.Colors.md3.surface_bright, 0.3)
+					? Settings.gradientBgEnabled ? ColorUtils.setAlphaColor(Looks.Colors.md3.secondary, 0.3) : Looks.Colors.md3.secondary_container
+					: Settings.gradientBgEnabled ? "#01000000" : ColorUtils.setAlphaColor(Looks.Colors.md3.surface_bright, 0.3)
 
 			gradient: Settings.gradientBgEnabled && isActive
 				? Looks.Gradients.library[Settings.activeGradient].createObject()

@@ -46,7 +46,7 @@ Rectangle {
         Behavior on Layout.preferredWidth { NumberAnimation { duration: 150; easing.type: Easing.InOutQuad } }
         Behavior on opacity { NumberAnimation { duration: 150 } }
 
-        WSlider {
+        Slider {
           anchors.verticalCenter: parent.verticalCenter
           width: 100
           from: 0

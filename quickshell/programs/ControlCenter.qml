@@ -51,9 +51,6 @@ Scope {
 
 				RowLayout {
 					id: quicktools
-					anchors.top: parent.top
-					anchors.left: parent.left
-					anchors.right: parent.right
 					spacing: 6
 
 					Uptime {}
