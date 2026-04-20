@@ -5,6 +5,7 @@ import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import qs.common.looks as Looks
+import qs.services
 import qs
 import qs.programs.controlcenter
 
@@ -46,7 +47,7 @@ Scope {
 			
 			ColumnLayout {
 				anchors.fill: parent
-				spacing: 12 // Space between your rows
+				spacing: 12 // Space between rows
 				anchors.margins: 8
 
 				RowLayout {
@@ -65,7 +66,6 @@ Scope {
 					id: dashboard
 					Layout.fillWidth: true
 					
-					// Your new content here
 					Rectangle { 
 						height: 80; Layout.fillWidth: true; 
 						color: Looks.Colors.md3.secondary_container
@@ -96,13 +96,60 @@ Scope {
     					? Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
 							: null
 						radius: Looks.Decorations.decor.radius
-						Text {
-							anchors.centerIn: parent
-							font.family: Looks.Fonts.family
-							font.pixelSize: Looks.Fonts.size
-							font.weight: Looks.Fonts.weight
-							color: Settings.textColorOnContainer
-							text: "Placeholder: Notifications"
+
+						ListView {
+							anchors.fill: parent
+							anchors.margins: 8
+							spacing: 10
+							clip: true
+							
+							// Feed the active notifications into the list
+							model: Notifications.notificationServer.trackedNotifications
+							
+							delegate: Rectangle {
+								width: ListView.view.width
+								height: col.implicitHeight + 20
+								color: Looks.Colors.md3.surface_container
+								radius: Looks.Decorations.decor.radius
+								
+								Column {
+									id: col
+									anchors.top: parent.top
+									anchors.left: parent.left
+									anchors.right: parent.right
+									anchors.margins: 10
+									spacing: 5
+									
+									Text {
+										text: modelData.summary
+										font.family: Looks.Fonts.family
+										font.pixelSize: Looks.Fonts.size + 2
+										font.weight: Font.Bold
+										color: Settings.textColorOnContainer
+										elide: Text.ElideRight
+										width: parent.width
+									}
+									
+									Text {
+										text: modelData.body
+										font.family: Looks.Fonts.family
+										font.pixelSize: Looks.Fonts.size
+										font.weight: Looks.Fonts.weight
+										color: Settings.textColorOnContainer
+										wrapMode: Text.WordWrap
+										width: parent.width
+										visible: modelData.body !== ""
+									}
+								}
+								
+								// Dismiss notification when clicked
+								MouseArea {
+									anchors.fill: parent
+									onClicked: {
+										modelData.dismiss()
+									}
+								}
+							}
 						}
 					}
 				}
