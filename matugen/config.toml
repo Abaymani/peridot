@@ -45,11 +45,6 @@ output_path = '~/.config/yazi/theme.toml'
 input_path = "./colors.css"
 output_path = "~/.config/wofi/colors.css"
 
-[templates.swaync]
-input_path = "./colors.css"
-output_path = "~/.config/swaync/colors.css"
-post_hook = "swaync-client -rs"
-
 [templates.obs]
 input_path = '~/.config/matugen/templates/matugen.obt'
 output_path = '~/.config/obs-studio/themes/matugen.obt'
