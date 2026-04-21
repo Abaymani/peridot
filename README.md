@@ -39,10 +39,16 @@ ln -s ~/peditot/* ~/.config
 **Misc.**
 - [ ] [Workspace overview / alt-tab](https://www.windowslatest.com/wp-content/uploads/2020/07/Alt-Tab-with-browser-tabs.jpg)
 - [ ] **Control Center**
-- [ ] **Notification center**
 - [ ] *Launcher (Rofi/Wofi replacement)*
 - [ ] Unified settings app
 - [ ] On-screen Keyboard
+
+### Notifications
+- [x] Rudimentary functionality (notifications visible in control center)
+- [ ] Popup notifications
+- [ ] images and all other information is shown
+- [ ] Do-not-disturb toggle
+- [ ] Notifications save to and are loaded from file
 
 ### Scripts & Utils
 - [x] Screenshot utility
@@ -152,8 +158,6 @@ sddm
 smartmontools
 starship
 sudo
-swaync
-sysstat
 tldr
 ttc-iosevka
 unrar

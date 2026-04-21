@@ -88,7 +88,6 @@ Scope {
 					id: notifications
 					Layout.fillWidth: true
 					
-					// Your new content here
 					Rectangle { 
 						height: 400; Layout.fillWidth: true; 
 						color: Looks.Colors.md3.secondary_container
@@ -97,57 +96,57 @@ Scope {
 							: null
 						radius: Looks.Decorations.decor.radius
 
+						Text {
+							anchors.centerIn: parent
+							text: "No notifications..."
+							
+							font.family: Looks.Fonts.family
+							font.pixelSize: Looks.Fonts.size + 4
+							
+							color: Settings.textColorOnContainer
+							opacity: notificationList.count === 0 ? 0.5 : 0.0
+						
+							Behavior on opacity {
+								NumberAnimation { 
+									duration: 300 
+									easing.type: Easing.InOutQuad 
+								}
+							}
+						}
+
 						ListView {
+							id: notificationList
 							anchors.fill: parent
 							anchors.margins: 8
 							spacing: 10
 							clip: true
+
+							model: Notifications.model
 							
-							// Feed the active notifications into the list
-							model: Notifications.notificationServer.trackedNotifications
-							
-							delegate: Rectangle {
-								width: ListView.view.width
-								height: col.implicitHeight + 20
-								color: Looks.Colors.md3.surface_container
-								radius: Looks.Decorations.decor.radius
-								
-								Column {
-									id: col
-									anchors.top: parent.top
-									anchors.left: parent.left
-									anchors.right: parent.right
-									anchors.margins: 10
-									spacing: 5
-									
-									Text {
-										text: modelData.summary
-										font.family: Looks.Fonts.family
-										font.pixelSize: Looks.Fonts.size + 2
-										font.weight: Font.Bold
-										color: Settings.textColorOnContainer
-										elide: Text.ElideRight
-										width: parent.width
-									}
-									
-									Text {
-										text: modelData.body
-										font.family: Looks.Fonts.family
-										font.pixelSize: Looks.Fonts.size
-										font.weight: Looks.Fonts.weight
-										color: Settings.textColorOnContainer
-										wrapMode: Text.WordWrap
-										width: parent.width
-										visible: modelData.body !== ""
-									}
+							delegate: NotificationItem {}
+
+							add: Transition {
+								NumberAnimation { 
+									property: "opacity"
+									from: 0
+									to: 1
+									duration: 300 
 								}
-								
-								// Dismiss notification when clicked
-								MouseArea {
-									anchors.fill: parent
-									onClicked: {
-										modelData.dismiss()
-									}
+							}
+
+							remove: Transition {
+								NumberAnimation { 
+									property: "opacity"
+									to: 0
+									duration: 300 
+								}
+							}
+
+							displaced: Transition {
+								NumberAnimation { 
+									properties: "y" 
+									duration: 300 
+									easing.type: Easing.OutQuad 
 								}
 							}
 						}
