@@ -40,7 +40,7 @@ Scope {
     }
 
     Rectangle {
-      width: 400
+      width: 500
       height: 700
       anchors.centerIn: parent
       color: Looks.Colors.md3.secondary_container
@@ -61,17 +61,51 @@ Scope {
         anchors.margins: 8
         spacing: 8
 
-        Text {
-            text: "Clipboard"
-            font.family: Looks.Fonts.family
-            font.pixelSize: Looks.Fonts.size + 8
-            font.weight: Looks.Fonts.weight
-            color: Settings.textColorOnContainer
+        RowLayout {
+          Text {
+              text: "Clipboard"
+              font.family: Looks.Fonts.family
+              font.pixelSize: Looks.Fonts.size + 8
+              font.weight: Looks.Fonts.weight
+              color: Settings.textColorOnContainer
+          }
+
+          Item {Layout.fillWidth: true}
+
+          Rectangle{
+            id: deleteHistoryButton
+            color: Looks.Colors.md3.secondary_container
+            gradient: Settings.gradientBgEnabled 
+              ? Looks.Gradients.library[Settings.activeGradient].createObject()
+              : null
+            implicitWidth: deleteHistoryText.implicitWidth + 20
+            radius: Looks.Decorations.decor.radius
+            height: Looks.Decorations.decor.elementHeight
+
+            Text {
+              id: deleteHistoryText
+              anchors.centerIn: parent
+              font.family: Looks.Fonts.family
+              font.pixelSize: Looks.Fonts.size+7
+              font.weight: Looks.Fonts.weight
+              text: "󰗨"
+              color: Settings.textColorOnContainer
+            }
+
+            MouseArea {
+              anchors.fill: parent
+              cursorShape: Qt.PointingHandCursor
+              hoverEnabled: true
+              onClicked: ClipboardService.deleteHistory()
+            }
+          }
         }
+
 
         TextField {
           id: searchInput
           Layout.fillWidth: true
+          Layout.preferredHeight: 28
           leftPadding: 10
           rightPadding: 10
           placeholderText: "Search..."
@@ -104,28 +138,52 @@ Scope {
           ScrollBar.vertical: ScrollBar { active: true }
 
           delegate: Rectangle {
-            width: ListView.view.width
+            width: ListView.view.width - 14
             height: delegateText.implicitHeight + 20
             color: Looks.Colors.md3.surface_container
             gradient: Settings.gradientBgEnabled 
               ? Looks.Gradients.library[Settings.activeGradient].createObject()
               : null
             radius: Looks.Decorations.decor.radius
-
-            Text {
-              id: delegateText
+            
+            RowLayout{
               anchors.fill: parent
               anchors.margins: 8
-              font.family: Looks.Fonts.family
-              font.pixelSize: Looks.Fonts.size
-              text: clipContent
-              color: Settings.textColorOnContainer
-              elide: Text.ElideRight
-              maximumLineCount: 3
-              wrapMode: Text.WordWrap
-              verticalAlignment: Text.AlignVCenter
-            }
 
+              Text {
+                id: delegateId
+
+                font.family: Looks.Fonts.family
+                font.pixelSize: Looks.Fonts.size
+                text: clipId
+                color: Settings.textColorOnContainer
+                elide: Text.ElideRight
+                maximumLineCount: 3
+                wrapMode: Text.WordWrap
+                verticalAlignment: Text.AlignVCenter
+              }
+
+              Looks.Seperator { verticalPadding: 1}
+
+              Text {
+                id: delegateText
+                Layout.fillWidth: true
+                verticalAlignment: Text.AlignVCenter
+                leftPadding: 10
+
+                font.family: Looks.Fonts.family
+                font.pixelSize: Looks.Fonts.size
+
+                text: clipContent
+                color: Settings.textColorOnContainer
+                elide: Text.ElideRight
+                maximumLineCount: 3
+                wrapMode: Text.WordWrap
+                textFormat: Text.PlainText
+                
+              }
+              
+            }
             MouseArea {
               id: itemMouseArea
               anchors.fill: parent

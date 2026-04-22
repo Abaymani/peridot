@@ -57,6 +57,7 @@ Scope {
 					Uptime {}
 					Item { Layout.fillWidth: true }
 					ColorPicker {}
+					OpenClipboard {}
 					Screenshot {}
 					Bluetooth {}
 					PeridotSettings {}

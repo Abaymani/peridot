@@ -68,6 +68,20 @@ Singleton {
   }
 
   Process {
+    id: wipeHistory
+    running: false
+    command: ["sh", "-c", "cliphist wipe"]
+
+    onExited: {
+      // Clear the internal data arrays
+      historyArray = []
+      searchResults = []
+      
+      applyFilter()
+    }
+  }
+
+  Process {
     id: copyProcess
     running: false
   }
@@ -101,6 +115,10 @@ Singleton {
         clipModel.append({ "clipId": item.clipId, "clipContent": item.clipContent })
       }
     }
+  }
+
+  function deleteHistory() {
+    wipeHistory.running = true
   }
 
   // Automatically re-filter whenever the search query changes
