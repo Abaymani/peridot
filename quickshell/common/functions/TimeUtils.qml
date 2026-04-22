@@ -7,7 +7,6 @@ Singleton{
     const diffMs = now.getTime() - timestamp;
     const diffMins = Math.floor(diffMs / 60000);
 
-    console.log(timestamp)
     if (diffMins < 1) return "now";
     if (diffMins < 60) return diffMins + "m";
     if (diffMins < 1440) return Math.floor(diffMins / 60) + "h";
