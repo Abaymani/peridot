@@ -18,4 +18,8 @@ Singleton {
     property color textColorNotContainer: gradientBgEnabled
         ? Looks.Colors.palette.neutral100
         : Looks.Colors.palette.neutral100
+
+    property color textColorOnLight: gradientBgEnabled
+        ? Looks.Colors.palette.neutral100
+        : Looks.Colors.palette.neutral20
 }

@@ -5,6 +5,7 @@ import qs.programs
 Scope {
 	Bar {}
 	ControlCenter {}
+	Clipboard {}
 }
 
 

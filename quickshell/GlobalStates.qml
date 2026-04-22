@@ -9,9 +9,15 @@ Singleton {
     id: root
     property bool isBarOpen: true
     property bool isControlCenterOpen: false
+    property bool isClipboardOpen: false
 
-    property var toggleShortcut: GlobalShortcut {
+    property var toggleControlCenter: GlobalShortcut {
         name: "toggleControlCenter"
         onPressed: isControlCenterOpen = !isControlCenterOpen
+    }
+
+    property var toggleClipboard: GlobalShortcut {
+        name: "toggleClipboard"
+        onPressed: isClipboardOpen = !isClipboardOpen
     }
 }

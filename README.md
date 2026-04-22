@@ -42,11 +42,12 @@ ln -s ~/peditot/* ~/.config
 - [ ] *Launcher (Rofi/Wofi replacement)*
 - [ ] Unified settings app
 - [ ] On-screen Keyboard
+- [x] Clipboard history viewer
 
 ### Notifications
 - [x] Rudimentary functionality (notifications visible in control center)
 - [ ] Popup notifications
-- [ ] images and all other information is shown
+- [ ] images, icons and all other information is shown
 - [ ] Do-not-disturb toggle
 - [ ] Notifications save to and are loaded from file
 
