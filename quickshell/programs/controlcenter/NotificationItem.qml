@@ -3,6 +3,7 @@ import Quickshell
 import Quickshell.Io
 import QtQuick.Layouts
 import qs.common.looks as Looks
+import qs.common.functions
 import qs.services
 import qs
 
@@ -43,7 +44,7 @@ Rectangle {
       }
 
       Text {
-        text: Qt.formatTime(new Date(timeReceived), "hh:mm")
+        text: TimeUtils.formatRelativeTime(new Date(timeReceived), Time.time)
         font.family: Looks.Fonts.family
         font.pixelSize: Looks.Fonts.size -1
         font.italic: true
