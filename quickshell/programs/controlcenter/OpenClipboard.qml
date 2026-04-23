@@ -5,7 +5,7 @@ import qs.common.looks as Looks
 import qs
 
 Rectangle{
-  color: Looks.Colors.md3.secondary_container
+  color: Looks.Colors.md3.surface_container
   gradient: Settings.gradientBgEnabled 
     ? Looks.Gradients.library[Settings.activeGradient].createObject()
     : null

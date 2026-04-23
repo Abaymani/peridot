@@ -36,7 +36,9 @@ PanelWindow {
     model: Notifications.popupModel
     verticalLayoutDirection: ListView.BottomToTop // TODO: should depend on anchor top/bottom
     
-    delegate: NotificationItem {}
+    delegate: NotificationItem {
+      isPopup: true
+    }
     
     // TODO: make customizable
     add: Transition {

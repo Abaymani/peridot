@@ -12,28 +12,35 @@ Rectangle {
   property var notifObject: Notifications.getNotification(notifId)
   property var modelData: notifObject.notif
   property var timeReceived: notifObject.timeReceived
+  property var isPopup: false
 
   width: ListView.view.width
   height: mainLayout.implicitHeight + 20
-  color: Looks.Colors.md3.surface_container
+  color: Looks.Colors.md3.secondary_container
   gradient: Settings.gradientBgEnabled 
     ? Looks.Gradients.library[Settings.activeGradient].createObject()
     : null
   radius: Looks.Decorations.decor.radius
+
+  HoverHandler {
+    id: cardHover
+  }
 
   RowLayout {
     id: mainLayout
     anchors.top: parent.top
     anchors.left: parent.left
     anchors.right: parent.right
-    anchors.margins: 10
-    spacing: 12
+    anchors.topMargin: 10
+    anchors.bottomMargin: 10
+    spacing: 8
 
     Item {
       Layout.alignment: Qt.AlignTop
       Layout.preferredWidth: 36
       Layout.preferredHeight: 36
-      
+      Layout.leftMargin: 10
+      Layout.rightMargin: -10
       // Hide the whole container in case no appropriate image exists
       visible: mainImage.source.toString() !== "" || badgeIcon.source.toString() !== ""
 
@@ -78,8 +85,9 @@ Rectangle {
     
 
     ColumnLayout {
-      spacing: 5
       Layout.fillWidth: true
+      Layout.leftMargin: 10
+      Layout.rightMargin: 10
       
       RowLayout {
       Layout.fillWidth: true
@@ -96,6 +104,7 @@ Rectangle {
         }
 
         Text {
+          visible: !isPopup
           text: TimeUtils.formatRelativeTime(new Date(timeReceived), Time.time)
           font.family: Looks.Fonts.family
           font.pixelSize: Looks.Fonts.size -1
@@ -118,16 +127,126 @@ Rectangle {
         elide: Text.ElideRight
         visible: modelData.body !== ""
       }
+      
+      RowLayout {
+        id: actionRow
+        property bool showActions: !isPopup && cardHover.hovered
+
+        opacity: showActions ? 1.0 : 0.0
+        visible: opacity > 0
+        clip: true
+
+        Layout.fillWidth: true
+        Layout.preferredHeight: showActions ? implicitHeight : 0
+        Layout.topMargin: 4
+        Layout.leftMargin: -2
+        Layout.rightMargin: -4
+        
+        Behavior on opacity {
+          NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
+        }
+        Behavior on Layout.preferredHeight {
+          NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
+        }
+
+        ListView {
+          id: actionList
+          Layout.fillWidth: true
+          Layout.preferredHeight: Looks.Decorations.decor.elementHeight
+          
+          orientation: ListView.Horizontal
+          spacing: 8
+          
+          model: modelData.actions 
+          
+          delegate: Rectangle {
+            color: Looks.Colors.md3.surface_container
+            gradient: Settings.gradientBgEnabled 
+              ? Looks.Gradients.library[Settings.activeGradient].createObject()
+              : null
+            radius: Looks.Decorations.decor.radius
+            width: actionText.implicitWidth + 24
+            height: Looks.Decorations.decor.elementHeight
+
+            Text {
+              id: actionText
+              anchors.centerIn: parent
+              text: modelData.text 
+              font.family: Looks.Fonts.family
+              font.pixelSize: Looks.Fonts.size - 1
+              color: Settings.textColorOnContainer
+            }
+
+            MouseArea {
+              anchors.fill: parent
+              cursorShape: Qt.PointingHandCursor
+              onClicked: {
+                modelData.invoke()
+              }
+            }
+          }
+        }
+
+        Rectangle {
+          color: Looks.Colors.md3.surface_container
+          gradient: Settings.gradientBgEnabled 
+            ? Looks.Gradients.library[Settings.activeGradient].createObject()
+            : null
+          implicitWidth: dismissIcon.implicitWidth + 20
+          radius: Looks.Decorations.decor.radius
+          height: Looks.Decorations.decor.elementHeight
+
+          Text {
+            id: dismissIcon
+            anchors.centerIn: parent
+            font.family: Looks.Fonts.family
+            font.pixelSize: Looks.Fonts.size+8
+            font.weight: Looks.Fonts.weight
+            text: ""
+            color: Settings.textColorOnContainer
+          }
+
+          MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+
+            onClicked: {
+              Notifications.dismiss(notifId)
+            }
+          }
+        }
+      }
     }
-  }
-  
-  
-  // (TEMP) Dismiss notification when clicked
-  MouseArea {
-    anchors.fill: parent
-    cursorShape: Qt.PointingHandCursor
-    onClicked: {
-      Notifications.dismiss(notifId)
+
+    Rectangle {
+      visible: isPopup
+      color: Looks.Colors.md3.surface_container
+      gradient: Settings.gradientBgEnabled 
+        ? Looks.Gradients.library[Settings.activeGradient].createObject()
+        : null
+      implicitWidth: dismissIconPopup.implicitWidth + 20
+      radius: Looks.Decorations.decor.radius
+      height: Looks.Decorations.decor.elementHeight
+      Layout.rightMargin: 10
+
+      Text {
+        id: dismissIconPopup
+        anchors.centerIn: parent
+        font.family: Looks.Fonts.family
+        font.pixelSize: Looks.Fonts.size+8
+        font.weight: Looks.Fonts.weight
+        text: ""
+        color: Settings.textColorOnContainer
+      }
+
+      MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+
+        onClicked: {
+          Notifications.dismiss(notifId)
+        }
+      }
     }
   }
 }

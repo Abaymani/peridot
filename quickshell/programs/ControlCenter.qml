@@ -40,7 +40,7 @@ Scope {
 			anchors.fill: parent
 			radius: Looks.Decorations.decor.radius
 
-			color: Looks.Colors.md3.surface_container
+			color: Looks.Colors.md3.secondary_container
 			gradient: Settings.gradientBgEnabled 
 				? Looks.Gradients.library[Settings.activebackgroundGradient].createObject() 
 				: null
@@ -69,7 +69,7 @@ Scope {
 					
 					Rectangle { 
 						height: 80; Layout.fillWidth: true; 
-						color: Looks.Colors.md3.secondary_container
+						color: Looks.Colors.md3.surface_container
 						gradient: Settings.gradientBgEnabled 
     					? Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
 							: null
@@ -91,7 +91,7 @@ Scope {
 					
 					Rectangle { 
 						height: 400; Layout.fillWidth: true; 
-						color: Looks.Colors.md3.secondary_container
+						color: Looks.Colors.md3.surface_container
 						gradient: Settings.gradientBgEnabled 
     					? Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
 							: null
@@ -119,7 +119,7 @@ Scope {
 							id: notificationList
 							anchors.fill: parent
 							anchors.margins: 8
-							spacing: 10
+							spacing: 6
 							clip: true
 
 							model: Notifications.model
