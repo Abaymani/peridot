@@ -9,12 +9,12 @@ Rectangle{
   gradient: Settings.gradientBgEnabled 
     ? Looks.Gradients.library[Settings.activeGradient].createObject()
     : null
-  implicitWidth: bluetoothIcon.implicitWidth + 20
+  implicitWidth: clipboardIcon.implicitWidth + 20
   radius: Looks.Decorations.decor.radius
   height: Looks.Decorations.decor.elementHeight
 
   Text {
-    id: bluetoothIcon
+    id: clipboardIcon
     anchors.centerIn: parent
     font.family: Looks.Fonts.family
     font.pixelSize: Looks.Fonts.size+5

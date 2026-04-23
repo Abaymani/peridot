@@ -88,6 +88,7 @@ Rectangle {
       Layout.fillWidth: true
       Layout.leftMargin: 10
       Layout.rightMargin: 10
+      Layout.alignment: Qt.AlignTop
       
       RowLayout {
       Layout.fillWidth: true
@@ -116,10 +117,9 @@ Rectangle {
 
       Text {
         Layout.fillWidth: true
-        Layout.minimumWidth: 0
         text: modelData.body
         font.family: Looks.Fonts.family
-        font.pixelSize: Looks.Fonts.size
+        font.pixelSize: Looks.Fonts.size-3
         font.weight: Looks.Fonts.weight
         color: Settings.textColorOnContainer
         wrapMode: Text.WordWrap

@@ -2,6 +2,7 @@ pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Services.Notifications
+import qs
 
 Singleton {
   id: root
@@ -60,7 +61,7 @@ Singleton {
       // Insert to show newest notifications on top of others.
       notifcationModel.insert(0, {"notifId": internalId})
 
-      if (!notification.lastGeneration) {
+      if (!notification.lastGeneration && !Settings.doNotDisturb) {
         popupListModel.insert(0, {"notifId": internalId})
         popupTimerComponent.createObject(root, {"targetId": internalId})
       }
@@ -86,13 +87,20 @@ Singleton {
     }
   }
 
-    function dismiss(internalId) {
-      if (root.objectMap[internalId]) {
-        root.objectMap[internalId].notif.dismiss() 
-      }
+  function dismiss(internalId) {
+    if (root.objectMap[internalId]) {
+      root.objectMap[internalId].notif.dismiss() 
     }
-    
-    function getNotification(internalId) {
-      return root.objectMap[internalId]
+  }
+  
+  function getNotification(internalId) {
+    return root.objectMap[internalId]
+  }
+
+  function clearNotifications() {
+    const ids = Object.keys(root.objectMap)
+    for (let i = 0; i < ids.length; i++) {
+      root.dismiss(ids[i])
     }
+  }
 }

@@ -97,63 +97,125 @@ Scope {
 							: null
 						radius: Looks.Decorations.decor.radius
 
-						Text {
-							anchors.centerIn: parent
-							text: "No notifications..."
-							
-							font.family: Looks.Fonts.family
-							font.pixelSize: Looks.Fonts.size + 4
-							
-							color: Settings.textColorOnContainer
-							opacity: notificationList.count === 0 ? 0.5 : 0.0
-						
-							Behavior on opacity {
-								NumberAnimation { 
-									duration: 300 
-									easing.type: Easing.InOutQuad 
-								}
-							}
-						}
-
-						ListView {
-							id: notificationList
+						ColumnLayout{
 							anchors.fill: parent
-							anchors.margins: 8
-							spacing: 6
-							clip: true
+              anchors.margins: 8
 
-							model: Notifications.model
-							
-							delegate: NotificationItem {}
+							RowLayout{
+								Layout.fillWidth: true
+								spacing: 8
+								
+								Rectangle{
+									color: Looks.Colors.md3.secondary_container
+									gradient: Settings.gradientBgEnabled 
+										? Looks.Gradients.library[Settings.activeGradient].createObject()
+										: null
+									implicitWidth: Settings.doNotDisturb? dndBtn.implicitWidth + 38 : dndBtn.implicitWidth + 40
+									radius: Looks.Decorations.decor.radius
+									height: Looks.Decorations.decor.elementHeight
 
-							add: Transition {
-								NumberAnimation { 
-									property: "opacity"
-									from: 0
-									to: 1
-									duration: 300 
+									Text {
+										id: dndBtn
+										anchors.centerIn: parent
+										font.family: Looks.Fonts.family
+										font.pixelSize: Looks.Fonts.size+5
+										font.weight: Looks.Fonts.weight
+										text: Settings.doNotDisturb? "󰂛" : "󰂚"
+										color: Settings.textColorOnContainer
+									}
+
+									MouseArea {
+										anchors.fill: parent
+										cursorShape: Qt.PointingHandCursor
+										hoverEnabled: true
+
+										onClicked: Settings.doNotDisturb  = !Settings.doNotDisturb 
+									}
+								}
+
+								Text {
+									Layout.fillWidth: true
+									horizontalAlignment: Text.AlignHCenter
+									font.family: Looks.Fonts.family
+									font.pixelSize: Looks.Fonts.size
+									font.weight: Looks.Fonts.weight
+									text: `${Notifications.model.count} notification${Notifications.model.count === 1 ? "" : "s"}`
+									color: Settings.textColorOnContainer
+								}
+
+								Rectangle{
+									color: Looks.Colors.md3.secondary_container
+									gradient: Settings.gradientBgEnabled 
+										? Looks.Gradients.library[Settings.activeGradient].createObject()
+										: null
+									implicitWidth: wipeNotifications.implicitWidth + 40
+									radius: Looks.Decorations.decor.radius
+									height: Looks.Decorations.decor.elementHeight
+
+									Text {
+										id: wipeNotifications
+										anchors.centerIn: parent
+										anchors.horizontalCenterOffset: 2
+										font.family: Looks.Fonts.family
+										font.pixelSize: Looks.Fonts.size+5
+										font.weight: Looks.Fonts.weight
+										text: "󰛌"
+										color: Settings.textColorOnContainer
+									}
+
+									MouseArea {
+										anchors.fill: parent
+										cursorShape: Qt.PointingHandCursor
+										hoverEnabled: true
+
+										onClicked: Notifications.clearNotifications()
+									}
 								}
 							}
 
-							remove: Transition {
-								NumberAnimation { 
-									property: "opacity"
-									to: 0
-									duration: 300 
-								}
-							}
+							Item {
+								Layout.fillWidth: true
+								Layout.fillHeight: true
 
-							displaced: Transition {
-								NumberAnimation { 
-									properties: "y" 
-									duration: 300 
-									easing.type: Easing.OutQuad 
+								ListView {
+									id: notificationList
+									anchors.fill: parent
+									spacing: 6
+									clip: true
+
+									model: Notifications.model
+									
+									delegate: NotificationItem {}
+
+									add: Transition {
+										NumberAnimation { 
+											property: "opacity"
+											from: 0
+											to: 1
+											duration: 300 
+										}
+									}
+
+									remove: Transition {
+										NumberAnimation { 
+											property: "opacity"
+											to: 0
+											duration: 300 
+										}
+									}
+
+									displaced: Transition {
+										NumberAnimation { 
+											properties: "y" 
+											duration: 300 
+											easing.type: Easing.OutQuad 
+										}
+									}
 								}
 							}
 						}
 					}
 				}
-
 				Item { Layout.fillHeight: true }
 			}
 		}

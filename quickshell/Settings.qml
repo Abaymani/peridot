@@ -1,11 +1,20 @@
 pragma Singleton
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
+pragma ComponentBehavior: Bound
 import qs.common.looks as Looks
 
 Singleton {
     id: root
-    property bool gradientBgEnabled: false
+    property bool gradientBgEnabled: true
+
+    property bool doNotDisturb: false
+
+    property var toggleDND: GlobalShortcut {
+        name: "toggleDND"
+        onPressed: doNotDisturb = !doNotDisturb
+    }
 
     property string activeGradient: "PrimaryH3C"
     property string activeSecondaryGradient: "PrimaryV2C"

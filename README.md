@@ -47,7 +47,7 @@ ln -s ~/peditot/* ~/.config
 - [x] Rudimentary functionality (notifications visible in control center)
 - [x] Popup notifications
 - [x] images, icons and all other information is shown
-- [ ] Do-not-disturb toggle
+- [x] Do-not-disturb toggle
 - [ ] Notifications save to and are loaded from file
 
 **Scripts & Utils**
