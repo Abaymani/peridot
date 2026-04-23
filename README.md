@@ -14,8 +14,7 @@ ln -s ~/peditot/* ~/.config
 ... Or you can skip manual linking and use a dotfiles manager!
 
 ## TODO
-**Bold text**: being worked on now.
-*Italic*: Will be worked on after bolded items.
+
 
 ### Quickshell Widgets & Applets
 **Topbar**
@@ -33,33 +32,33 @@ ln -s ~/peditot/* ~/.config
 
 
 **Calendar**
-- [ ] *Simple calendar view*
+- [ ] Simple calendar view
 - [ ] Google calendar / ical integration
 
 **Misc.**
 - [ ] [Workspace overview / alt-tab](https://www.windowslatest.com/wp-content/uploads/2020/07/Alt-Tab-with-browser-tabs.jpg)
-- [ ] **Control Center**
-- [ ] *Launcher (Rofi/Wofi replacement)*
+- [ ] Control Center
+- [ ] Launcher (Rofi/Wofi replacement)
 - [ ] Unified settings app
 - [ ] On-screen Keyboard
 - [x] Clipboard history viewer
 
-### Notifications
+**Notifications**
 - [x] Rudimentary functionality (notifications visible in control center)
 - [x] Popup notifications
 - [x] images, icons and all other information is shown
 - [ ] Do-not-disturb toggle
 - [ ] Notifications save to and are loaded from file
 
-### Scripts & Utils
+**Scripts & Utils**
 - [x] Screenshot utility
 - [ ] Brightness utility
 - [ ] Battery utility (performance modes)
 - [ ] Matugen dark/light choice *(currently always dark)*
 
-### Other
+**Other**
 - [x] hyprlock rice
-- [x] **wlogout rice**
+- [x] wlogout rice
 
 ___
 
