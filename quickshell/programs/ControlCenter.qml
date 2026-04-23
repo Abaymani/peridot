@@ -6,6 +6,7 @@ import Quickshell.Wayland
 import Quickshell.Hyprland
 import qs.common.looks as Looks
 import qs.services
+import qs.widgets
 import qs
 import qs.programs.controlcenter
 
@@ -56,11 +57,26 @@ Scope {
 
 					Uptime {}
 					Item { Layout.fillWidth: true }
-					ColorPicker {}
-					OpenClipboard {}
-					Screenshot {}
-					Bluetooth {}
-					PeridotSettings {}
+					Button {
+						buttonText: "󰈊"
+						onClicked: Quickshell.execDetached(["sh", "-c", "hyprpicker -a"]);
+					}
+					Button {
+						buttonText: ""
+						onClicked: GlobalStates.isClipboardOpen = !GlobalStates.isClipboardOpen
+					}
+					Button {
+						buttonText: ""
+						onClicked: Quickshell.execDetached(["sh", "-c", "~/peridot/peridot/scripts/screenshot.sh"]);
+					}
+					Button {
+						buttonText: "󰂯"
+						onClicked: Quickshell.execDetached(["hyprctl", "dispatch", "exec", "blueman-manager"]);
+					}
+					Button {
+						buttonText: ""
+						onClicked: console.log("Settings app doesn't exist yet! :(")
+					}
 				}
 
 				RowLayout {
@@ -105,32 +121,12 @@ Scope {
 								Layout.fillWidth: true
 								spacing: 8
 								
-								Rectangle{
+								Button{
 									color: Looks.Colors.md3.secondary_container
-									gradient: Settings.gradientBgEnabled 
-										? Looks.Gradients.library[Settings.activeGradient].createObject()
-										: null
-									implicitWidth: Settings.doNotDisturb? dndBtn.implicitWidth + 38 : dndBtn.implicitWidth + 40
-									radius: Looks.Decorations.decor.radius
-									height: Looks.Decorations.decor.elementHeight
-
-									Text {
-										id: dndBtn
-										anchors.centerIn: parent
-										font.family: Looks.Fonts.family
-										font.pixelSize: Looks.Fonts.size+5
-										font.weight: Looks.Fonts.weight
-										text: Settings.doNotDisturb? "󰂛" : "󰂚"
-										color: Settings.textColorOnContainer
-									}
-
-									MouseArea {
-										anchors.fill: parent
-										cursorShape: Qt.PointingHandCursor
-										hoverEnabled: true
-
-										onClicked: Settings.doNotDisturb  = !Settings.doNotDisturb 
-									}
+									widthPadding: Settings.doNotDisturb? 38 : 40
+									fontSizeModifier: 5
+									buttonText: Settings.doNotDisturb? "󰂛" : "󰂚"
+									onClicked: Settings.doNotDisturb  = !Settings.doNotDisturb 
 								}
 
 								Text {
@@ -143,33 +139,13 @@ Scope {
 									color: Settings.textColorOnContainer
 								}
 
-								Rectangle{
+								Button{
 									color: Looks.Colors.md3.secondary_container
-									gradient: Settings.gradientBgEnabled 
-										? Looks.Gradients.library[Settings.activeGradient].createObject()
-										: null
-									implicitWidth: wipeNotifications.implicitWidth + 40
-									radius: Looks.Decorations.decor.radius
-									height: Looks.Decorations.decor.elementHeight
-
-									Text {
-										id: wipeNotifications
-										anchors.centerIn: parent
-										anchors.horizontalCenterOffset: 2
-										font.family: Looks.Fonts.family
-										font.pixelSize: Looks.Fonts.size+5
-										font.weight: Looks.Fonts.weight
-										text: "󰛌"
-										color: Settings.textColorOnContainer
-									}
-
-									MouseArea {
-										anchors.fill: parent
-										cursorShape: Qt.PointingHandCursor
-										hoverEnabled: true
-
-										onClicked: Notifications.clearNotifications()
-									}
+									widthPadding: 40
+									fontSizeModifier: 5
+									h_centerOffset: 2
+									buttonText: "󰛌"
+									onClicked: Notifications.clearNotifications()
 								}
 							}
 

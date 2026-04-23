@@ -4,32 +4,41 @@ import Quickshell.Io
 import qs.common.looks as Looks
 import qs
 
-Rectangle{
+Rectangle {
+  id: root
+  signal clicked()
+  required property string buttonText
+  property int widthPadding: 20
+  property int fontSizeModifier: 8
+  property color textColor: Settings.textColorOnContainer
+  property int h_centerOffset: 0
+
   color: Looks.Colors.md3.surface_container
   gradient: Settings.gradientBgEnabled 
     ? Looks.Gradients.library[Settings.activeGradient].createObject()
     : null
-  implicitWidth: bluetoothIcon.implicitWidth + 20
+  implicitWidth: btnText.implicitWidth + widthPadding
   radius: Looks.Decorations.decor.radius
   height: Looks.Decorations.decor.elementHeight
 
   Text {
-    id: bluetoothIcon
+    id: btnText
     anchors.centerIn: parent
+    anchors.horizontalCenterOffset: h_centerOffset
     font.family: Looks.Fonts.family
-    font.pixelSize: Looks.Fonts.size+8
+    font.pixelSize: Looks.Fonts.size + fontSizeModifier
     font.weight: Looks.Fonts.weight
-    text: "󰂯"
-    color: Settings.textColorOnContainer
+    text: buttonText
+    color: textColor
   }
 
-  MouseArea {
+    MouseArea {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     hoverEnabled: true
 
     onClicked: {
-      Quickshell.execDetached(["hyprctl", "dispatch", "exec", "blueman-manager"]);
+      root.clicked()
     }
   }
 }

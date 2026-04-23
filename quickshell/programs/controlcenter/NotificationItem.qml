@@ -5,6 +5,7 @@ import QtQuick.Layouts
 import qs.common.looks as Looks
 import qs.common.functions
 import qs.services
+import qs.widgets
 import qs
 
 Rectangle {
@@ -159,94 +160,34 @@ Rectangle {
           
           model: modelData.actions 
           
-          delegate: Rectangle {
-            color: Looks.Colors.md3.surface_container
-            gradient: Settings.gradientBgEnabled 
-              ? Looks.Gradients.library[Settings.activeGradient].createObject()
-              : null
-            radius: Looks.Decorations.decor.radius
-            width: actionText.implicitWidth + 24
-            height: Looks.Decorations.decor.elementHeight
-
-            Text {
-              id: actionText
-              anchors.centerIn: parent
-              text: modelData.text 
-              font.family: Looks.Fonts.family
-              font.pixelSize: Looks.Fonts.size - 1
-              color: Settings.textColorOnContainer
-            }
-
-            MouseArea {
-              anchors.fill: parent
-              cursorShape: Qt.PointingHandCursor
-              onClicked: {
-                modelData.invoke()
-              }
+          delegate: Item { 
+            required property var modelData
+            width: innerButton.width
+            height: innerButton.height
+            Button {
+              id: innerButton
+              color: Looks.Colors.md3.surface_container
+              fontSizeModifier: -1
+              buttonText: parent.modelData.text 
+              onClicked: parent.modelData.invoke()
             }
           }
         }
 
-        Rectangle {
+        Button {
           color: Looks.Colors.md3.surface_container
-          gradient: Settings.gradientBgEnabled 
-            ? Looks.Gradients.library[Settings.activeGradient].createObject()
-            : null
-          implicitWidth: dismissIcon.implicitWidth + 20
-          radius: Looks.Decorations.decor.radius
-          height: Looks.Decorations.decor.elementHeight
-
-          Text {
-            id: dismissIcon
-            anchors.centerIn: parent
-            font.family: Looks.Fonts.family
-            font.pixelSize: Looks.Fonts.size+8
-            font.weight: Looks.Fonts.weight
-            text: ""
-            color: Settings.textColorOnContainer
-          }
-
-          MouseArea {
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-
-            onClicked: {
-              Notifications.dismiss(notifId)
-            }
-          }
+          buttonText: ""
+          onClicked: Notifications.dismiss(notifId)
         }
       }
     }
 
-    Rectangle {
+    Button {
       visible: isPopup
       color: Looks.Colors.md3.surface_container
-      gradient: Settings.gradientBgEnabled 
-        ? Looks.Gradients.library[Settings.activeGradient].createObject()
-        : null
-      implicitWidth: dismissIconPopup.implicitWidth + 20
-      radius: Looks.Decorations.decor.radius
-      height: Looks.Decorations.decor.elementHeight
       Layout.rightMargin: 10
-
-      Text {
-        id: dismissIconPopup
-        anchors.centerIn: parent
-        font.family: Looks.Fonts.family
-        font.pixelSize: Looks.Fonts.size+8
-        font.weight: Looks.Fonts.weight
-        text: ""
-        color: Settings.textColorOnContainer
-      }
-
-      MouseArea {
-        anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
-
-        onClicked: {
-          Notifications.dismiss(notifId)
-        }
-      }
+      buttonText: ""
+      onClicked:Notifications.dismiss(notifId)
     }
   }
 }
