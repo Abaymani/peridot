@@ -2,7 +2,7 @@
 
 Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell. With bits and pieces taken/inspired from [end4-dots](https://github.com/end-4/dots-hyprland), [ML4W](https://github.com/mylinuxforwork/dotfiles) and [Caelestia](https://github.com/caelestia-dots/shell). Project aim is just to learn quickshell and make something useable for myself by the end.
 
-![Peridot](peridot/peridot.jpg "Peridot")
+![Peridot](peridot/peridot.jpg "Peridot topbar and control center")
 
 ## Setup
 To make git tracking easier, clone this repo to a folder separate from *~/.config* and create a symlink instead. This way, your git repo won't start tracking random app config folders.
