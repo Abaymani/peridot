@@ -6,6 +6,7 @@ import Quickshell.Wayland
 import Quickshell.Hyprland
 import qs.common.looks as Looks
 import qs.services
+import qs.widgets
 import qs
 
 Scope {
@@ -72,32 +73,9 @@ Scope {
 
           Item {Layout.fillWidth: true}
 
-          Rectangle{
-            id: deleteHistoryButton
-            color: Looks.Colors.md3.secondary_container
-            gradient: Settings.gradientBgEnabled 
-              ? Looks.Gradients.library[Settings.activeGradient].createObject()
-              : null
-            implicitWidth: deleteHistoryText.implicitWidth + 20
-            radius: Looks.Decorations.decor.radius
-            height: Looks.Decorations.decor.elementHeight
-
-            Text {
-              id: deleteHistoryText
-              anchors.centerIn: parent
-              font.family: Looks.Fonts.family
-              font.pixelSize: Looks.Fonts.size+7
-              font.weight: Looks.Fonts.weight
-              text: "󰗨"
-              color: Settings.textColorOnContainer
-            }
-
-            MouseArea {
-              anchors.fill: parent
-              cursorShape: Qt.PointingHandCursor
-              hoverEnabled: true
-              onClicked: ClipboardService.deleteHistory()
-            }
+          Button {
+            buttonText: "󰗨"
+            onClicked: ClipboardService.deleteHistory()
           }
         }
 
@@ -127,71 +105,83 @@ Scope {
           }
         }
 
-        ListView {
+        RowLayout {
           Layout.fillWidth: true
           Layout.fillHeight: true
-          clip: true
-          id: listView
-          model: ClipboardService.model
           spacing: 8
-          
-          ScrollBar.vertical: ScrollBar { active: true }
 
-          delegate: Rectangle {
-            width: ListView.view.width - 14
-            height: delegateText.implicitHeight + 20
-            color: Looks.Colors.md3.surface_container
-            gradient: Settings.gradientBgEnabled 
-              ? Looks.Gradients.library[Settings.activeGradient].createObject()
-              : null
-            radius: Looks.Decorations.decor.radius
-            
-            RowLayout{
-              anchors.fill: parent
-              anchors.margins: 8
+          ListView {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            clip: true
+            id: listView
+            model: ClipboardService.model
+            spacing: 8
 
-              Text {
-                id: delegateId
+            ScrollBar.vertical: ScrollBar { 
+              parent: listView.parent
+              Layout.fillHeight: true
+              visible: size < 1.0
+              policy: ScrollBar.AlwaysOn
+              active: true 
+            }
 
-                font.family: Looks.Fonts.family
-                font.pixelSize: Looks.Fonts.size
-                text: clipId
-                color: Settings.textColorOnContainer
-                elide: Text.ElideRight
-                maximumLineCount: 3
-                wrapMode: Text.WordWrap
-                verticalAlignment: Text.AlignVCenter
-              }
+            delegate: Rectangle {
+              width: ListView.view.width
+              height: delegateText.implicitHeight + 20
+              color: Looks.Colors.md3.surface_container
+              gradient: Settings.gradientBgEnabled 
+                ? Looks.Gradients.library[Settings.activeGradient].createObject()
+                : null
+              radius: Looks.Decorations.decor.radius
+              
+              RowLayout{
+                anchors.fill: parent
+                anchors.margins: 8
 
-              Looks.Seperator { verticalPadding: 1}
+                Text {
+                  id: delegateId
 
-              Text {
-                id: delegateText
-                Layout.fillWidth: true
-                verticalAlignment: Text.AlignVCenter
-                leftPadding: 10
+                  font.family: Looks.Fonts.family
+                  font.pixelSize: Looks.Fonts.size
+                  text: clipId
+                  color: Settings.textColorOnContainer
+                  elide: Text.ElideRight
+                  maximumLineCount: 3
+                  wrapMode: Text.WordWrap
+                  verticalAlignment: Text.AlignVCenter
+                }
 
-                font.family: Looks.Fonts.family
-                font.pixelSize: Looks.Fonts.size
+                Looks.Seperator { verticalPadding: 1}
 
-                text: clipContent
-                color: Settings.textColorOnContainer
-                elide: Text.ElideRight
-                maximumLineCount: 3
-                wrapMode: Text.WordWrap
-                textFormat: Text.PlainText
+                Text {
+                  id: delegateText
+                  Layout.fillWidth: true
+                  verticalAlignment: Text.AlignVCenter
+                  leftPadding: 10
+
+                  font.family: Looks.Fonts.family
+                  font.pixelSize: Looks.Fonts.size
+
+                  text: clipContent
+                  color: Settings.textColorOnContainer
+                  elide: Text.ElideRight
+                  maximumLineCount: 3
+                  wrapMode: Text.WordWrap
+                  textFormat: Text.PlainText
+                  
+                }
                 
               }
-              
-            }
-            MouseArea {
-              id: itemMouseArea
-              anchors.fill: parent
-              hoverEnabled: true
-              cursorShape: Qt.PointingHandCursor
-              onClicked: {
-                ClipboardService.copyItem(clipId, clipContent)
-                GlobalStates.isClipboardOpen = false // Hide the overlay after copying
+              MouseArea {
+                id: itemMouseArea
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onClicked: {
+                  ClipboardService.copyItem(clipId, clipContent)
+                  GlobalStates.isClipboardOpen = false // Hide the overlay after copying
+                }
               }
             }
           }
