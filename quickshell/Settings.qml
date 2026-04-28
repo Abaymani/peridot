@@ -7,7 +7,7 @@ import qs.common.looks as Looks
 
 Singleton {
     id: root
-    property bool gradientBgEnabled: false
+    property bool gradientBgEnabled: true
     property bool doNotDisturb: false
 
     property var toggleDND: GlobalShortcut {

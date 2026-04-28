@@ -84,6 +84,7 @@ yay -S breeze-icons breeze-gtk qt6ct-kde qt5ct-kde darkly-bin
 
 Peridot uses [YAMIS](https://store.kde.org/p/2303161) for icons. It is bundled but a symlink is required.
 ``` 
+mkdir -p ~/.local/share/icons/
 ln -sfn ~/peridot/peridot/icons/YAMIS/ ~/.local/share/icons/YAMIS
 ```
 
@@ -96,8 +97,7 @@ Since I don't have an install script (yet) and have multiple setups, here are al
 7zip
 **adw-gtk-theme**
 awww
-**base**
-**base-devel**
+brillo
 bibata-cursor-theme-bin
 **blueman**
 **breeze-gtk**
