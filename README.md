@@ -7,11 +7,14 @@ Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell. With bits and pieces
 ## Setup
 To make git tracking easier, clone this repo to a folder separate from *~/.config* and create a symlink instead. This way, your git repo won't start tracking random app config folders.
 
-Clone the repo to the home folder:
 ```
 ln -s ~/peditot/* ~/.config
 ```
-... Or you can skip manual linking and use a dotfiles manager!
+
+In order for most config files to work properly, matugen needs to run at least once. If you use waypaper, add this post-hook to your 'config.ini' to run matugen automatically when changing wallpaper:
+```
+post_command = matugen image "$wallpaper" --source-color-index 0 -m "dark" & notify-send " Running Matugen!"
+```
 
 ## TODO
 
