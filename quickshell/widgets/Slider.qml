@@ -3,7 +3,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell.Widgets
-import qs.common.looks as Looks
+import qs.common.looks
 
 Slider {
     id: root
@@ -33,10 +33,10 @@ Slider {
                 return;
             }
             if (event.angleDelta.y > 0) {
-                root.value = Math.min(root.value + root.stepSize, 1)
+                root.value = Math.min(root.value + root.stepSize*2, 1)
                 root.moved()
             } else {
-                root.value = Math.max(root.value - root.stepSize, 0)
+                root.value = Math.max(root.value - root.stepSize*2, 0)
                 root.moved()
             }
         }
@@ -46,7 +46,7 @@ Slider {
             width: parent.width
             implicitHeight: root.trackWidth
             radius: root.trackWidth / 2
-            color: Looks.Colors.md3.secondary
+            color: Colors.md3.secondary
         }
 
         Item {
@@ -60,7 +60,7 @@ Slider {
                 width: background.width 
                 height: root.trackWidth
                 radius: root.trackWidth / 2
-                color: Looks.Colors.md3.primary
+                color: Colors.md3.primary
             }
         }
     }
@@ -69,8 +69,8 @@ Slider {
         id: handle
         anchors.verticalCenter: parent.verticalCenter
         x: (diameter / 2) + root.visualPosition * (root.width - diameter) - (diameter / 2)
-        diameter: 6
-        color: Looks.Colors.md3.primary
+        diameter: 10
+        color: Colors.md3.primary
 
         MouseArea {
             id: handleMouseArea
