@@ -24,7 +24,7 @@ Rectangle {
         Text {
 			id: batteryPercentage
 			font.family: Looks.Fonts.family
-			font.pixelSize: Looks.Fonts.size 
+			font.pixelSize: Looks.Fonts.size -2 
 			font.weight: Looks.Fonts.weight
 			renderType: Text.NativeRendering
 
@@ -38,7 +38,6 @@ Rectangle {
 
         Text {
 			id: batteryIcon
-			
 			font.family: Looks.Fonts.family
 			font.pixelSize: Looks.Fonts.size +4
 			font.weight: Looks.Fonts.weight
