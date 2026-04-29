@@ -56,7 +56,7 @@ Singleton {
     }
 
     function checkBatteryLevels() {
-        if (!root._device.ready) return;
+        if (!root._device.ready || !hasBattery) return;
 
         // If we drop to 15% or below, aren't charging, and haven't notified yet
         if (root._percentage <= 0.15 && !root.isCharging && !root._notifiedLowBattery) {
@@ -79,6 +79,7 @@ Singleton {
     }
 
     function updateIcon() {
+        if (!hasBattery) return;
         if (root.isFull) {
             root.icon = "󰁹";
             return;
