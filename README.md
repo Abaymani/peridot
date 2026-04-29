@@ -20,19 +20,7 @@ post_command = matugen image "$wallpaper" --source-color-index 0 -m "dark" & not
 
 
 ### Quickshell Widgets & Applets
-**Topbar**
-- [x] datetime display
-- [x] Workspaces widget
-- [x] MPRIS widget
-- [x] Network widget
-- [x] Resource monitor 
-- [x] Update(s) widget
-- [x] Volume controls
-- [x] Active window title
-- [x] Tray
-- [x] Logout / shutdown shortcut
-- [x] Battery indicator
-
+**Topbar ✅**
 
 **Calendar**
 - [ ] Simple calendar view
@@ -44,6 +32,7 @@ post_command = matugen image "$wallpaper" --source-color-index 0 -m "dark" & not
 - [ ] Launcher (Rofi/Wofi replacement)
 - [ ] Unified settings app
 - [ ] On-screen Keyboard
+- [ ] Emoji picker
 - [x] Clipboard history viewer
 
 **Notifications**
@@ -57,7 +46,6 @@ post_command = matugen image "$wallpaper" --source-color-index 0 -m "dark" & not
 - [x] Screenshot utility
 - [ ] Brightness utility
 - [ ] Battery utility (performance modes)
-- [ ] Matugen dark/light choice *(currently always dark)*
 
 **Other**
 - [x] hyprlock rice
@@ -97,7 +85,7 @@ Since I don't have an install script (yet) and have multiple setups, here are al
 7zip
 **adw-gtk-theme**
 awww
-brillo
+**brillo**
 bibata-cursor-theme-bin
 **blueman**
 **breeze-gtk**
