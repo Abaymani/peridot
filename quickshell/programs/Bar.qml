@@ -51,8 +51,9 @@ Scope {
 					ResourceMonitor {}
 					AudioControls {}
 					Mpris { Layout.fillWidth: false }
-					Tray {Layout.alignment: Qt.AlignVCenter}
-					ClockWidget { }
+					Tray { Layout.alignment: Qt.AlignVCenter }
+					BatteryWidget {}
+					ClockWidget {}
 					Logout {}
 				}
 			}

@@ -120,7 +120,7 @@ Rectangle {
         Layout.fillWidth: true
         text: modelData.body
         font.family: Looks.Fonts.family
-        font.pixelSize: Looks.Fonts.size-3
+        font.pixelSize: Looks.Fonts.size-2
         font.weight: Looks.Fonts.weight
         color: Settings.textColorOnContainer
         wrapMode: Text.WordWrap

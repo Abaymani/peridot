@@ -31,7 +31,7 @@ post_command = matugen image "$wallpaper" --source-color-index 0 -m "dark" & not
 - [x] Active window title
 - [x] Tray
 - [x] Logout / shutdown shortcut
-- [ ] Battery indicator
+- [x] Battery indicator
 
 
 **Calendar**
