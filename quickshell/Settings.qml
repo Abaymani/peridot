@@ -4,10 +4,11 @@ import Quickshell
 import Quickshell.Hyprland
 pragma ComponentBehavior: Bound
 import qs.common.looks as Looks
+import qs.services
 
 Singleton {
     id: root
-    property bool gradientBgEnabled: true
+    property bool gradientBgEnabled: false
     property bool doNotDisturb: false
 
     property var toggleDND: GlobalShortcut {
@@ -30,4 +31,9 @@ Singleton {
     property color textColorOnLight: gradientBgEnabled
         ? Looks.Colors.palette.neutral100
         : Looks.Colors.palette.neutral20
+
+    property bool isDarkMode: true
+    property int matugenSourceColorIndex: 0
+    property string currentWallpaper: ""
+    Component.onCompleted: {MatugenService.init()}
 }
