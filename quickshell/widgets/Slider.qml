@@ -42,29 +42,26 @@ Slider {
         }
 
         Rectangle {
-            id: trackHighlight
-            anchors {
-                left: parent.left
-                verticalCenter: parent.verticalCenter
-            }
-            topLeftRadius: root.trackWidth / 2
-            bottomLeftRadius: root.trackWidth / 2
-            color: Looks.Colors.md3.primary
+            anchors.verticalCenter: parent.verticalCenter
+            width: parent.width
             implicitHeight: root.trackWidth
-            width: background.width * root.visualPosition
+            radius: root.trackWidth / 2
+            color: Looks.Colors.md3.secondary
         }
 
-        Rectangle {
-            id: trackTrough
-            anchors {
-                right: parent.right
-                verticalCenter: parent.verticalCenter
+        Item {
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            height: root.trackWidth
+            width: parent.width * root.visualPosition
+            clip: true
+
+            Rectangle {
+                width: background.width 
+                height: root.trackWidth
+                radius: root.trackWidth / 2
+                color: Looks.Colors.md3.primary
             }
-            topRightRadius: root.trackWidth / 2
-            bottomRightRadius: root.trackWidth / 2
-            color: Looks.Colors.md3.secondary
-            implicitHeight: root.trackWidth
-            width: background.width * (1 - root.visualPosition)
         }
     }
 
@@ -80,20 +77,5 @@ Slider {
             hoverEnabled: true
             acceptedButtons: Qt.NoButton
         }
-
-        Circle {
-            anchors.centerIn: parent
-            diameter: root.pressed ? 10 : handleMouseArea.containsMouse ? 10 : 10
-            color: Looks.Colors.md3.primary
-        }
-
-        /*WToolTip {
-            id: tooltip
-            extraVisibleCondition: root.pressed
-            text: root.tooltipContent
-            font.pixelSize: Looks.Fonts.size
-            verticalPadding: 3
-            horizontalPadding: 8
-        }*/
     }
 }
