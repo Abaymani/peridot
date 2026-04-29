@@ -8,17 +8,17 @@ Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell. With bits and pieces
 To make git tracking easier, clone this repo to a folder separate from *~/.config* and create a symlink instead. This way, your git repo won't start tracking random app config folders.
 
 ```
-ln -s ~/peditot/* ~/.config
+ln -s ~/peridot/* ~/.config
 ```
 
-In order for most config files to work properly, matugen needs to run at least once. If you use waypaper, add this post-hook to your 'config.ini' to run matugen automatically when changing wallpaper:
+In order for most config files to work properly, matugen needs to run at least once. If running waypaper, this will happen as soon as wallpaper is set for the first time. If not, the file *~/.config/peridot/settings/current_wallpaper.txt* needs to be created and given an image path. For example:
+
 ```
-post_command = matugen image "$wallpaper" --source-color-index 0 -m "dark" & notify-send " Running Matugen!"
+echo "/home/$USER/.config/peridot/peridot.jpg" > ~/.config/peridot/settings/current_wallpaper.txt
 ```
+
 
 ## TODO
-
-
 ### Quickshell Widgets & Applets
 **Topbar ✅**
 
@@ -48,8 +48,7 @@ post_command = matugen image "$wallpaper" --source-color-index 0 -m "dark" & not
 - [ ] Battery utility (performance modes)
 
 **Other**
-- [x] hyprlock rice
-- [x] wlogout rice
+- [ ] fastfetch rice
 
 ___
 

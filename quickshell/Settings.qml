@@ -33,7 +33,7 @@ Singleton {
         : Looks.Colors.palette.neutral20
 
     property bool isDarkMode: true
-    property int matugenSourceColorIndex: 0
+    property int matugenSourceColorIndex: 0 //pick a source color based on the index provided (0 - 4) 0 = most dominant, 1 = 2nd most dominant, etc
     property string currentWallpaper: ""
     Component.onCompleted: {MatugenService.init()}
 }
