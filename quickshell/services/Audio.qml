@@ -13,7 +13,7 @@ Singleton {
   property PwNode source: Pipewire.defaultAudioSource
   readonly property real hardMaxValue: 2.00
   //property string audioTheme: Config.options.sounds.theme
-  property real value: sink?.audio.volume ?? 0
+  property real volume: 0
   property string activePortName: ""
 
   function friendlyDeviceName(node) {
@@ -85,14 +85,26 @@ Singleton {
 
   Connections {
     target: sink?.audio ?? null
-    function onVolumeChanged() { portUpdateProcess.running = true }
-    function onMutedChanged() { portUpdateProcess.running = true }
+    function onVolumeChanged() { 
+      portUpdateProcess.running = true 
+      volumeUpdateProcess.running = true
+    }
+    function onMutedChanged() { 
+      portUpdateProcess.running = true 
+    }
   }
 
-    Process {
+  onSinkChanged: {
+    if (sink) {
+      portUpdateProcess.running = true
+      volumeUpdateProcess.running = true
+    }
+  }
+
+  Process {
     id: portUpdateProcess
     // This is a condensed version of your bash script logic
-    command: ["sh", "-c", "pactl list sinks | awk -v tgt=\"$(pactl get-default-sink)\" '$0 ~ \"Name: \"tgt {f=1} f && /Active Port:/ {print $3; exit} /^$/ {f=0}'"]    
+    command: ["sh", "-c", "pactl list sinks | awk -v tgt=\"$(pactl get-default-sink)\" '$0 ~ \"Name: \"tgt {f=1} f && /Active Port:/ {print; exit} /^$/ {f=0}'"]    
     running: true
 
     stdout: StdioCollector {
@@ -102,59 +114,19 @@ Singleton {
     }
   }
 
-  /*
-  Connections { // Protection against sudden volume changes
-    target: sink?.audio ?? null
-    property bool lastReady: false
-    property real lastVolume: 0
-    function onVolumeChanged() {
-      if (!Config.options.audio.protection.enable) return;
-      const newVolume = sink.audio.volume;
-      // when resuming from suspend, we should not write volume to avoid pipewire volume reset issues
-      if (isNaN(newVolume) || newVolume === undefined || newVolume === null) {
-        lastReady = false;
-        lastVolume = 0;
-        return;
-      }
-      if (!lastReady) {
-        lastVolume = newVolume;
-        lastReady = true;
-        return;
-      }
-      const maxAllowedIncrease = Config.options.audio.protection.maxAllowedIncrease / 100; 
-      const maxAllowed = Config.options.audio.protection.maxAllowed / 100;
+  Process {
+    id: volumeUpdateProcess
+    command: ["sh", "-c", "pactl list sinks | awk -v tgt=\"$(pactl get-default-sink)\" '$0 ~ \"Name: \"tgt {f=1} f && /^[[:space:]]*Volume:/ { match($0, /[0-9]+%/); print substr($0, RSTART, RLENGTH-1); exit }'"]
+    running: true
 
-      if (newVolume - lastVolume > maxAllowedIncrease) {
-        sink.audio.volume = lastVolume;
-        root.sinkProtectionTriggered(Translation.tr("Illegal increment"));
-      } else if (newVolume > maxAllowed || newVolume > root.hardMaxValue) {
-        root.sinkProtectionTriggered(Translation.tr("Exceeded max allowed"));
-        sink.audio.volume = Math.min(lastVolume, maxAllowed);
+    stdout: StdioCollector {
+      onStreamFinished: { 
+        // Parse the stdout to a float, ignoring trailing newlines or [MUTED] tags
+        let parsedVol = parseFloat(this.text);
+        if (!isNaN(parsedVol)) {
+          root.volume = parsedVol;
+        }
       }
-      lastVolume = sink.audio.volume;
     }
   }
-
-  function playSystemSound(soundName) {
-    const ogaPath = `/usr/share/sounds/${root.audioTheme}/stereo/${soundName}.oga`;
-    const oggPath = `/usr/share/sounds/${root.audioTheme}/stereo/${soundName}.ogg`;
-
-    // Try playing .oga first
-    let command = [
-      "ffplay",
-      "-nodisp",
-      "-autoexit",
-      ogaPath
-    ];
-    Quickshell.execDetached(command);
-
-    // Also try playing .ogg (ffplay will just fail silently if file doesn't exist)
-    command = [
-      "ffplay",
-      "-nodisp",
-      "-autoexit",
-      oggPath
-    ];
-    Quickshell.execDetached(command);
-  }*/
 }

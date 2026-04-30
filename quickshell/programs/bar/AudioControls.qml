@@ -75,7 +75,7 @@ Rectangle {
           font.pixelSize: Looks.Fonts.size - 2
           color: Settings.textColorOnContainer
           renderType: Text.NativeRendering
-          text: Math.round((Services.Audio.sink?.audio.volume ?? 0) * 100) + "%"
+          text: Services.Audio.sink ? Services.Audio.volume + "%" : "N/A"
         }
       }
 

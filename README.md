@@ -114,6 +114,7 @@ iwd
 jq
 **kitty**
 loupe
+**libpulse**
 man-db
 **matugen**
 mesa-utils
