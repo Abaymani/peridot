@@ -5,130 +5,70 @@
     "source": "~/.config/fastfetch/images/arch.png",
     "width": 28
   },
-  "display": {
-    "stat": false,
-    "pipe": false,
-    "showErrors": false,
-    "disableLinewrap": true,
-    "hideCursor": false,
-    "separator": ": ",
-    "color": {
-      "keys": "",
-      "title": "",
-      "output": "",
-      "separator": ""
-    },
-    "brightColor": true,
-    "duration": {
-      "abbreviation": false,
-      "spaceBeforeUnit": "default"
-    },
-    "size": {
-      "maxPrefix": "YB",
-      "binaryPrefix": "iec",
-      "ndigits": 2,
-      "spaceBeforeUnit": "default"
-    },
-    "temp": {
-      "unit": "D",
-      "ndigits": 1,
+    "display": {
+      "separator": "",
       "color": {
-        "green": "32",
-        "yellow": "93",
-        "red": "91"
+          "separator": "4" // Bold
       },
-      "spaceBeforeUnit": "default"
-    },
-    "percent": {
-      "type": [
-        "num",
-        "num-color"
+      "constants": [
+          "─────────"
       ],
-      "ndigits": 0,
-      "color": {
-        "green": "32",
-        "yellow": "93",
-        "red": "91"
-      },
-      "spaceBeforeUnit": "default",
-      "width": 0
-    },
-    "bar": {
-      "char": {
-        "elapsed": "■",
-        "total": "-"
-      },
-      "border": {
-        "left": "[ ",
-        "right": " ]",
-        "leftElapsed": "",
-        "rightElapsed": ""
-      },
-      "color": {
-        "elapsed": "auto",
-        "total": "97",
-        "border": "97"
-      },
-      "width": 10
-    },
-    "fraction": {
-      "ndigits": 2
-    },
-    "noBuffer": false,
-    "key": {
-      "width": 0,
-      "type": "string",
-      "paddingLeft": 0
-    },
-    "freq": {
-      "ndigits": 2,
-      "spaceBeforeUnit": "default"
-    },
-    "constants": []
-  },
-  "general": {
-    "thread": true,
-    "processingTimeout": 5000,
-    "detectVersion": true,
-    "playerName": "",
-    "dsForceDrm": false
+      "key": {
+          "type": "both",
+          "paddingLeft": 0
+      }
   },
   "modules": [
     {
       "type": "title",
-      "key": " ",
-      "keyIcon": "",
-      "fqdn": false,
-      "color": {
-        "user": "",
-        "at": "",
-        "host": ""
-      }
+      "format": "  ┌{$1}──── {#1}{user-name}{at-symbol-colored}{host-name} ─────{$1}┐{#}",
+      "outputColor": "yellow"
     },
     {
-      "type": "separator",
-      "string": "-",
-      "outputColor": "",
-      "times": 0
+      "key": "│ ",
+      "keyColor": "yellow",
+      "type": "cpu"
     },
     {
+      "key": "│ ",
+      "keyColor": "yellow",
+      "type": "gpu"
+    },
+    {
+      "key": "│ ",
       "type": "os",
+      "keyColor": "white",
       "keyIcon": ""
     },
     {
-      "type": "host",
-      "keyIcon": "󰌢"
+      "key": "│ ",
+      "keyColor": "green",
+      "type": "wm",
+      "keyIcon": ""
     },
     {
-      "type": "kernel",
-      "keyIcon": ""
+      "key": "│ ",
+      "keyColor": "green",
+      "type": "host"
     },
     {
-      "type": "uptime",
-      "keyIcon": ""
+        "key": "│ ",
+        "keyColor": "blue",
+        "type": "uptime"
+    },
+    {
+        "key": "│ ",
+        "keyColor": "blue",
+        "type": "shell"
+    },
+    {
+        "key": "│ ",
+        "keyColor": "blue",
+        "type": "terminal"
     },
     {
       "type": "packages",
+      "key": "│ ",
       "keyIcon": "󰏖",
       "disabled": [
         "apk"
@@ -136,54 +76,7 @@
       "combined": false
     },
     {
-      "type": "de",
-      "keyIcon": ""
-    },
-    {
-      "type": "wm",
-      "keyIcon": "",
-      "detectPlugin": true
-    },
-    {
-      "type": "wmtheme",
-      "keyIcon": "󰓸"
-    },
-    {
-      "type": "theme",
-      "keyIcon": "󰉼"
-    },
-    {
-      "type": "icons",
-      "keyIcon": ""
-    },
-    {
-      "type": "font",
-      "keyIcon": ""
-    },
-    {
-      "type": "terminal",
-      "keyIcon": ""
-    },
-    {
-      "type": "cpu",
-      "keyIcon": "",
-      "temp": false,
-      "showPeCoreCount": false
-    },
-    {
-      "type": "gpu",
-      "keyIcon": "󰾲",
-      "driverSpecific": false,
-      "detectionMethod": "pci",
-      "temp": false,
-      "hideType": "none",
-      "percent": {
-        "green": 50,
-        "yellow": 80,
-        "type": 0
-      }
-    },
-    {
+      "key": "│ ",
       "type": "memory",
       "keyIcon": "",
       "percent": {
@@ -193,6 +86,7 @@
       }
     },
     {
+      "key": "│ ",
       "type": "disk",
       "keyIcon": "",
       "showRegular": true,
@@ -202,7 +96,6 @@
       "showReadOnly": true,
       "showUnknown": false,
       "folders": "",
-      "hideFolders": "/efi:/boot:/boot/*",
       "hideFS": "",
       "useAvailable": false,
       "percent": {
@@ -212,18 +105,14 @@
       }
     },
     {
-      "type": "battery",
-      "keyIcon": "",
-      "temp": false,
-      "percent": {
-        "green": 50,
-        "yellow": 20,
-        "type": 0
-      }
+      "type": "custom",
+      "format": "  └{$1}──────────────────────{$1}┘",
+      "outputColor": "cyan"
     },
     {
-      "type": "poweradapter",
-      "keyIcon": "󰚥"
+      "type": "colors",
+      "paddingLeft": 14,
+      "symbol": "circle"
     }
   ]
 }

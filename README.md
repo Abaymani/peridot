@@ -47,9 +47,6 @@ echo "/home/$USER/.config/peridot/peridot.jpg" > ~/.config/peridot/settings/curr
 - [ ] Brightness utility
 - [ ] Battery utility (performance modes)
 
-**Other**
-- [ ] fastfetch rice
-
 ___
 
 ## Theming
