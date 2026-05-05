@@ -7,98 +7,106 @@ import Quickshell.Services.UPower
 
 Singleton {
     id: root
-    property UPowerDevice _device: UPower.displayDevice
-    property bool hasBattery: _device.ready && _device.isLaptopBattery
+    property bool available: UPower.displayDevice.isLaptopBattery
+    property var chargeState: UPower.displayDevice.state
+    property bool isCharging: chargeState == UPowerDeviceState.Charging
+    property bool isPluggedIn: isCharging || chargeState == UPowerDeviceState.PendingCharge
+    property real percentage: UPower.displayDevice?.percentage ?? 1
+    readonly property bool allowAutomaticSuspend: true
 
-    property real _percentage: _device.percentage
-    property string percentage: _device.ready ? Math.round(_device.percentage*100) + "%" : "0%"
+    property bool isLow: available && (percentage <= 15/100)
+    property bool isCritical: available && (percentage <= 5/100)
+    property bool isSuspending: available && (percentage <= 3/100)
+    property bool isFull: available && (percentage >= 101/100)
 
-    property bool isCharging: false 
-    property bool isFull: _device.ready && _device.state === UPowerDeviceState.FullyCharged
+    property bool isLowAndNotCharging: isLow && !isCharging
+    property bool isCriticalAndNotCharging: isCritical && !isCharging
+    property bool isSuspendingAndNotCharging: allowAutomaticSuspend && isSuspending && !isCharging
+    property bool isFullAndCharging: isFull && isCharging
 
-    property bool _notifiedLowBattery: false
+    property real energyRate: UPower.displayDevice.changeRate
+    property real timeToEmpty: UPower.displayDevice.timeToEmpty
+    property real timeToFull: UPower.displayDevice.timeToFull
 
-    property string icon: " "
-
-    // This listens DIRECTLY to the underlying hardware device's events
-    Connections {
-        target: root._device
-
-        function onPercentageChanged() {
-            checkBatteryLevels();
-        }
-    }
-
-    //Changed from connection to process, since it was not updating correctly.
-    Process {
-        id: statusProc
-        command: ["cat", "/sys/class/power_supply/BAT1/status"]
-        running: true
-        
-        stdout: StdioCollector {
-            onStreamFinished: {
-                const stat = text.trim();
-                root.isCharging = (stat === "Charging");
-                
-                checkBatteryLevels();
-                updateIcon();
+    property real health: (function() {
+        const devList = UPower.devices.values;
+        for (let i = 0; i < devList.length; ++i) {
+            const dev = devList[i];
+            if (dev.isLaptopBattery && dev.healthSupported) {
+                const health = dev.healthPercentage;
+                if (health === 0) {
+                    return 0.01;
+                } else if (health < 1) {
+                    return health * 100;
+                } else {
+                    return health;
+                }
             }
         }
-    }
+        return 0;
+    })()
 
-    Timer {
-        interval: 3000
-        running: true
-        repeat: true
-        onTriggered: {
-            statusProc.running = true
-        }
-    }
-
-    function checkBatteryLevels() {
-        if (!root._device.ready || !hasBattery) return;
-
-        // If we drop to 15% or below, aren't charging, and haven't notified yet
-        if (root._percentage <= 0.15 && !root.isCharging && !root._notifiedLowBattery) {
-            
+    onIsChargingChanged: {
+        if (root.isCharging)
             Quickshell.execDetached([
                 "notify-send", 
-                "-u", "critical", 
-                "-i", "battery-empty", 
-                "Battery Low", 
-                `Your battery is at ${root.percentage}%. Please plug in.`
+                "Charger connected", 
+                "Device is charging", 
+                "-u", "critical",
+                "-i", "/home/armin/.local/share/icons/YAMIS/status/scalable/battery-full-charging-symbolic.svg",
+                "-a", "Shell",
+                "--hint=int:transient:1",
             ]);
-            
-            root._notifiedLowBattery = true;
-            
-        } 
-        // Reset the flag if the battery goes back above 15% or we plug it in
-        else if (root.percentage > 0.15 || root.isCharging) {
-            root._notifiedLowBattery = false;
+        else if (!root.isFull)
+            Quickshell.execDetached([
+                "notify-send", 
+                "Charger disconnected", 
+                "Battery is not full! Consider reconnecting charger.", 
+                "-u", "critical",
+                "-i", "/home/armin/.local/share/icons/YAMIS/status/scalable/battery-caution.svg",
+                "-a", "Shell",
+                "--hint=int:transient:1",
+            ]);
+    }
+
+    onIsLowAndNotChargingChanged: {
+        if (!root.available || !isLowAndNotCharging) return;
+        Quickshell.execDetached([
+            "notify-send", 
+            "Low battery", 
+            "Consider plugging in your device", 
+            "-u", "critical",
+            "-a", "Shell",
+            "--hint=int:transient:1",
+        ])
+    }
+
+    onIsCriticalAndNotChargingChanged: {
+        if (!root.available || !isCriticalAndNotCharging) return;
+        Quickshell.execDetached([
+            "notify-send", 
+            "Critically low battery", 
+            "Please charge!\nAutomatic suspend triggers at 3%", 
+            "-u", "critical",
+            "-a", "Shell",
+            "--hint=int:transient:1",
+        ]);
+    }
+
+    onIsSuspendingAndNotChargingChanged: {
+        if (root.available && isSuspendingAndNotCharging) {
+            Quickshell.execDetached(["bash", "-c", `systemctl suspend || loginctl suspend`]);
         }
     }
 
-    function updateIcon() {
-        if (!hasBattery) return;
-        if (root.isFull) {
-            root.icon = "󰁹";
-            return;
-        }
-        if (root.isCharging) {
-            root.icon = "󰂄";
-            return;
-        }
-
-        // Evaluates lowest to highest using whole numbers (0-100)
-        if (root.percentage < 0.15) root.icon = "󰂃";
-        else if (root._percentage < 0.20) root.icon = "󰁻";
-        else if (root._percentage < 0.30) root.icon = "󰁼";
-        else if (root._percentage < 0.40) root.icon = "󰁽";
-        else if (root._percentage < 0.50) root.icon = "󰁾";
-        else if (root._percentage < 0.60) root.icon = "󰁿";
-        else if (root._percentage < 0.70) root.icon = "󰂀";
-        else if (root._percentage < 0.80) root.icon = "󰂁";
-        else if (root._percentage < 0.90) root.icon = "󰂂";
-        else root.icon = "󰁹";
+    onIsFullAndChargingChanged: {
+        if (!root.available || !isFullAndCharging) return;
+        Quickshell.execDetached([
+            "notify-send",
+            "Battery full",
+            "Please unplug the charger",
+            "-a", "Shell",
+            "--hint=int:transient:1",
+        ]);
     }
 }
