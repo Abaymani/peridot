@@ -46,7 +46,7 @@ echo "/home/$USER/.config/peridot/peridot.jpg" > ~/.config/peridot/settings/curr
 
 **Scripts & Utils**
 - [x] Screenshot utility
-- [ ] Brightness utility
+- [x] Brightness utility
 
 ___
 
