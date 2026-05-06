@@ -74,7 +74,8 @@ Singleton {
 
     onIsPluggedInChanged: {
         if(!root.available || Settings.userOverridePowerProfile) return;
-        if (!root.isPluggedIn && root.percentage < 0.75) {
+        if (!root.isPluggedIn) {
+            console.log("BRO WTF")
             Quickshell.execDetached([
                 "powerprofilesctl",
                 "set",

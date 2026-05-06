@@ -36,6 +36,7 @@ echo "/home/$USER/.config/peridot/peridot.jpg" > ~/.config/peridot/settings/curr
 
 **Control Center**
 - [ ] Power profile override
+- [ ] Show user profile picture and name instead next to uptime.
 
 **Notifications**
 - [x] Rudimentary functionality (notifications visible in control center)

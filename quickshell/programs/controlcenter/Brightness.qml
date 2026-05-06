@@ -56,6 +56,7 @@ Rectangle {
             Slider {
                 id: brightnessSlider
                 Layout.fillWidth: true
+                trackWidth: 15
                 from: 0
                 to: 1
 
@@ -67,7 +68,7 @@ Rectangle {
             }
 
             Text {
-                text: root.hovering ? (Math.round(brightnessSlider.value *100) + "%").padStart(4, ' ') : ""
+                text: root.hovering ? (Math.round(brightnessSlider.value *100) + "%").padStart(4, ' ') : "󰃟"
                 leftPadding: root.hovering ? 0 : 3
                 rightPadding: root.hovering ? 0 : 3
                 font.family: Fonts.family
