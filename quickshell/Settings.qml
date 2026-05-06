@@ -1,5 +1,6 @@
 pragma Singleton
 import QtQuick
+import QtCore
 import Quickshell
 import Quickshell.Hyprland
 pragma ComponentBehavior: Bound
@@ -8,14 +9,18 @@ import qs.services
 
 Singleton {
     id: root
+
+    //POWER PROFILES
+    property bool userOverridePowerProfile: false
+    property string onBatteryPowerProfile: "power-saver"
+    property string onChargerPowerProfile: "performance" 
+
+    //DIRECTORIES (TODO: Move to separate file)
+    readonly property string home: StandardPaths.standardLocations(StandardPaths.HomeLocation)
+    readonly property string iconPath: StandardPaths.standardLocations(StandardPaths.HomeLocation) + "/.local/share/icons/YAMIS"
+
+    //LOOKS
     property bool gradientBgEnabled: false
-    property bool doNotDisturb: false
-
-    property var toggleDND: GlobalShortcut {
-        name: "toggleDND"
-        onPressed: doNotDisturb = !doNotDisturb
-    }
-
     property string activeGradient: "PrimaryH3C"
     property string activeSecondaryGradient: "PrimaryV2C"
     property string activebackgroundGradient: "WeakV2C"
@@ -31,9 +36,10 @@ Singleton {
     property color textColorOnLight: gradientBgEnabled
         ? Looks.Colors.palette.neutral100
         : Looks.Colors.palette.neutral20
-
+    
+    //MATUGEN
     property bool isDarkMode: true
     property int matugenSourceColorIndex: 0 //pick a source color based on the index provided (0 - 4) 0 = most dominant, 1 = 2nd most dominant, etc
     property string currentWallpaper: ""
-    Component.onCompleted: {MatugenService.init()}
+    Component.onCompleted: {MatugenService.init()} //TODO: move somewhere else!
 }

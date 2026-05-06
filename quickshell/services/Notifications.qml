@@ -61,7 +61,7 @@ Singleton {
       // Insert to show newest notifications on top of others.
       notifcationModel.insert(0, {"notifId": internalId})
 
-      if (!notification.lastGeneration && !Settings.doNotDisturb) {
+      if (!notification.lastGeneration && !GlobalStates.doNotDisturb) {
         popupListModel.insert(0, {"notifId": internalId})
         popupTimerComponent.createObject(root, {"targetId": internalId})
       }

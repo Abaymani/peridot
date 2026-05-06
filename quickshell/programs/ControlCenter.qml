@@ -123,10 +123,10 @@ Scope {
 								
 								Button{
 									color: Looks.Colors.md3.secondary_container
-									widthPadding: Settings.doNotDisturb? 38 : 40
+									widthPadding: GlobalStates.doNotDisturb? 38 : 40
 									fontSizeModifier: 5
-									buttonText: Settings.doNotDisturb? "󰂛" : "󰂚"
-									onClicked: Settings.doNotDisturb  = !Settings.doNotDisturb 
+									buttonText: GlobalStates.doNotDisturb? "󰂛" : "󰂚"
+									onClicked: GlobalStates.doNotDisturb  = !GlobalStates.doNotDisturb 
 								}
 
 								Text {

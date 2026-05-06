@@ -1,5 +1,6 @@
 pragma Singleton
 
+import qs
 import QtQuick
 import Quickshell
 import Quickshell.Io
@@ -17,7 +18,7 @@ Singleton {
     property bool isLow: available && (percentage <= 15/100)
     property bool isCritical: available && (percentage <= 5/100)
     property bool isSuspending: available && (percentage <= 3/100)
-    property bool isFull: available && (percentage >= 101/100)
+    property bool isFull: available && (percentage >= 99/100)
 
     property bool isLowAndNotCharging: isLow && !isCharging
     property bool isCriticalAndNotCharging: isCritical && !isCharging
@@ -47,26 +48,46 @@ Singleton {
     })()
 
     onIsChargingChanged: {
-        if (root.isCharging)
+        if (root.isCharging){
             Quickshell.execDetached([
                 "notify-send", 
                 "Charger connected", 
                 "Device is charging", 
                 "-u", "critical",
-                "-i", "/home/armin/.local/share/icons/YAMIS/status/scalable/battery-full-charging-symbolic.svg",
+                "-i", Settings.iconPath + "/status/scalable/battery-full-charging-symbolic.svg",
                 "-a", "Shell",
                 "--hint=int:transient:1",
             ]);
-        else if (!root.isFull)
+        }
+        else if (!root.isFull){
             Quickshell.execDetached([
                 "notify-send", 
                 "Charger disconnected", 
                 "Battery is not full! Consider reconnecting charger.", 
                 "-u", "critical",
-                "-i", "/home/armin/.local/share/icons/YAMIS/status/scalable/battery-caution.svg",
+                "-i", Settings.iconPath + "/status/scalable/battery-caution.svg",
                 "-a", "Shell",
                 "--hint=int:transient:1",
             ]);
+        }
+    }
+
+    onIsPluggedInChanged: {
+        if(!root.available || Settings.userOverridePowerProfile) return;
+        if (!root.isPluggedIn && root.percentage < 0.75) {
+            Quickshell.execDetached([
+                "powerprofilesctl",
+                "set",
+                Settings.onBatteryPowerProfile,
+            ]);
+        }
+        else {
+            Quickshell.execDetached([
+                "powerprofilesctl",
+                "set",
+                Settings.onChargerPowerProfile,
+            ]);
+        }
     }
 
     onIsLowAndNotChargingChanged: {

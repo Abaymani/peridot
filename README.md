@@ -28,12 +28,14 @@ echo "/home/$USER/.config/peridot/peridot.jpg" > ~/.config/peridot/settings/curr
 
 **Misc.**
 - [ ] [Workspace overview / alt-tab](https://www.windowslatest.com/wp-content/uploads/2020/07/Alt-Tab-with-browser-tabs.jpg)
-- [ ] Control Center
 - [ ] Launcher (Rofi/Wofi replacement)
 - [ ] Unified settings app
 - [ ] On-screen Keyboard
 - [ ] Emoji picker
 - [x] Clipboard history viewer
+
+**Control Center**
+- [ ] Power profile override
 
 **Notifications**
 - [x] Rudimentary functionality (notifications visible in control center)
@@ -45,7 +47,6 @@ echo "/home/$USER/.config/peridot/peridot.jpg" > ~/.config/peridot/settings/curr
 **Scripts & Utils**
 - [x] Screenshot utility
 - [ ] Brightness utility
-- [ ] Battery utility (performance modes)
 
 ___
 
@@ -61,8 +62,6 @@ pacman -S adw-gtk-theme
 ```
 yay -S breeze-icons breeze-gtk qt6ct-kde qt5ct-kde darkly-bin
 ```
-> [!CAUTION]
-> Qt apps may display dark text on dark backgrounds when using dark themes.
 
 #### Icons
 
@@ -137,6 +136,7 @@ openssh
 **pavucontrol**
 pipewire-pulse
 polkit-kde-agent
+**power-profiles-daemon**
 qbittorrent
 **qt5ct**
 **qt6ct**
