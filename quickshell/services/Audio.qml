@@ -1,6 +1,7 @@
 pragma Singleton
 pragma ComponentBehavior: Bound
 import QtQuick
+import qs
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Pipewire
@@ -8,125 +9,159 @@ import Quickshell.Services.Pipewire
 Singleton {
   id: root
 
-  property bool ready: Pipewire.defaultAudioSink?.ready ?? false
-  property PwNode sink: Pipewire.defaultAudioSink
-  property PwNode source: Pipewire.defaultAudioSource
-  readonly property real hardMaxValue: 2.00
-  //property string audioTheme: Config.options.sounds.theme
-  property real volume: 0
-  property string activePortName: ""
+  property string previousSinkName: ""
+  property string previousSourceName: ""
 
-  function friendlyDeviceName(node) {
-    return (node.nickname || node.description || Translation.tr("Unknown"));
+  property list<PwNode> sinks: []
+  property list<PwNode> sources: []
+  property list<PwNode> streams: []
+
+  readonly property PwNode sink: Pipewire.defaultAudioSink
+  readonly property PwNode source: Pipewire.defaultAudioSource
+
+  readonly property bool muted: !!sink?.audio?.muted
+  readonly property real volume: sink?.audio?.volume ?? 0
+
+  readonly property bool sourceMuted: !!source?.audio?.muted
+  readonly property real sourceVolume: source?.audio?.volume ?? 0
+
+  readonly property real maxVolume: 100
+
+  function setVolume(newVolume: real): void {
+    if (sink?.ready && sink?.audio) {
+      sink.audio.muted = false;
+      sink.audio.volume = Math.max(0, Math.min(root.maxVolume, newVolume));
+    }
   }
 
-  function appNodeDisplayName(node) {
-    return (node.properties["application.name"] || node.description || node.name)
-  }
-
-  // Lists
-  function correctType(node, isSink) {
-    return (node.isSink === isSink) && node.audio
-  }
-
-  function appNodes(isSink) {
-    return Pipewire.nodes.values.filter((node) => { // Should be list<PwNode> but it breaks ScriptModel
-      return root.correctType(node, isSink) && node.isStream
-    })
-  }
-
-  function devices(isSink) {
-    return Pipewire.nodes.values.filter(node => {
-      return root.correctType(node, isSink) && !node.isStream
-    })
-  }
-
-  readonly property list<var> outputAppNodes: root.appNodes(true)
-  readonly property list<var> inputAppNodes: root.appNodes(false)
-  readonly property list<var> outputDevices: root.devices(true)
-  readonly property list<var> inputDevices: root.devices(false)
-
-  // Signals
-  signal sinkProtectionTriggered(string reason);
-
-  // Controls
   function toggleMute() {
-    Audio.sink.audio.muted = !Audio.sink.audio.muted
+    root.muted 
+      ? sink.audio.muted = false
+      : sink.audio.muted = true
   }
 
-  function toggleMicMute() {
-    Audio.source.audio.muted = !Audio.source.audio.muted
+  function incrementVolume(amount: real): void {
+    setVolume(volume + (amount || Settings.audioIncrement));
   }
 
-  function incrementVolume() {
-    const currentVolume = Audio.value;
-    const step = currentVolume < 0.1 ? 0.01 : 0.02 || 0.2;
-    Audio.sink.audio.volume = Math.min(1, Audio.sink.audio.volume + step);
-  }
-  
-  function decrementVolume() {
-    const currentVolume = Audio.value;
-    const step = currentVolume < 0.1 ? 0.01 : 0.02 || 0.2;
-    Audio.sink.audio.volume -= step;
+  function decrementVolume(amount: real): void {
+    setVolume(volume - (amount || Settings.audioIncrement));
   }
 
-  function setDefaultSink(node) {
-    Pipewire.preferredDefaultAudioSink = node;
-  }
-
-  function setDefaultSource(node) {
-    Pipewire.preferredDefaultAudioSource = node;
-  }
-
-  PwObjectTracker {
-      objects: [sink, source]
-  }
-
-
-  Connections {
-    target: sink?.audio ?? null
-    function onVolumeChanged() { 
-      portUpdateProcess.running = true 
-      volumeUpdateProcess.running = true
+  function setSourceVolume(newVolume: real): void {
+    if (source?.ready && source?.audio) {
+      source.audio.muted = false;
+      source.audio.volume = Math.max(0, Math.min(root.maxVolume, newVolume));
     }
-    function onMutedChanged() { 
-      portUpdateProcess.running = true 
+  }
+
+  function incrementSourceVolume(amount: real): void {
+    setSourceVolume(sourceVolume + (amount || Settings.audioIncrement));
+  }
+
+  function decrementSourceVolume(amount: real): void {
+    setSourceVolume(sourceVolume - (amount || Settings.audioIncrement));
+  }
+
+  function setAudioSink(newSink: PwNode): void {
+    Pipewire.preferredDefaultAudioSink = newSink;
+  }
+
+  function setAudioSource(newSource: PwNode): void {
+    Pipewire.preferredDefaultAudioSource = newSource;
+  }
+
+  function cycleNextAudioOutput(): void {
+    if (sinks.length === 0) return;
+
+    const currentIndex = sinks.findIndex(s => s === sink);
+    const nextIndex = (currentIndex + 1) % sinks.length;
+    setAudioSink(sinks[nextIndex]);
+  }
+
+  function setStreamVolume(stream: PwNode, newVolume: real): void {
+    if (stream?.ready && stream?.audio) {
+      stream.audio.muted = false;
+      stream.audio.volume = Math.max(0, Math.min(root.maxVolume, newVolume));
     }
+  }
+
+  function setStreamMuted(stream: PwNode, muted: bool): void {
+    if (stream?.ready && stream?.audio) {
+      stream.audio.muted = muted;
+    }
+  }
+
+  function getStreamVolume(stream: PwNode): real {
+    return stream?.audio?.volume ?? 0;
+  }
+
+  function getStreamMuted(stream: PwNode): bool {
+    return !!stream?.audio?.muted;
+  }
+
+  function getStreamName(stream: PwNode): string {
+    if (!stream)
+      return qsTr("Unknown");
+    // Try application name first, then description, then name
+    return stream.properties["application.name"] || stream.description || stream.name || qsTr("Unknown Application");
   }
 
   onSinkChanged: {
-    if (sink) {
-      portUpdateProcess.running = true
-      volumeUpdateProcess.running = true
-    }
+    if (!sink?.ready)
+      return;
+
+    const newSinkName = sink.description || sink.name || "Unknown Device";
+    previousSinkName = newSinkName;
   }
 
-  Process {
-    id: portUpdateProcess
-    // This is a condensed version of your bash script logic
-    command: ["sh", "-c", "pactl list sinks | awk -v tgt=\"$(pactl get-default-sink)\" '$0 ~ \"Name: \"tgt {f=1} f && /Active Port:/ {print; exit} /^$/ {f=0}'"]    
-    running: true
+  onSourceChanged: {
+    if (!source?.ready)
+      return;
 
-    stdout: StdioCollector {
-      onStreamFinished: { 
-        root.activePortName = this.text.trim().toLowerCase();
-      }
-    }
+    const newSourceName = source.description || source.name || "Unknown Device";
+    previousSourceName = newSourceName;
   }
 
-  Process {
-    id: volumeUpdateProcess
-    command: ["sh", "-c", "pactl list sinks | awk -v tgt=\"$(pactl get-default-sink)\" '$0 ~ \"Name: \"tgt {f=1} f && /^[[:space:]]*Volume:/ { match($0, /[0-9]+%/); print substr($0, RSTART, RLENGTH-1); exit }'"]
-    running: true
+  Component.onCompleted: {
+    previousSinkName = sink?.description || sink?.name || "Unknown Device";
+    previousSourceName = source?.description || source?.name || "Unknown Device";
+  }
 
-    stdout: StdioCollector {
-      onStreamFinished: { 
-        // Parse the stdout to a float, ignoring trailing newlines or [MUTED] tags
-        let parsedVol = parseFloat(this.text);
-        if (!isNaN(parsedVol)) {
-          root.volume = parsedVol;
+  Connections {
+    function onValuesChanged(): void {
+      const newSinks = [];
+      const newSources = [];
+      const newStreams = [];
+
+      for (const node of Pipewire.nodes.values) {
+        if (!node.isStream) {
+          if (node.isSink)
+            newSinks.push(node);
+          else if (node.audio)
+            newSources.push(node);
+        } else if (node.audio) {
+          newStreams.push(node);
         }
       }
+
+      root.sinks = newSinks;
+      root.sources = newSources;
+      root.streams = newStreams;
     }
+
+    target: Pipewire.nodes
+  }
+
+  PwObjectTracker {
+    objects: [...root.sinks, ...root.sources, ...root.streams]
+  }
+
+  IpcHandler {
+    function cycleOutput(): void {
+      root.cycleNextAudioOutput();
+    }
+
+    target: "audio"
   }
 }

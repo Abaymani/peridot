@@ -33,7 +33,6 @@ Rectangle {
       spacing: 0
 
       // --- VOLUME SLIDER CONTAINER ---
-      // This Item acts as our "Revealer"
       Item {
         id: sliderContainer
         clip: true // Essential: hides the slider when width is small
@@ -51,13 +50,12 @@ Rectangle {
           width: 100
           from: 0
           to: 1
-          value: Services.Audio.sink?.audio.volume ?? 0
-          onMoved: if (Services.Audio.sink) Services.Audio.sink.audio.volume = value
+          value: Services.Audio.volume
+          onMoved: Services.Audio.setVolume(value)
         }
       }
 
       // --- PERCENTAGE TEXT CONTAINER ---
-      // This Item "hides" when the slider shows
       Item {
         id: percentContainer
         clip: true
@@ -75,7 +73,7 @@ Rectangle {
           font.pixelSize: Looks.Fonts.size - 2
           color: Settings.textColorOnContainer
           renderType: Text.NativeRendering
-          text: Services.Audio.sink ? Services.Audio.volume + "%" : "N/A"
+          text: Services.Audio.sink ? Math.round(Services.Audio.volume * 100) + "%" : "N/A"
         }
       }
 
@@ -91,15 +89,16 @@ Rectangle {
         color: Services.Audio.sink?.audio.muted ? Settings.textColorOnContainer : Settings.textColorOnContainer
         renderType: Text.NativeRendering
         text: {
-          const sink = Services.Audio.sink;
-          
-          if (!sink || sink.audio.muted) {
-            return "";
-          }; 
+          if (!Services.Audio.sink) return "󰖡"; // N/A or Error icon
+          if (Services.Audio.muted) return "󰖁"; // Muted icon
 
-          const name = Services.Audio.activePortName;
-          if (name.includes("headphone") || name.includes("headset")) return "";
-          return "";
+          const desc = (Services.Audio.sink.description || "").toLowerCase();
+          const formFactor = (Services.Audio.sink.properties["device.form_factor"] || "").toLowerCase();
+          const isHeadphone = desc.includes("headphone") || desc.includes("headset") || formFactor === "headphone" || formFactor === "headset";
+
+          if (isHeadphone) return "󰋋"; // Headphone icon
+          return "󰕾"; // High
+
         }
 
         MouseArea {
