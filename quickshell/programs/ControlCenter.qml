@@ -90,15 +90,11 @@ Scope {
     					? Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
 							: null
 						radius: Looks.Decorations.decor.radius
-						Text {
-							anchors.centerIn: parent
-							font.family: Looks.Fonts.family
-							font.pixelSize: Looks.Fonts.size
-							font.weight: Looks.Fonts.weight
-							color: Settings.textColorOnContainer
-							text: "Placeholder: Dashboard\n->Resource-usage (detailed and with temps)\n->Battery\n->Brightness"
+						
+						Brightness {
 						}
 					}
+
 				}
 
 				RowLayout {
@@ -115,7 +111,7 @@ Scope {
 
 						ColumnLayout{
 							anchors.fill: parent
-              anchors.margins: 8
+              				anchors.margins: 8
 
 							RowLayout{
 								Layout.fillWidth: true

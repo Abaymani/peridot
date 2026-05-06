@@ -19,7 +19,7 @@ Slider {
 
     Behavior on value { // This makes the adjusted value (like volume) shift smoothly
         SmoothedAnimation {
-            velocity: 0.7
+            velocity: 8
         }
     }
 

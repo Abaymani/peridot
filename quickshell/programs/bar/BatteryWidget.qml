@@ -53,8 +53,7 @@ Rectangle {
         if (BatteryService.isCharging) return "󰂄";
 
 		const percentage = BatteryService.percentage
-        // Evaluates lowest to highest using whole numbers (0-100)
-        if (percentage < 0.15) root.icon = "󰂃";
+        if (percentage < 0.15) return "󰂃";
         else if (percentage < 0.20) return "󰁻";
         else if (percentage < 0.30) return "󰁼";
         else if (percentage < 0.40) return "󰁽";
