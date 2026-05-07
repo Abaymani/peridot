@@ -7,7 +7,12 @@ import qs
 Rectangle {
   id: root
   signal clicked()
+
   required property string buttonText
+  property bool toggleButton: false
+  property bool checked: false
+  property bool enabled: true
+
   property int widthPadding: 20
   property int fontSizeModifier: 8
   property color textColor: Settings.textColorOnContainer
@@ -18,8 +23,16 @@ Rectangle {
     ? Looks.Gradients.library[Settings.activeGradient].createObject()
     : null
   implicitWidth: btnText.implicitWidth + widthPadding
+  opacity: checked ? 1 : 0.4
   radius: Looks.Decorations.decor.radius
   height: Looks.Decorations.decor.elementHeight
+
+  Behavior on opacity {
+    NumberAnimation {
+      duration: 100 // 150ms is usually a sweet spot for snappy UI elements
+      easing.type: Easing.InOutQuad // Gives it a natural ease-in and ease-out feel
+    }
+  }
 
   Text {
     id: btnText
@@ -33,12 +46,14 @@ Rectangle {
   }
 
     MouseArea {
-    anchors.fill: parent
-    cursorShape: Qt.PointingHandCursor
-    hoverEnabled: true
+      visible: root.enabled
+      anchors.fill: parent
+      cursorShape: Qt.PointingHandCursor
+      hoverEnabled: true
 
-    onClicked: {
-      root.clicked()
-    }
+      onClicked: {
+        if (root.toggleButton) root.checked = !root.checked
+        root.clicked()
+      }
   }
 }

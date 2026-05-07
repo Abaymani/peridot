@@ -18,7 +18,6 @@ Rectangle {
     anchors.left: parent.left
     anchors.right: parent.right
     anchors.top: parent.top
-    anchors.margins: 8
 
     property bool hovering: false
 

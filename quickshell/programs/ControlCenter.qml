@@ -78,23 +78,39 @@ Scope {
 						onClicked: console.log("Settings app doesn't exist yet! :(")
 					}
 				}
-
-				RowLayout {
-					id: dashboard
-					Layout.fillWidth: true
 					
-					Rectangle { 
-						height: 80; Layout.fillWidth: true; 
-						color: Looks.Colors.md3.surface_container
-						gradient: Settings.gradientBgEnabled 
-    					? Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
-							: null
-						radius: Looks.Decorations.decor.radius
-						
-						Brightness {
+				Rectangle { 
+					Layout.fillWidth: true; 
+					
+					implicitHeight: dashboard.implicitHeight
+					color: Looks.Colors.md3.surface_container
+					gradient: Settings.gradientBgEnabled 
+						? Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
+						: null
+					radius: Looks.Decorations.decor.radius
+
+					ColumnLayout {
+						id: dashboard
+						anchors.fill: parent
+						anchors.margins: 8
+
+						Brightness {}
+							
+						RadioBtnGroup {
+							Layout.fillWidth: true 
+							color: "transparent"
+							options: ["󱤅", "", ""]
+							selectedIndex: 1
+							onSelectionChanged: (index, value) => {
+								console.log(value)
+							}
+						}
+
+						Item{
+							height: 10
+							Layout.fillHeight: true
 						}
 					}
-
 				}
 
 				RowLayout {
@@ -111,7 +127,7 @@ Scope {
 
 						ColumnLayout{
 							anchors.fill: parent
-              				anchors.margins: 8
+							anchors.margins: 8
 
 							RowLayout{
 								Layout.fillWidth: true
