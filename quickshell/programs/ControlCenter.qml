@@ -71,7 +71,8 @@ Scope {
 					}
 					Button {
 						buttonText: "󰂯"
-						onClicked: Quickshell.execDetached(["hyprctl", "dispatch", "exec", "blueman-manager"]);
+						
+						onClicked: Hyprland.dispatch("hl.dsp.exec_cmd('blueman-manager')");
 					}
 					Button {
 						buttonText: ""

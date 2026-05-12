@@ -23,7 +23,7 @@ Rectangle {
     ? Looks.Gradients.library[Settings.activeGradient].createObject()
     : null
   implicitWidth: btnText.implicitWidth + widthPadding
-  opacity: checked ? 1 : 0.4
+  opacity: toggleButton ? checked ? 1 : 0.4 : 1
   radius: Looks.Decorations.decor.radius
   height: Looks.Decorations.decor.elementHeight
 

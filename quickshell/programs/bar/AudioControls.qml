@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell
 import Quickshell.Widgets
+import Quickshell.Hyprland
 import qs.common.looks as Looks
 import qs.services as Services
 import qs.widgets
@@ -108,7 +109,7 @@ Rectangle {
           acceptedButtons: Qt.LeftButton | Qt.RightButton
 
           onClicked: (mouse) => {
-            if (mouse.button === Qt.LeftButton) {Quickshell.execDetached(["hyprctl", "dispatch", "hl.dsp.exec_cmd('pavucontrol')"])}
+            if (mouse.button === Qt.LeftButton) Hyprland.dispatch("hl.dsp.exec_cmd('pavucontrol')")
             else if (mouse.button === Qt.RightButton) {Services.Audio.toggleMute()}
           }
         }

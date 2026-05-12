@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
+import Quickshell.Hyprland
 import qs
 import qs.common.looks as Looks
 import qs.services as Services
@@ -76,6 +77,6 @@ Rectangle {
   MouseArea{
       anchors.fill: parent
       cursorShape: Qt.PointingHandCursor
-      onClicked: {Quickshell.execDetached(["hyprctl", "dispatch", "exec", "nm-connection-editor"])}
+      onClicked: Hyprland.dispatch("hl.dsp.exec_cmd('nm-connection-editor')")
   }
 }

@@ -35,6 +35,7 @@ Rectangle {
         bottomRightRadius: isLast ? Decorations.decor.radius : 0
 
         buttonText: modelData
+        toggleButton: true
         checked: index === root.selectedIndex
         color: root.btnColor
 
