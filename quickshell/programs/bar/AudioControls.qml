@@ -108,7 +108,7 @@ Rectangle {
           acceptedButtons: Qt.LeftButton | Qt.RightButton
 
           onClicked: (mouse) => {
-            if (mouse.button === Qt.LeftButton) {Quickshell.execDetached(["hyprctl", "dispatch", "exec", "pavucontrol"])}
+            if (mouse.button === Qt.LeftButton) {Quickshell.execDetached(["hyprctl", "dispatch", "hl.dsp.exec_cmd('pavucontrol')"])}
             else if (mouse.button === Qt.RightButton) {Services.Audio.toggleMute()}
           }
         }
