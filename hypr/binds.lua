@@ -34,7 +34,9 @@ hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ action = "toggle", mode = "maximized"}))
+
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind("switch:off:Lid", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"), { locked = true })
 
 -- Quickshell
 hl.bind(mainMod .. " + A", hl.dsp.global("quickshell:toggleControlCenter"))

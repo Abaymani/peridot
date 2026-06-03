@@ -23,14 +23,14 @@ Rectangle {
     ? Looks.Gradients.library[Settings.activeGradient].createObject()
     : null
   implicitWidth: btnText.implicitWidth + widthPadding
-  opacity: toggleButton ? checked ? 1 : 0.4 : 1
+  opacity: toggleButton ? (checked ? 1 : 0.4) : 1
   radius: Looks.Decorations.decor.radius
   height: Looks.Decorations.decor.elementHeight
 
   Behavior on opacity {
     NumberAnimation {
-      duration: 100 // 150ms is usually a sweet spot for snappy UI elements
-      easing.type: Easing.InOutQuad // Gives it a natural ease-in and ease-out feel
+      duration: 100 
+      easing.type: Easing.InOutQuad
     }
   }
 
@@ -52,7 +52,6 @@ Rectangle {
       hoverEnabled: true
 
       onClicked: {
-        if (root.toggleButton) root.checked = !root.checked
         root.clicked()
       }
   }

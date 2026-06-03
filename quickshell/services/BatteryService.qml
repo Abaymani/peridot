@@ -75,18 +75,10 @@ Singleton {
     onIsPluggedInChanged: {
         if(!root.available || Settings.userOverridePowerProfile) return;
         if (!root.isPluggedIn) {
-            Quickshell.execDetached([
-                "powerprofilesctl",
-                "set",
-                Settings.onBatteryPowerProfile,
-            ]);
+            updatePowerProfile("power-saver")
         }
         else {
-            Quickshell.execDetached([
-                "powerprofilesctl",
-                "set",
-                Settings.onChargerPowerProfile,
-            ]);
+            updatePowerProfile("performance")
         }
     }
 
@@ -126,6 +118,18 @@ Singleton {
             "notify-send",
             "Battery full",
             "Please unplug the charger",
+            "-a", "Shell",
+            "--hint=int:transient:1",
+        ]);
+    }
+
+    function updatePowerProfile(profile){
+        Quickshell.execDetached(["powerprofilesctl", "set", profile])
+        Quickshell.execDetached([
+            "notify-send", 
+            "Updating power profile", 
+            `Setting to: ${profile}`, 
+            "-i", Settings.iconPath + "/categories/scalable/computer.svg",
             "-a", "Shell",
             "--hint=int:transient:1",
         ]);

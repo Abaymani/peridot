@@ -10,7 +10,7 @@ Rectangle {
   property var options: []
   property int selectedIndex: 0
   property color btnColor: Colors.md3.secondary_container
-  signal selectionChanged(int index, string value)
+  signal selectionChanged(int index)
 
   implicitHeight: buttonRow.implicitHeight
   color: "transparent"
@@ -40,11 +40,11 @@ Rectangle {
         color: root.btnColor
 
         onClicked: {
-          console.log(modelData)
           if (root.selectedIndex !== index) {
             root.selectedIndex = index
-            root.selectionChanged(index, modelData)
           }
+          
+          selectionChanged(root.selectedIndex)
         }
       }
     }

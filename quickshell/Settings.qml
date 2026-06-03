@@ -11,7 +11,7 @@ Singleton {
     id: root
 
     //POWER PROFILES
-    property bool userOverridePowerProfile: false
+    property bool userOverridePowerProfile: true
     property string onBatteryPowerProfile: "power-saver"
     property string onChargerPowerProfile: "performance" 
 
@@ -20,7 +20,7 @@ Singleton {
     readonly property string iconPath: StandardPaths.standardLocations(StandardPaths.HomeLocation) + "/.local/share/icons/YAMIS"
 
     //LOOKS
-    property bool gradientBgEnabled: true
+    property bool gradientBgEnabled: false
     property string activeGradient: "PrimaryH3C"
     property string activeSecondaryGradient: "PrimaryV2C"
     property string activebackgroundGradient: "WeakV2C"

@@ -71,7 +71,6 @@ Scope {
 					}
 					Button {
 						buttonText: "󰂯"
-						
 						onClicked: Hyprland.dispatch("hl.dsp.exec_cmd('blueman-manager')");
 					}
 					Button {
@@ -102,8 +101,14 @@ Scope {
 							color: "transparent"
 							options: ["󱤅", "", ""]
 							selectedIndex: 1
-							onSelectionChanged: (index, value) => {
-								console.log(value)
+							
+							enabled: Settings.userOverridePowerProfile
+							opacity: Settings.userOverridePowerProfile ? 1.0 : 0.5
+
+							onSelectionChanged: {
+								if (this.selectedIndex === 0) BatteryService.updatePowerProfile("power-saver")
+								else if (this.selectedIndex === 1) BatteryService.updatePowerProfile("balanced")
+								else if (this.selectedIndex === 2) BatteryService.updatePowerProfile("performance")
 							}
 						}
 
