@@ -104,6 +104,7 @@ gnome-text-editor
 **grim**
 gum
 htop
+**hypridle**
 **hyprland**
 **hyprlock**
 **hyprpicker**
