@@ -83,19 +83,19 @@ Scope {
         TextField {
           id: searchInput
           Layout.fillWidth: true
-          Layout.preferredHeight: 28
+          Layout.preferredHeight: 32
           leftPadding: 10
           rightPadding: 10
           placeholderText: "Search..."
           placeholderTextColor: Looks.Colors.palette.neutral70
-          color: Settings.textColorOnLight
+          color: Settings.textColorOnContainer
           font.family: Looks.Fonts.family
           font.pixelSize: Looks.Fonts.size
           
           onTextChanged: ClipboardService.searchQuery = text
 
           background: Rectangle {
-            color: Looks.Colors.md3.inverse_surface
+            color: Looks.Colors.md3.surface_container
             gradient: Settings.gradientBgEnabled 
               ? Looks.Gradients.library[Settings.activeSecondaryGradient].createObject()
               : null
