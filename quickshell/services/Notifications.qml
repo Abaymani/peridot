@@ -6,14 +6,14 @@ import qs
 
 Singleton {
   id: root
-  property alias model: notifcationModel
+  property alias model: notificationModel
   property alias popupModel: popupListModel
 
   property var objectMap: ({})
   property int _idCounter: 0
 
   ListModel {
-    id: notifcationModel
+    id: notificationModel
   }
 
   ListModel {
@@ -59,7 +59,7 @@ Singleton {
       }
 
       // Insert to show newest notifications on top of others.
-      notifcationModel.insert(0, {"notifId": internalId})
+      notificationModel.insert(0, {"notifId": internalId})
 
       if (!notification.lastGeneration && !GlobalStates.doNotDisturb) {
         popupListModel.insert(0, {"notifId": internalId})
@@ -68,9 +68,9 @@ Singleton {
       // Also remove notifications in our reversed list.
       notification.closed.connect(() => {
         // Remove from the visual list
-        for (let i = 0; i < notifcationModel.count; i++) {
-          if (notifcationModel.get(i).notifId === internalId) {
-            notifcationModel.remove(i)
+        for (let i = 0; i < notificationModel.count; i++) {
+          if (notificationModel.get(i).notifId === internalId) {
+            notificationModel.remove(i)
             break
           }
         }

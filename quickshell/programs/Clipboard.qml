@@ -65,9 +65,7 @@ Scope {
         RowLayout {
           Looks.ClearText {
               text: "Clipboard"
-              font.family: Looks.Fonts.family
               font.pixelSize: Looks.Fonts.size + 8
-              font.weight: Looks.Fonts.weight
               color: Settings.textColorOnContainer
           }
 
@@ -142,8 +140,6 @@ Scope {
                 Looks.ClearText {
                   id: delegateId
 
-                  font.family: Looks.Fonts.family
-                  font.pixelSize: Looks.Fonts.size
                   text: clipId
                   color: Settings.textColorOnContainer
                   elide: Text.ElideRight
@@ -152,16 +148,13 @@ Scope {
                   verticalAlignment: Text.AlignVCenter
                 }
 
-                Looks.Seperator { verticalPadding: 1}
+                Looks.Separator { verticalPadding: 1}
 
                 Looks.ClearText {
                   id: delegateText
                   Layout.fillWidth: true
                   verticalAlignment: Text.AlignVCenter
                   leftPadding: 10
-
-                  font.family: Looks.Fonts.family
-                  font.pixelSize: Looks.Fonts.size
 
                   text: clipContent
                   color: Settings.textColorOnContainer

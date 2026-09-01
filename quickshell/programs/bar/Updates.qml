@@ -2,24 +2,17 @@ import QtQuick
 import QtQuick.Layouts
 import qs.common.looks as Looks
 import qs.services as Services
+import qs.widgets
 import qs
 
-Rectangle {
+Pill {
 	id: root
-	
-	
+
 	// 2. Dynamic Width: Hug the content + padding
 	implicitWidth: mainLayout.implicitWidth + 24
-	implicitHeight: Looks.Decorations.decor.elementHeight
-	radius: Looks.Decorations.decor.radius
 	clip: true
 
-	color: Looks.Colors.md3.secondary_container
-  gradient: Settings.gradientBgEnabled 
-    ? Looks.Gradients.library[Settings.activeGradient].createObject()
-    : null
 
-	
 	// Smooth transition when the pill grows/shrinks or changes color
 	Behavior on width { NumberAnimation { duration: 200 } }
 
@@ -31,7 +24,6 @@ Rectangle {
 		Looks.ClearText {
 			id: iconText
 			text: "󰣇" // Nerd Font: nf-md-update
-			font.family: Looks.Fonts.family
 			font.pixelSize: Looks.Fonts.size + 2
 			color: Settings.textColorOnContainer
 			transformOrigin: Item.Center
@@ -40,11 +32,8 @@ Rectangle {
 		// --- Update Count ---
 		Looks.ClearText {
 			text: Services.UpdateService.isChecking ? "..." : Services.UpdateService.count
-			font.family: Looks.Fonts.family
 			font.pixelSize: Looks.Fonts.size -1
-			font.weight: Looks.Fonts.weight
 			color: Settings.textColorOnContainer
-			renderType: Text.NativeRendering
 		}
 	}
 

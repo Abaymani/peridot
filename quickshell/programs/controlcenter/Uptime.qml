@@ -22,21 +22,16 @@ Rectangle{
     spacing: 5
 
     Looks.ClearText {
-      font.family: Looks.Fonts.family
       font.pixelSize: Looks.Fonts.size-1
-      font.weight: Looks.Fonts.weight
       font.italic: true
-      
+
       text: "Up:"
       color: Settings.textColorOnContainer
     }
 
     Looks.ClearText {
       id: uptimeText
-      font.family: Looks.Fonts.family
-      font.pixelSize: Looks.Fonts.size 
-      font.weight: Looks.Fonts.weight
-      
+
       text: "0"
       color: Settings.textColorOnContainer
     }

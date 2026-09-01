@@ -2,19 +2,13 @@ import QtQuick
 import QtQuick.Layouts
 import qs.common.looks as Looks
 import qs.services
+import qs.widgets
 import qs
 
-Rectangle {
+Pill {
 	id: batteryWidget
-	width: batteryInfo.implicitWidth + 20
-	implicitHeight: Looks.Decorations.decor.elementHeight
-	radius: Looks.Decorations.decor.radius
+	implicitWidth: batteryInfo.implicitWidth + 20
     visible: BatteryService.available
-	
-	color: Looks.Colors.md3.secondary_container
-	gradient: Settings.gradientBgEnabled 
-		? Looks.Gradients.library[Settings.activeGradient].createObject()
-		: null
 
     RowLayout {
 		id: batteryInfo
@@ -23,26 +17,19 @@ Rectangle {
 
         Looks.ClearText {
 			id: batteryPercentage
-			font.family: Looks.Fonts.family
-			font.pixelSize: Looks.Fonts.size -2 
-			font.weight: Looks.Fonts.weight
-			renderType: Text.NativeRendering
+			font.pixelSize: Looks.Fonts.size -2
 
 			text: Math.round(BatteryService.percentage * 100) + "%"
 			color: Settings.textColorOnContainer
 		}
 
-        Looks.Seperator {
+        Looks.Separator {
 			color: Settings.textColorOnContainer
 		}
 
         Looks.ClearText {
 			id: batteryIcon
-			font.family: Looks.Fonts.family
 			font.pixelSize: Looks.Fonts.size +4
-			font.weight: Looks.Fonts.weight
-			renderType: Text.NativeRendering
-			
 			text: getIcon()
 			color: Settings.textColorOnContainer
 		}

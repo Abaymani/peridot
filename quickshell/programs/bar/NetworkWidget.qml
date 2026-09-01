@@ -4,19 +4,13 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
 import qs
+import qs.widgets
 import qs.common.looks as Looks
 import qs.services as Services
 
-Rectangle {
+Pill {
   id: root
-  height: Looks.Decorations.decor.elementHeight
   implicitWidth: mainLayout.implicitWidth + 20
-  radius: Looks.Decorations.decor.radius
-  
-  color: Looks.Colors.md3.secondary_container
-  gradient: Settings.gradientBgEnabled 
-    ? Looks.Gradients.library[Settings.activeGradient].createObject()
-    : null
 
   RowLayout {
     id: mainLayout
@@ -26,18 +20,14 @@ Rectangle {
 
     // Icon Logic: Shows Ethernet icon if wired, otherwise WiFi icon
     Looks.ClearText {
-      font.family: Looks.Fonts.family
-      font.pixelSize: Looks.Fonts.size
       color: Settings.textColorOnContainer
-      text: Services.Network.activeEthernet ? "󰈀" : "" 
+      text: Services.Network.activeEthernet ? "󰈀" : ""
     }
 
     //Shows "Wired" or the SSID of the WiFi
     Looks.ClearText {
-      font.family: Looks.Fonts.family
       font.pixelSize: Looks.Fonts.size - 2
       color: Settings.textColorOnContainer
-      renderType: Text.NativeRendering
       text: {
         if (Services.Network.activeEthernet) return "Wired";
         if (Services.Network.active) return Services.Network.active.ssid;
@@ -45,30 +35,26 @@ Rectangle {
       }
     }
 
-    Looks.Seperator {
+    Looks.Separator {
       color: Settings.textColorOnContainer
     }
 
     // Download speed
     Looks.ClearText {
-      font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size -2
       color: Settings.textColorOnContainer
-      renderType: Text.NativeRendering
       property var stats: Services.NetworkUsage.formatBytes(Services.NetworkUsage.downloadSpeed)
-      text: `${stats.value.toFixed(1)} ` + stats.unit + "⬇" 
+      text: `${stats.value.toFixed(1)} ` + stats.unit + "⬇"
     }
 
-    Looks.Seperator {
+    Looks.Separator {
       color: Settings.textColorOnContainer
     }
 
     // Upload speed
     Looks.ClearText {
-      font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size -2
       color: Settings.textColorOnContainer
-      renderType: Text.NativeRendering
       property var stats: Services.NetworkUsage.formatBytes(Services.NetworkUsage.uploadSpeed)
       text: `${stats.value.toFixed(1)} ` + stats.unit + "⬆"
     }

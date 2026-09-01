@@ -99,8 +99,6 @@ Rectangle {
           Layout.fillWidth: true
           Layout.minimumWidth: 0
           text: modelData.summary
-          font.family: Looks.Fonts.family
-          font.pixelSize: Looks.Fonts.size
           font.weight: Font.Bold
           color: Settings.textColorOnContainer
           elide: Text.ElideRight
@@ -109,7 +107,6 @@ Rectangle {
         Looks.ClearText {
           visible: !isPopup
           text: TimeUtils.formatRelativeTime(new Date(timeReceived), Time.time)
-          font.family: Looks.Fonts.family
           font.pixelSize: Looks.Fonts.size -1
           font.italic: true
           color: Settings.textColorOnContainer
@@ -120,9 +117,7 @@ Rectangle {
       Looks.ClearText {
         Layout.fillWidth: true
         text: modelData.body
-        font.family: Looks.Fonts.family
         font.pixelSize: Looks.Fonts.size-2
-        font.weight: Looks.Fonts.weight
         color: Settings.textColorOnContainer
         wrapMode: Text.WordWrap
         maximumLineCount: 3

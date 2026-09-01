@@ -2,19 +2,12 @@ import QtQuick
 import QtQuick.Layouts
 import qs.common.looks as Looks
 import qs.services
+import qs.widgets
 import qs
 
-Rectangle {
+Pill {
 	id: clockPill
-	width: datetime.implicitWidth + 20
-	implicitHeight: Looks.Decorations.decor.elementHeight
-	radius: Looks.Decorations.decor.radius
-	
-	color: Looks.Colors.md3.secondary_container
-	gradient: Settings.gradientBgEnabled 
-		? Looks.Gradients.library[Settings.activeGradient].createObject()
-		: null
-	
+	implicitWidth: datetime.implicitWidth + 20
 
 	RowLayout {
 		id: datetime
@@ -23,27 +16,16 @@ Rectangle {
 
 		Looks.ClearText {
 			id: dateText
-			font.family: Looks.Fonts.family
-			font.pixelSize: Looks.Fonts.size 
-			font.weight: Looks.Fonts.weight
-			renderType: Text.NativeRendering
-
 			text: Qt.formatDateTime(Time.time, "dddd, MM/dd")
 			color: Settings.textColorOnContainer
 		}
 
-		Looks.Seperator {
+		Looks.Separator {
 			color: Settings.textColorOnContainer
 		}
 
 		Looks.ClearText {
 			id: clockText
-			
-			font.family: Looks.Fonts.family
-			font.pixelSize: Looks.Fonts.size 
-			font.weight: Looks.Fonts.weight
-			renderType: Text.NativeRendering
-			
 			text: Qt.formatDateTime(Time.time, "hh:mm")
 			color: Settings.textColorOnContainer
 		}

@@ -6,18 +6,12 @@ import qs
 import qs.widgets
 import qs.common.looks as Looks
 
-Rectangle {
+Pill {
     id: root
-    height: Looks.Decorations.decor.elementHeight
-    radius: Looks.Decorations.decor.radius
-    color: Looks.Colors.md3.secondary_container
-    gradient: Settings.gradientBgEnabled 
-        ? Looks.Gradients.library[Settings.activeGradient].createObject()
-        : null
     property bool hovering: false
 
-    Process { 
-        id: brilloProc 
+    Process {
+        id: brilloProc
         command: ["sh", "-c", "brillo -G"]
         running: true
 
@@ -56,8 +50,8 @@ Rectangle {
 
                 onMoved: {
                     let percent = Math.round(value * 100);
-                    Quickshell.execDetached(["brillo", "-u", "200000", "-S", percent.toString()]);   
-                    brightnessSlider.value = value         
+                    Quickshell.execDetached(["brillo", "-u", "200000", "-S", percent.toString()]);
+                    brightnessSlider.value = value
                 }
             }
 
@@ -65,11 +59,9 @@ Rectangle {
                 text: root.hovering ? (Math.round(brightnessSlider.value *100) + "%").padStart(4, ' ') : "󰃟"
                 leftPadding: root.hovering ? 0 : 3
                 rightPadding: root.hovering ? 0 : 3
-                font.family: Looks.Fonts.family
                 font.pixelSize: root.hovering ? Looks.Fonts.size-2 :  Looks.Fonts.size + 5
-                font.weight: Looks.Fonts.weight
                 color: Settings.textColorOnContainer
             }
-        } 
+        }
     }
 }

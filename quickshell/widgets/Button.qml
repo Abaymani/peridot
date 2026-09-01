@@ -41,9 +41,7 @@ Rectangle {
     id: btnText
     anchors.centerIn: parent
     anchors.horizontalCenterOffset: h_centerOffset
-    font.family: Looks.Fonts.family
     font.pixelSize: Looks.Fonts.size + fontSizeModifier
-    font.weight: Looks.Fonts.weight
     text: buttonText
     color: textColor
   }

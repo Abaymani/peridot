@@ -16,12 +16,9 @@ RowLayout {
   Looks.ClearText {
     text: ">"
     color: Settings.textColorNotContainer
-    font.family: Looks.Fonts.family
-    font.pixelSize: Looks.Fonts.size
     Layout.fillWidth: false
 
     renderTypeQuality: 16 // Helps with legibility on light wallpapers
-    renderType: Text.NativeRendering
   }
 
   Looks.ClearText {
@@ -33,11 +30,7 @@ RowLayout {
     Layout.maximumWidth: 350    
     
     elide: Text.ElideRight
-    font.family: Looks.Fonts.family
-    font.pixelSize: Looks.Fonts.size
-    font.weight: Looks.Fonts.weight
 
     renderTypeQuality: 16 // Helps with legibility on light wallpapers
-    renderType: Text.NativeRendering
   }
 }

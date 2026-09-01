@@ -11,7 +11,6 @@ RowLayout {
   Looks.ClearText {
     text: " "
     color: Settings.textColorNotContainer
-    font.family: Looks.Fonts.family
     font.pixelSize: Looks.Fonts.size + 4
 
     renderTypeQuality: 16 // Helps with legibility on light wallpapers

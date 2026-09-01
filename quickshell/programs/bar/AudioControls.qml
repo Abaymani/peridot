@@ -9,15 +9,9 @@ import qs.services as Services
 import qs.widgets
 import qs
 
-Rectangle {
+Pill {
   id: root
-  height: Looks.Decorations.decor.elementHeight
   implicitWidth: mainLayout.implicitWidth + 20
-  radius: Looks.Decorations.decor.radius
-  color: Looks.Colors.md3.secondary_container
-  gradient: Settings.gradientBgEnabled 
-    ? Looks.Gradients.library[Settings.activeGradient].createObject()
-    : null
 
   property bool volReveal: false
 
@@ -26,7 +20,7 @@ Rectangle {
     hoverEnabled: true
     onEntered: root.volReveal = true
     onExited: root.volReveal = false
-    
+
 
     RowLayout {
       id: mainLayout
@@ -38,7 +32,7 @@ Rectangle {
         id: sliderContainer
         clip: true // Essential: hides the slider when width is small
         Layout.preferredHeight: 20
-        
+
         // Logic for sliding width
         Layout.preferredWidth: !root.volReveal ? 0 : 100
         opacity: root.volReveal ? 1 : 0
@@ -70,25 +64,20 @@ Rectangle {
         Looks.ClearText {
           id: percentText
           anchors.centerIn: parent
-          font.family: Looks.Fonts.family
           font.pixelSize: Looks.Fonts.size - 2
           color: Settings.textColorOnContainer
-          renderType: Text.NativeRendering
           text: Services.Audio.sink ? Math.round(Services.Audio.volume * 100) + "%" : "N/A"
         }
       }
 
-      Looks.Seperator {
-        Layout.leftMargin: 8 
+      Looks.Separator {
+        Layout.leftMargin: 8
         Layout.rightMargin: 8
         color: Settings.textColorOnContainer
       }
 
       Looks.ClearText {
-        font.family: Looks.Fonts.family
-        font.pixelSize: Looks.Fonts.size
         color: Services.Audio.sink?.audio.muted ? Settings.textColorOnContainer : Settings.textColorOnContainer
-        renderType: Text.NativeRendering
         text: {
           if (!Services.Audio.sink) return "󰖡"; // N/A or Error icon
           if (Services.Audio.muted) return "󰖁"; // Muted icon
