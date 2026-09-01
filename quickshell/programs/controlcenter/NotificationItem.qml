@@ -87,6 +87,7 @@ Rectangle {
 
     ColumnLayout {
       Layout.fillWidth: true
+      spacing: 0
       Layout.leftMargin: 10
       Layout.rightMargin: 10
       Layout.alignment: Qt.AlignTop
@@ -139,7 +140,7 @@ Rectangle {
 
         Layout.fillWidth: true
         Layout.preferredHeight: showActions ? implicitHeight : 0
-        Layout.topMargin: 4
+        Layout.topMargin: showActions ? 9 : 0
         Layout.leftMargin: -2
         Layout.rightMargin: -4
         
@@ -147,6 +148,9 @@ Rectangle {
           NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
         }
         Behavior on Layout.preferredHeight {
+          NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
+        }
+        Behavior on Layout.topMargin {
           NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
         }
 
