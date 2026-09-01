@@ -2,14 +2,15 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import qs.common.looks as Looks
+import qs.common.functions
 import qs
 
 
 Rectangle{
-  color: Looks.Colors.md3.surface_container
-  gradient: Settings.gradientBgEnabled 
-    ? Looks.Gradients.library[Settings.activeGradient].createObject()
-    : null
+  color: Settings.gradientBgEnabled 
+    ? ColorUtils.setAlphaColor(Looks.Colors.md3.secondary, 0.5)
+    : Looks.Colors.md3.surface_container
+
   implicitWidth: uptimeTextContainer.implicitWidth + 20
   radius: Looks.Decorations.decor.radius
   height: Looks.Decorations.decor.elementHeight

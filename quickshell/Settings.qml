@@ -23,7 +23,7 @@ Singleton {
     property bool gradientBgEnabled: true
     property string activeGradient: "PrimaryH3C"
     property string activeSecondaryGradient: "PrimaryV2C"
-    property string activebackgroundGradient: "WeakV2C"
+    property string activebackgroundGradient: "WeakH2C"
 
     property color textColorOnContainer: gradientBgEnabled 
         ? Looks.Colors.palette.neutral100
