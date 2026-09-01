@@ -67,7 +67,7 @@ Rectangle {
         Behavior on Layout.preferredWidth { NumberAnimation { duration: 150; easing.type: Easing.InOutQuad } }
         Behavior on opacity { NumberAnimation { duration: 150 } }
 
-        Text {
+        Looks.ClearText {
           id: percentText
           anchors.centerIn: parent
           font.family: Looks.Fonts.family
@@ -84,7 +84,7 @@ Rectangle {
         color: Settings.textColorOnContainer
       }
 
-      Text {
+      Looks.ClearText {
         font.family: Looks.Fonts.family
         font.pixelSize: Looks.Fonts.size
         color: Services.Audio.sink?.audio.muted ? Settings.textColorOnContainer : Settings.textColorOnContainer

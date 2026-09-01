@@ -13,7 +13,7 @@ RowLayout {
 
   spacing: 6 
   
-  Text {
+  Looks.ClearText {
     text: ">"
     color: Settings.textColorNotContainer
     font.family: Looks.Fonts.family
@@ -22,11 +22,9 @@ RowLayout {
 
     renderTypeQuality: 16 // Helps with legibility on light wallpapers
     renderType: Text.NativeRendering
-    style: Text.Outline
-    styleColor: ColorUtils.setAlphaColor(Looks.Colors.palette.neutral0, 0.1)
   }
 
-  Text {
+  Looks.ClearText {
     id: titleText
     color: Settings.textColorNotContainer
     text: activeWindow?.title ?? "Desktop"
@@ -41,7 +39,5 @@ RowLayout {
 
     renderTypeQuality: 16 // Helps with legibility on light wallpapers
     renderType: Text.NativeRendering
-    style: Text.Outline
-    styleColor: ColorUtils.setAlphaColor(Looks.Colors.palette.neutral0, 0.1)
   }
 }

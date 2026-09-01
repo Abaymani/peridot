@@ -8,7 +8,7 @@ import qs
 RowLayout {
   id: root
 
-  Text {
+  Looks.ClearText {
     text: " "
     color: Settings.textColorNotContainer
     font.family: Looks.Fonts.family

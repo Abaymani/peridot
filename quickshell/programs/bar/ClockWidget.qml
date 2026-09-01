@@ -21,7 +21,7 @@ Rectangle {
 		anchors.centerIn: parent
 		height: parent.height
 
-		Text {
+		Looks.ClearText {
 			id: dateText
 			font.family: Looks.Fonts.family
 			font.pixelSize: Looks.Fonts.size 
@@ -36,7 +36,7 @@ Rectangle {
 			color: Settings.textColorOnContainer
 		}
 
-		Text {
+		Looks.ClearText {
 			id: clockText
 			
 			font.family: Looks.Fonts.family

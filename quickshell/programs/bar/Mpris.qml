@@ -31,7 +31,7 @@ Rectangle {
       Layout.alignment: Qt.AlignVCenter
 
       // Previous Button
-      Text {
+      Looks.ClearText {
         text: "󰒮" // or "<<"
         font.pixelSize: Looks.Fonts.size * 1.2
         topPadding: 1
@@ -46,7 +46,7 @@ Rectangle {
       }
 
       // Play/Pause Button
-      Text {
+      Looks.ClearText {
         text: MprisService.isPlaying ? "󰏤" : "󰐊" // or "||" : ">"
         font.pixelSize: Looks.Fonts.size * 1.2
         topPadding: 1
@@ -60,7 +60,7 @@ Rectangle {
       }
 
       // Next Button
-      Text {
+      Looks.ClearText {
         text: "󰒭" // or ">>"
         font.pixelSize: Looks.Fonts.size * 1.2
         topPadding: 1
@@ -84,7 +84,7 @@ Rectangle {
 			height: parent.height
 			clip: true // Hide the text when it scrolls outside this box
 
-			Text {
+			Looks.ClearText {
 				id: trackText
 				text: (MprisService.activeTrack?.title ?? "Unknown") + 
         " - " + 
@@ -121,7 +121,7 @@ Rectangle {
 			}
 		}
 
-    Text {
+    Looks.ClearText {
       Layout.preferredWidth: 10
       Layout.alignment: Text.AlignVCenter
       horizontalAlignment: Text.AlignHCenter

@@ -20,7 +20,7 @@ Rectangle{
     anchors.centerIn: parent
     spacing: 5
 
-    Text {
+    Looks.ClearText {
       font.family: Looks.Fonts.family
       font.pixelSize: Looks.Fonts.size-1
       font.weight: Looks.Fonts.weight
@@ -30,7 +30,7 @@ Rectangle{
       color: Settings.textColorOnContainer
     }
 
-    Text {
+    Looks.ClearText {
       id: uptimeText
       font.family: Looks.Fonts.family
       font.pixelSize: Looks.Fonts.size 

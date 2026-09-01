@@ -23,13 +23,13 @@ Rectangle {
     height: parent.height
     spacing: 4
 
-    Text {
+    Looks.ClearText {
       font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size
       color: Settings.textColorOnContainer
       text: ""
     }
-    Text {
+    Looks.ClearText {
       id: memoryText
 
       font.family: Looks.Fonts.family 
@@ -50,14 +50,14 @@ Rectangle {
       color: Settings.textColorOnContainer
     }
 
-    Text {
+    Looks.ClearText {
       font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size
       color: Settings.textColorOnContainer
       text: ""
     }
 
-    Text {
+    Looks.ClearText {
       id: cpuText
 
       font.family: Looks.Fonts.family 

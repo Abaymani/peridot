@@ -25,7 +25,7 @@ Rectangle {
     spacing: 6
 
     // Icon Logic: Shows Ethernet icon if wired, otherwise WiFi icon
-    Text {
+    Looks.ClearText {
       font.family: Looks.Fonts.family
       font.pixelSize: Looks.Fonts.size
       color: Settings.textColorOnContainer
@@ -33,7 +33,7 @@ Rectangle {
     }
 
     //Shows "Wired" or the SSID of the WiFi
-    Text {
+    Looks.ClearText {
       font.family: Looks.Fonts.family
       font.pixelSize: Looks.Fonts.size - 2
       color: Settings.textColorOnContainer
@@ -50,7 +50,7 @@ Rectangle {
     }
 
     // Download speed
-    Text {
+    Looks.ClearText {
       font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size -2
       color: Settings.textColorOnContainer
@@ -64,7 +64,7 @@ Rectangle {
     }
 
     // Upload speed
-    Text {
+    Looks.ClearText {
       font.family: Looks.Fonts.family 
       font.pixelSize: Looks.Fonts.size -2
       color: Settings.textColorOnContainer

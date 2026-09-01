@@ -34,7 +34,7 @@ Rectangle {
     }
   }
 
-  Text {
+  Looks.ClearText {
     id: btnText
     anchors.centerIn: parent
     anchors.horizontalCenterOffset: h_centerOffset

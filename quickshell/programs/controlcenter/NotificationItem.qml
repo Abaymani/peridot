@@ -94,7 +94,7 @@ Rectangle {
       RowLayout {
       Layout.fillWidth: true
 
-        Text {
+        Looks.ClearText {
           Layout.fillWidth: true
           Layout.minimumWidth: 0
           text: modelData.summary
@@ -105,7 +105,7 @@ Rectangle {
           elide: Text.ElideRight
         }
 
-        Text {
+        Looks.ClearText {
           visible: !isPopup
           text: TimeUtils.formatRelativeTime(new Date(timeReceived), Time.time)
           font.family: Looks.Fonts.family
@@ -116,7 +116,7 @@ Rectangle {
         }
       }
 
-      Text {
+      Looks.ClearText {
         Layout.fillWidth: true
         text: modelData.body
         font.family: Looks.Fonts.family

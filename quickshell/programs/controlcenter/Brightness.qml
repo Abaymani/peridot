@@ -4,15 +4,15 @@ import Quickshell
 import Quickshell.Io
 import qs
 import qs.widgets
-import qs.common.looks
+import qs.common.looks as Looks
 
 Rectangle {
     id: root
-    height: Decorations.decor.elementHeight
-    radius: Decorations.decor.radius
-    color: Colors.md3.secondary_container
+    height: Looks.Decorations.decor.elementHeight
+    radius: Looks.Decorations.decor.radius
+    color: Looks.Colors.md3.secondary_container
     gradient: Settings.gradientBgEnabled 
-        ? Gradients.library[Settings.activeGradient].createObject()
+        ? Looks.Gradients.library[Settings.activeGradient].createObject()
         : null
 
     anchors.left: parent.left
@@ -66,12 +66,12 @@ Rectangle {
                 }
             }
 
-            Text {
+            Looks.ClearText {
                 text: root.hovering ? (Math.round(brightnessSlider.value *100) + "%").padStart(4, ' ') : "󰃟"
                 leftPadding: root.hovering ? 0 : 3
                 rightPadding: root.hovering ? 0 : 3
                 font.family: Fonts.family
-                font.pixelSize: root.hovering ? Fonts.size-2 :  Fonts.size + 5
+                font.pixelSize: root.hovering ? Looks.Fonts.size-2 :  Looks.Fonts.size + 5
                 font.weight: Fonts.weight
                 color: Settings.textColorOnContainer
             }

@@ -44,7 +44,7 @@ RowLayout {
 				? Looks.Gradients.library[Settings.activeGradient].createObject()
 				: null
 
-			Text {
+			Looks.ClearText {
 				id: wsText
 				anchors.centerIn: parent
 				anchors.horizontalCenterOffset: -1

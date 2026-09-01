@@ -21,7 +21,7 @@ Rectangle {
 		anchors.centerIn: parent
 		height: parent.height
 
-        Text {
+        Looks.ClearText {
 			id: batteryPercentage
 			font.family: Looks.Fonts.family
 			font.pixelSize: Looks.Fonts.size -2 
@@ -36,7 +36,7 @@ Rectangle {
 			color: Settings.textColorOnContainer
 		}
 
-        Text {
+        Looks.ClearText {
 			id: batteryIcon
 			font.family: Looks.Fonts.family
 			font.pixelSize: Looks.Fonts.size +4

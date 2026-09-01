@@ -4,9 +4,9 @@ import qs.common.functions
 
 Gradient {
   orientation: Gradient.Vertical
-  property color startColor: ColorUtils.setAlphaColor(Colors.md3.primary, 0.5)
+  property color startColor: ColorUtils.setAlphaColor(Colors.md3.primary, 0.7)
   property color midColor: '#34ffffff'
-  property color endColor: ColorUtils.setAlphaColor(Colors.md3.secondary, 0.5)
+  property color endColor: ColorUtils.setAlphaColor(Colors.md3.secondary, 0.7)
 
   GradientStop { position: -0.2; color: startColor}
   GradientStop { position: 0.2; color: midColor}

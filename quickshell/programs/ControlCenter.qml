@@ -27,7 +27,7 @@ Scope {
 		}
 
 		//TODO: move to settings
-		implicitHeight: 800
+		implicitHeight: contentColumn.implicitHeight + 8
 		implicitWidth: Looks.Decorations.decor.controlCenterWidth
 
 		margins{
@@ -48,6 +48,7 @@ Scope {
 			
 			ColumnLayout {
 				anchors.fill: parent
+				id: contentColumn
 				spacing: 12 // Space between rows
 				anchors.margins: 8
 
@@ -124,7 +125,8 @@ Scope {
 					Layout.fillWidth: true
 					
 					Rectangle { 
-						height: 400; Layout.fillWidth: true; 
+						height: 400;
+						Layout.fillWidth: true; 
 						color: Looks.Colors.md3.surface_container
 						gradient: Settings.gradientBgEnabled 
     					? Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 

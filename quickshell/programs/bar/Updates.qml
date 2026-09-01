@@ -28,7 +28,7 @@ Rectangle {
 		anchors.centerIn: parent
 
 		// --- Status Icon ---
-		Text {
+		Looks.ClearText {
 			id: iconText
 			text: "󰣇" // Nerd Font: nf-md-update
 			font.family: Looks.Fonts.family
@@ -38,7 +38,7 @@ Rectangle {
 		}
 
 		// --- Update Count ---
-		Text {
+		Looks.ClearText {
 			text: Services.UpdateService.isChecking ? "..." : Services.UpdateService.count
 			font.family: Looks.Fonts.family
 			font.pixelSize: Looks.Fonts.size -1

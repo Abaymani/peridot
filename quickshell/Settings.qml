@@ -20,7 +20,7 @@ Singleton {
     readonly property string iconPath: StandardPaths.standardLocations(StandardPaths.HomeLocation) + "/.local/share/icons/YAMIS"
 
     //LOOKS
-    property bool gradientBgEnabled: false
+    property bool gradientBgEnabled: true
     property string activeGradient: "PrimaryH3C"
     property string activeSecondaryGradient: "PrimaryV2C"
     property string activebackgroundGradient: "WeakV2C"

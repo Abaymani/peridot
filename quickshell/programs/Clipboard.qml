@@ -63,7 +63,7 @@ Scope {
         spacing: 8
 
         RowLayout {
-          Text {
+          Looks.ClearText {
               text: "Clipboard"
               font.family: Looks.Fonts.family
               font.pixelSize: Looks.Fonts.size + 8
@@ -139,7 +139,7 @@ Scope {
                 anchors.fill: parent
                 anchors.margins: 8
 
-                Text {
+                Looks.ClearText {
                   id: delegateId
 
                   font.family: Looks.Fonts.family
@@ -154,7 +154,7 @@ Scope {
 
                 Looks.Seperator { verticalPadding: 1}
 
-                Text {
+                Looks.ClearText {
                   id: delegateText
                   Layout.fillWidth: true
                   verticalAlignment: Text.AlignVCenter
