@@ -166,7 +166,6 @@ Rectangle {
             height: innerButton.height
             Button {
               id: innerButton
-              color: Looks.Colors.md3.surface_container
               fontSizeModifier: -1
               buttonText: parent.modelData.text 
               onClicked: parent.modelData.invoke()
@@ -175,7 +174,6 @@ Rectangle {
         }
 
         Button {
-          color: Looks.Colors.md3.surface_container
           buttonText: ""
           onClicked: Notifications.dismiss(notifId)
         }
@@ -184,7 +182,6 @@ Rectangle {
 
     Button {
       visible: isPopup
-      color: Looks.Colors.md3.surface_container
       Layout.rightMargin: 10
       buttonText: ""
       onClicked:Notifications.dismiss(notifId)

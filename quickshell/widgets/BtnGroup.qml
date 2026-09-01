@@ -8,9 +8,8 @@ Rectangle {
 
   // List of buttons to generate
   property var options: []
-  property int selectedIndex: 0
   property bool onPrimaryBg: false
-  signal selectionChanged(int index)
+  signal newClick(int index)
 
   implicitHeight: buttonRow.implicitHeight
   implicitWidth: buttonRow.width
@@ -36,16 +35,10 @@ Rectangle {
         bottomRightRadius: isLast ? Decorations.decor.radius : 0
 
         buttonText: modelData
-        toggleButton: true
-        checked: index === root.selectedIndex
         onPrimaryBg: root.onPrimaryBg
 
         onClicked: {
-          if (root.selectedIndex !== index) {
-            root.selectedIndex = index
-          }
-          
-          selectionChanged(root.selectedIndex)
+          newClick(this.index)
         }
       }
     }

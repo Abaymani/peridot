@@ -56,58 +56,20 @@ Scope {
 					id: quicktools
 					spacing: 2
 					
-
-					Uptime {}
+					Uptime { }
 					Item { Layout.fillWidth: true }
-					Button {
-						buttonText: "󰈊"
-						onClicked: Quickshell.execDetached(["sh", "-c", "hyprpicker -a"]);
-						gradient: Settings.gradientBgEnabled 
-							? Looks.Gradients.library["NoneGradient"].createObject()
-							: null
-						bottomRightRadius: 0
-						topRightRadius: 0
-					}
-					Button {
-						radius: 0
-						buttonText: ""
-						gradient: Settings.gradientBgEnabled 
-							? Looks.Gradients.library["NoneGradient"].createObject()
-							: null
-						onClicked: GlobalStates.isClipboardOpen = !GlobalStates.isClipboardOpen
-					}
-					Button {
-						radius: 0
-						buttonText: ""
-						gradient: Settings.gradientBgEnabled 
-							? Looks.Gradients.library["NoneGradient"].createObject()
-							: null
-						onClicked: Quickshell.execDetached(["sh", "-c", "~/peridot/peridot/scripts/screenshot.sh"]);
-					}
-					Button {
-						radius: 0
-						buttonText: "󰂯"
-						gradient: Settings.gradientBgEnabled 
-							? Looks.Gradients.library["NoneGradient"].createObject()
-							: null
-						onClicked: Hyprland.dispatch("hl.dsp.exec_cmd('blueman-manager')");
-					}
-					Button {
-						radius: 0
-						buttonText: "󱝊"
-						gradient: Settings.gradientBgEnabled 
-							? Looks.Gradients.library["NoneGradient"].createObject()
-							: null
-						onClicked: Settings.gradientBgEnabled = !Settings.gradientBgEnabled
-					}
-					Button {
-						buttonText: ""
-						onClicked: console.log("Settings app doesn't exist yet! :(")
-						gradient: Settings.gradientBgEnabled 
-							? Looks.Gradients.library["NoneGradient"].createObject()
-							: null
-						bottomLeftRadius: 0
-						topLeftRadius: 0
+					BtnGroup{
+						options: ["󰈊", "", "", "󰂯", "󱝊", ""]
+						onNewClick: (idx) => {
+							switch (idx) {
+								case 0: Quickshell.execDetached(["sh", "-c", "hyprpicker -a"]); break;
+								case 1: GlobalStates.isClipboardOpen = !GlobalStates.isClipboardOpen; break;
+								case 2: Quickshell.execDetached(["sh", "-c", "~/peridot/peridot/scripts/screenshot.sh"]); break;
+								case 3: Hyprland.dispatch("hl.dsp.exec_cmd('blueman-manager')"); break;
+								case 4: Settings.gradientBgEnabled = !Settings.gradientBgEnabled; break;
+								case 5: console.log("Settings app doesn't exist yet! :("); break;
+							}
+						}
 					}
 				}
 					
@@ -133,6 +95,7 @@ Scope {
 							color: "transparent"
 							options: ["󱤅", "", ""]
 							selectedIndex: 1
+							onPrimaryBg: true
 							
 							enabled: Settings.userOverridePowerProfile
 							opacity: Settings.userOverridePowerProfile ? 1.0 : 0.5
@@ -173,7 +136,7 @@ Scope {
 								spacing: 8
 								
 								Button{
-									color: Looks.Colors.md3.secondary_container
+									onPrimaryBg: true
 									widthPadding: GlobalStates.doNotDisturb? 38 : 40
 									fontSizeModifier: 5
 									buttonText: GlobalStates.doNotDisturb? "󰂛" : "󰂚"
@@ -191,7 +154,7 @@ Scope {
 								}
 
 								Button{
-									color: Looks.Colors.md3.secondary_container
+									onPrimaryBg: true
 									widthPadding: 40
 									fontSizeModifier: 5
 									h_centerOffset: 2

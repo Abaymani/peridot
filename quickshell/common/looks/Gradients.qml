@@ -9,8 +9,7 @@ Singleton {
         "PrimaryH3C": _ph3c,
         "PrimaryV2C": _pv2c,
         "PrimaryV3C": _pv3c,
-        "WeakV2C": _wv2c,
-        "NoneGradient": _ng
+        "WeakV2C": _wv2c
     }
 
     // Define the actual components here
@@ -18,6 +17,4 @@ Singleton {
     readonly property Component _pv2c: G.PrimaryV2C {}
     readonly property Component _pv3c: G.PrimaryV3C {}
     readonly property Component _wv2c: G.WeakV2C {}
-    readonly property Component _ng: G.NoneGradient {}
-
 }
