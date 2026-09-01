@@ -54,33 +54,60 @@ Scope {
 
 				RowLayout {
 					id: quicktools
-					spacing: 6
+					spacing: 2
+					
 
 					Uptime {}
 					Item { Layout.fillWidth: true }
 					Button {
 						buttonText: "󰈊"
 						onClicked: Quickshell.execDetached(["sh", "-c", "hyprpicker -a"]);
+						gradient: Settings.gradientBgEnabled 
+							? Looks.Gradients.library["NoneGradient"].createObject()
+							: null
+						bottomRightRadius: 0
+						topRightRadius: 0
 					}
 					Button {
+						radius: 0
 						buttonText: ""
+						gradient: Settings.gradientBgEnabled 
+							? Looks.Gradients.library["NoneGradient"].createObject()
+							: null
 						onClicked: GlobalStates.isClipboardOpen = !GlobalStates.isClipboardOpen
 					}
 					Button {
+						radius: 0
 						buttonText: ""
+						gradient: Settings.gradientBgEnabled 
+							? Looks.Gradients.library["NoneGradient"].createObject()
+							: null
 						onClicked: Quickshell.execDetached(["sh", "-c", "~/peridot/peridot/scripts/screenshot.sh"]);
 					}
 					Button {
+						radius: 0
 						buttonText: "󰂯"
+						gradient: Settings.gradientBgEnabled 
+							? Looks.Gradients.library["NoneGradient"].createObject()
+							: null
 						onClicked: Hyprland.dispatch("hl.dsp.exec_cmd('blueman-manager')");
 					}
 					Button {
+						radius: 0
 						buttonText: "󱝊"
+						gradient: Settings.gradientBgEnabled 
+							? Looks.Gradients.library["NoneGradient"].createObject()
+							: null
 						onClicked: Settings.gradientBgEnabled = !Settings.gradientBgEnabled
 					}
 					Button {
 						buttonText: ""
 						onClicked: console.log("Settings app doesn't exist yet! :(")
+						gradient: Settings.gradientBgEnabled 
+							? Looks.Gradients.library["NoneGradient"].createObject()
+							: null
+						bottomLeftRadius: 0
+						topLeftRadius: 0
 					}
 				}
 					
@@ -99,7 +126,7 @@ Scope {
 						anchors.fill: parent
 						anchors.margins: 8
 
-						Brightness {}
+						Brightness { Layout.fillWidth: true }
 							
 						RadioBtnGroup {
 							Layout.fillWidth: true 

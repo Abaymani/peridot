@@ -14,11 +14,6 @@ Rectangle {
     gradient: Settings.gradientBgEnabled 
         ? Looks.Gradients.library[Settings.activeGradient].createObject()
         : null
-
-    anchors.left: parent.left
-    anchors.right: parent.right
-    anchors.top: parent.top
-
     property bool hovering: false
 
     Process { 
@@ -70,9 +65,9 @@ Rectangle {
                 text: root.hovering ? (Math.round(brightnessSlider.value *100) + "%").padStart(4, ' ') : "󰃟"
                 leftPadding: root.hovering ? 0 : 3
                 rightPadding: root.hovering ? 0 : 3
-                font.family: Fonts.family
+                font.family: Looks.Fonts.family
                 font.pixelSize: root.hovering ? Looks.Fonts.size-2 :  Looks.Fonts.size + 5
-                font.weight: Fonts.weight
+                font.weight: Looks.Fonts.weight
                 color: Settings.textColorOnContainer
             }
         } 
