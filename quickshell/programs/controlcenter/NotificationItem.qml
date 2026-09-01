@@ -23,6 +23,11 @@ Rectangle {
     : null
   radius: Looks.Decorations.decor.radius
 
+  // Behavior instead of ListView.displaced: keeps retargeting while this item's own height is still animating (e.g. expanded + pushed down by a new notification).
+  Behavior on y {
+    NumberAnimation { duration: 300; easing.type: Easing.OutQuad }
+  }
+
   HoverHandler {
     id: cardHover
   }

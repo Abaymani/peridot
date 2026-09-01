@@ -193,14 +193,6 @@ Scope {
 											duration: 300 
 										}
 									}
-
-									displaced: Transition {
-										NumberAnimation { 
-											properties: "y" 
-											duration: 300 
-											easing.type: Easing.OutQuad 
-										}
-									}
 								}
 							}
 						}
