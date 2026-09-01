@@ -75,6 +75,10 @@ Scope {
 						onClicked: Hyprland.dispatch("hl.dsp.exec_cmd('blueman-manager')");
 					}
 					Button {
+						buttonText: "󱝊"
+						onClicked: Settings.gradientBgEnabled = !Settings.gradientBgEnabled
+					}
+					Button {
 						buttonText: ""
 						onClicked: console.log("Settings app doesn't exist yet! :(")
 					}
