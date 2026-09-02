@@ -29,13 +29,13 @@ echo "/home/$USER/.config/peridot/peridot.jpg" > ~/.config/peridot/settings/curr
 **Misc.**
 - [ ] [Workspace overview / alt-tab](https://www.windowslatest.com/wp-content/uploads/2020/07/Alt-Tab-with-browser-tabs.jpg)
 - [ ] Launcher (Rofi/Wofi replacement)
-- [ ] Unified settings app
+- [x] Unified settings app
 - [ ] On-screen Keyboard
 - [ ] Emoji picker
 - [x] Clipboard history viewer
 
 **Control Center**
-- [ ] Power profile override
+- [x] Power profile override
 - [ ] Show user profile picture and name instead next to uptime.
 
 **Notifications**
