@@ -18,7 +18,10 @@ Scope {
         height: 600
         minimumWidth: 640
         minimumHeight: 420
-        title: "Settings"
+        maximumWidth: 1000
+        // title is matched by the "peridot-settings-rule" window rule in
+        // hypr/windowrules.lua (float + size) - keep the two in sync.
+        title: "Peridot Settings"
         color: "transparent"
 
         property var categories: [

@@ -89,6 +89,16 @@ hl.window_rule({
     match = { class = "nm-connection-editor" },
 })
 
+hl.window_rule({
+    name = "peridot-settings-rule",
+    size = { 880, 600 },
+    min_size = { 640, 420 },
+    max_size = { 1000, 1200 },
+    float = true,
+    center = true,
+    match = { title = "^Peridot Settings$" },
+})
+
 ---- LAYERRULES ----
 hl.layer_rule({
     blur = true,
