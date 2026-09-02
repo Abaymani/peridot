@@ -1,0 +1,12 @@
+{
+    "activeGradient": "PrimaryH3C",
+    "activeSecondaryGradient": "PrimaryV2C",
+    "activebackgroundGradient": "WeakH2C",
+    "audioIncrement": 2,
+    "gradientBgEnabled": true,
+    "isDarkMode": true,
+    "matugenSourceColorIndex": 0,
+    "onBatteryPowerProfile": "power-saver",
+    "onChargerPowerProfile": "performance",
+    "userOverridePowerProfile": true
+}

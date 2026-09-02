@@ -21,6 +21,8 @@ Singleton {
         onPressed: isClipboardOpen = !isClipboardOpen
     }
 
+    property bool isSettingsOpen: false
+
     property bool doNotDisturb: false
     property var toggleDND: GlobalShortcut {
         name: "toggleDND"

@@ -75,10 +75,10 @@ Singleton {
     onIsPluggedInChanged: {
         if(!root.available || Settings.userOverridePowerProfile) return;
         if (!root.isPluggedIn) {
-            updatePowerProfile("power-saver")
+            updatePowerProfile(Settings.onBatteryPowerProfile)
         }
         else {
-            updatePowerProfile("performance")
+            updatePowerProfile(Settings.onChargerPowerProfile)
         }
     }
 
