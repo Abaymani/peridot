@@ -1,22 +1,16 @@
 -----------------
 ----- INPUT -----
 -----------------
+-- kb_layout, follow_mouse, sensitivity and touchpad.natural_scroll are
+-- managed by the Peridot settings app - see hypr/generated/input.lua. Edit
+-- those via the settings app, not here.
 
 hl.config({
     input = {
-        kb_layout  = "se",
         kb_variant = "",
         kb_model   = "",
         kb_options = "",
         kb_rules   = "",
-
-        follow_mouse = 1,
-
-        sensitivity = -0.3, -- -1.0 - 1.0, 0 means no modification.
-
-        touchpad = {
-            natural_scroll = true,
-        },
     },
 })
 

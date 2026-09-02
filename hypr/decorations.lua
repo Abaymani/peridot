@@ -1,55 +1,35 @@
 -----------------------
 ----- DECORATIONS -----
 -----------------------
+-- gaps_in, gaps_out, border_size, resize_on_border, allow_tearing, layout,
+-- rounding, active_opacity, inactive_opacity, blur.enabled, shadow.enabled
+-- and animations.enabled are managed by the Peridot settings app - see
+-- hypr/generated/decorations.lua. Edit those via the settings app, not here.
 
 local colors = require("colors")
 
 hl.config({
     general = {
-        gaps_in  = 2,
-        gaps_out = 6, 10, 10, 10,
-
-        border_size = 1,
-
         col = {
             active_border   = { colors = {colors.primary, colors.primary, "rgba(00000000)"}, angle = 90 },
             inactive_border = "rgba(00000000)",
         },
-
-        -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
-        resize_on_border = true,
-
-        -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
-        allow_tearing = false,
-
-        layout = "dwindle",
     },
 
     decoration = {
-        rounding       = 12,
         rounding_power = 3,
 
-        -- Change transparency of focused and unfocused windows
-        active_opacity   = 1.0,
-        inactive_opacity = 0.92,
-
         shadow = {
-            enabled      = true,
             range        = 4,
             render_power = 3,
             color        = 0x00000030,
         },
 
         blur = {
-            enabled   = true,
             size      = 2,
             passes    = 3,
             vibrancy  = 0.1696,
         },
-    },
-
-    animations = {
-        enabled = true,
     },
 })
 

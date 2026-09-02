@@ -1,0 +1,14 @@
+{
+    "activeOpacity": 1,
+    "allowTearing": false,
+    "animationsEnabled": true,
+    "blurEnabled": true,
+    "borderSize": 1,
+    "gapsIn": 2,
+    "gapsOut": 6,
+    "inactiveOpacity": 0.92,
+    "layout": "dwindle",
+    "resizeOnBorder": true,
+    "rounding": 12,
+    "shadowEnabled": true
+}

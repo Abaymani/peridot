@@ -6,6 +6,7 @@ import Quickshell
 import qs
 import qs.common.looks as Looks
 import qs.widgets
+import qs.services as Services
 import qs.programs.preferences
 
 Scope {
@@ -27,12 +28,16 @@ Scope {
         property var categories: [
             {name: "Appearance", icon: "󱝊", page: appearancePageComponent},
             {name: "Power", icon: "󱤅", page: powerPageComponent},
-            {name: "Audio", icon: "󰕾", page: audioPageComponent}
+            {name: "Audio", icon: "󰕾", page: audioPageComponent},
+            {name: "Hyprland Decorations", icon: "", page: hyprlandDecorationsPageComponent},
+            {name: "Hyprland Input", icon: "", page: hyprlandInputPageComponent}
         ]
         property int selectedIndex: 0
 
         Component { id: appearancePageComponent; AppearancePage {} }
         Component { id: powerPageComponent; PowerPage {} }
+        Component { id: hyprlandDecorationsPageComponent; HyprlandDecorationsPage {} }
+        Component { id: hyprlandInputPageComponent; HyprlandInputPage {} }
         Component { id: audioPageComponent; AudioPage {} }
 
         // Forces the active page to be recreated from scratch, giving every
@@ -137,25 +142,34 @@ Scope {
                     Layout.fillHeight: true
                     spacing: 0
 
-                    ScrollView {
-                        id: scrollView
+                    RowLayout {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         Layout.margins: 20
-                        clip: true
+                        spacing: 8
 
-                        Loader {
-                            id: pageLoader
-                            width: scrollView.availableWidth
-                            sourceComponent: window.categories[window.selectedIndex].page
+                        Flickable {
+                            id: contentFlickable
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            clip: true
+                            contentWidth: pageLoader.width
+                            contentHeight: pageLoader.height
+
+                            Loader {
+                                id: pageLoader
+                                width: contentFlickable.width
+                                sourceComponent: window.categories[window.selectedIndex].page
+                            }
+
+                            ScrollBar.vertical: ScrollBar {
+                                parent: contentFlickable.parent
+                                Layout.fillHeight: true
+                                visible: size < 1.0
+                                policy: ScrollBar.AlwaysOn
+                                active: true
+                            }
                         }
-                    }
-
-                    Rectangle {
-                        Layout.fillWidth: true
-                        implicitHeight: 1
-                        color: Looks.Colors.palette.neutral100
-                        opacity: 0.35
                     }
 
                     RowLayout {
@@ -170,6 +184,8 @@ Scope {
                             fontSizeModifier: -1
                             onClicked: {
                                 Settings.revert();
+                                Services.HyprlandDecorations.revert();
+                                Services.HyprlandInput.revert();
                                 pageRefreshTimer.restart();
                             }
                         }
@@ -178,7 +194,11 @@ Scope {
                             buttonText: "Save"
                             fontSizeModifier: -1
                             onPrimaryBg: true
-                            onClicked: Settings.save()
+                            onClicked: {
+                                Settings.save();
+                                Services.HyprlandDecorations.save();
+                                Services.HyprlandInput.save();
+                            }
                         }
                     }
                 }
