@@ -17,7 +17,7 @@ Pill {
 
     Looks.ClearText {
       color: Settings.textColorOnContainer
-      text: ""
+      text: ""
     }
     Looks.ClearText {
       id: memoryText
@@ -40,7 +40,7 @@ Pill {
 
     Looks.ClearText {
       color: Settings.textColorOnContainer
-      text: ""
+      text: ""
     }
 
     Looks.ClearText {

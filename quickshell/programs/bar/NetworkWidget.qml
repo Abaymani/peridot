@@ -21,7 +21,7 @@ Pill {
     // Icon Logic: Shows Ethernet icon if wired, otherwise WiFi icon
     Looks.ClearText {
       color: Settings.textColorOnContainer
-      text: Services.Network.activeEthernet ? "󰈀" : ""
+      text: Services.Network.activeEthernet ? "󰈀" : "" 
     }
 
     //Shows "Wired" or the SSID of the WiFi
