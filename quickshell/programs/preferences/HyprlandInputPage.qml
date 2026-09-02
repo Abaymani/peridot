@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import qs.common.looks as Looks
+import qs.common.functions
 import qs.widgets
 import qs.services as Services
 import qs
@@ -32,7 +33,9 @@ ColumnLayout {
             verticalAlignment: Text.AlignVCenter
 
             background: Rectangle {
-                color: Looks.Colors.md3.surface_container
+                color: Settings.gradientBgEnabled
+                    ? ColorUtils.setAlphaColor(Looks.Colors.md3.secondary, 0.5)
+                    : Looks.Colors.md3.secondary_container
                 radius: Looks.Decorations.decor.radius
                 border.width: 1
                 border.color: parent.activeFocus ? Looks.Colors.md3.primary : "#00000000"
@@ -70,9 +73,8 @@ ColumnLayout {
     SettingsRow {
         label: "Mouse sensitivity: " + Services.HyprlandInput.sensitivity.toFixed(2)
 
-        Slider {
-            Layout.preferredWidth: 200
-            from: -1; to: 1; stepSize: 0.05
+        NumberField {
+            from: -1; to: 1; stepSize: 0.05; decimals: 2
             value: Services.HyprlandInput.sensitivity
             onMoved: Services.HyprlandInput.sensitivity = value
         }

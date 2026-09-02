@@ -25,14 +25,24 @@ Scope {
         title: "Peridot Settings"
         color: "transparent"
 
-        property var categories: [
-            {name: "Appearance", icon: "󱝊", page: appearancePageComponent},
-            {name: "Power", icon: "󱤅", page: powerPageComponent},
-            {name: "Audio", icon: "󰕾", page: audioPageComponent},
-            {name: "Hyprland Decorations", icon: "", page: hyprlandDecorationsPageComponent},
-            {name: "Hyprland Input", icon: "", page: hyprlandInputPageComponent}
+        property var sections: [
+            {
+                name: "Shell",
+                items: [
+                    {name: "Appearance", icon: "\u{f174a}", page: appearancePageComponent},
+                    {name: "Power", icon: "\u{f1905}", page: powerPageComponent},
+                    {name: "Audio", icon: "\u{f057e}", page: audioPageComponent}
+                ]
+            },
+            {
+                name: "Hyprland",
+                items: [
+                    {name: "Decorations", icon: "", page: hyprlandDecorationsPageComponent},
+                    {name: "Input", icon: "", page: hyprlandInputPageComponent}
+                ]
+            }
         ]
-        property int selectedIndex: 0
+        property var selectedCategory: sections[0].items[0]
 
         Component { id: appearancePageComponent; AppearancePage {} }
         Component { id: powerPageComponent; PowerPage {} }
@@ -80,53 +90,73 @@ Scope {
                     }
 
                     Repeater {
-                        model: window.categories
+                        model: window.sections
 
-                        delegate: Rectangle {
-                            id: categoryDelegate
+                        delegate: ColumnLayout {
+                            id: sectionDelegate
                             required property var modelData
-                            required property int index
-                            readonly property bool isSelected: window.selectedIndex === index
 
                             Layout.fillWidth: true
-                            implicitHeight: Looks.Decorations.decor.elementHeight + 10
-                            radius: Looks.Decorations.decor.radius
-                            color: isSelected ? Looks.Colors.md3.secondary_container : "transparent"
-                            gradient: (isSelected && Settings.gradientBgEnabled)
-                                ? Looks.Gradients.library[Settings.activeGradient].createObject()
-                                : null
+                            spacing: 4
 
-                            Item {
-                                anchors.fill: parent
-                                anchors.leftMargin: 10
-                                anchors.rightMargin: 10
-
-                                // Icon gets a hard, fixed-size box (not a Layout
-                                // preference, which different glyphs' own implicit
-                                // widths can override) so the label below always
-                                // starts at the same x regardless of glyph width.
-                                Looks.ClearText {
-                                    id: iconText
-                                    anchors.left: parent.left
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    width: 24
-                                    horizontalAlignment: Text.AlignHCenter
-                                    text: categoryDelegate.modelData.icon
-                                    color: Settings.textColorOnContainer
-                                }
-                                Looks.ClearText {
-                                    anchors.left: parent.left
-                                    anchors.leftMargin: 34
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    text: categoryDelegate.modelData.name
-                                    color: Settings.textColorOnContainer
-                                }
+                            Looks.ClearText {
+                                Layout.topMargin: 8
+                                Layout.leftMargin: 8
+                                text: sectionDelegate.modelData.name.toUpperCase()
+                                font.pixelSize: Looks.Fonts.size - 1
+                                opacity: 0.5
+                                color: Settings.textColorOnContainer
                             }
 
-                            MouseArea {
-                                anchors.fill: parent
-                                cursorShape: Qt.PointingHandCursor
-                                onClicked: window.selectedIndex = categoryDelegate.index
+                            Repeater {
+                                model: sectionDelegate.modelData.items
+
+                                delegate: Rectangle {
+                                    id: categoryDelegate
+                                    required property var modelData
+                                    readonly property bool isSelected: window.selectedCategory === categoryDelegate.modelData
+
+                                    Layout.fillWidth: true
+                                    implicitHeight: Looks.Decorations.decor.elementHeight + 10
+                                    radius: Looks.Decorations.decor.radius
+                                    color: isSelected ? Looks.Colors.md3.secondary_container : "transparent"
+                                    gradient: (isSelected && Settings.gradientBgEnabled)
+                                        ? Looks.Gradients.library[Settings.activeGradient].createObject()
+                                        : null
+
+                                    Item {
+                                        anchors.fill: parent
+                                        anchors.leftMargin: 10
+                                        anchors.rightMargin: 10
+
+                                        // Icon gets a hard, fixed-size box (not a Layout
+                                        // preference, which different glyphs' own implicit
+                                        // widths can override) so the label below always
+                                        // starts at the same x regardless of glyph width.
+                                        Looks.ClearText {
+                                            id: iconText
+                                            anchors.left: parent.left
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            width: 24
+                                            horizontalAlignment: Text.AlignHCenter
+                                            text: categoryDelegate.modelData.icon
+                                            color: Settings.textColorOnContainer
+                                        }
+                                        Looks.ClearText {
+                                            anchors.left: parent.left
+                                            anchors.leftMargin: 34
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            text: categoryDelegate.modelData.name
+                                            color: Settings.textColorOnContainer
+                                        }
+                                    }
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        cursorShape: Qt.PointingHandCursor
+                                        onClicked: window.selectedCategory = categoryDelegate.modelData
+                                    }
+                                }
                             }
                         }
                     }
@@ -159,7 +189,7 @@ Scope {
                             Loader {
                                 id: pageLoader
                                 width: contentFlickable.width
-                                sourceComponent: window.categories[window.selectedIndex].page
+                                sourceComponent: window.selectedCategory.page
                             }
 
                             ScrollBar.vertical: ScrollBar {

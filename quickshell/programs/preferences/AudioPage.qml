@@ -32,8 +32,7 @@ ColumnLayout {
             wrapMode: Text.WordWrap
         }
 
-        Slider {
-            Layout.preferredWidth: 260
+        NumberField {
             from: 1
             to: 20
             stepSize: 1

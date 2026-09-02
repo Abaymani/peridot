@@ -10,7 +10,7 @@ ColumnLayout {
     spacing: 24
 
     readonly property var profiles: ["power-saver", "balanced", "performance"]
-    readonly property var profileIcons: ["󱤅", "", ""]
+    readonly property var profileIcons: ["󱤅", "", ""]
 
     Looks.ClearText {
         text: "Power"

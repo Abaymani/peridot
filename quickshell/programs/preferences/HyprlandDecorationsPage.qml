@@ -28,9 +28,8 @@ ColumnLayout {
     SettingsRow {
         label: "Inner gap: " + Services.HyprlandDecorations.gapsIn + "px"
 
-        Slider {
-            Layout.preferredWidth: 200
-            from: 0; to: 20; stepSize: 1
+        NumberField {
+            from: 0; to: 100; stepSize: 1
             value: Services.HyprlandDecorations.gapsIn
             onMoved: Services.HyprlandDecorations.gapsIn = value
         }
@@ -39,9 +38,8 @@ ColumnLayout {
     SettingsRow {
         label: "Outer gap: " + Services.HyprlandDecorations.gapsOut + "px"
 
-        Slider {
-            Layout.preferredWidth: 200
-            from: 0; to: 30; stepSize: 1
+        NumberField {
+            from: 0; to: 100; stepSize: 1
             value: Services.HyprlandDecorations.gapsOut
             onMoved: Services.HyprlandDecorations.gapsOut = value
         }
@@ -50,9 +48,8 @@ ColumnLayout {
     SettingsRow {
         label: "Border size: " + Services.HyprlandDecorations.borderSize + "px"
 
-        Slider {
-            Layout.preferredWidth: 200
-            from: 0; to: 10; stepSize: 1
+        NumberField {
+            from: 0; to: 100; stepSize: 1
             value: Services.HyprlandDecorations.borderSize
             onMoved: Services.HyprlandDecorations.borderSize = value
         }
@@ -103,9 +100,8 @@ ColumnLayout {
     SettingsRow {
         label: "Rounding: " + Services.HyprlandDecorations.rounding + "px"
 
-        Slider {
-            Layout.preferredWidth: 200
-            from: 0; to: 30; stepSize: 1
+        NumberField {
+            from: 0; to: 100; stepSize: 1
             value: Services.HyprlandDecorations.rounding
             onMoved: Services.HyprlandDecorations.rounding = value
         }
@@ -114,9 +110,8 @@ ColumnLayout {
     SettingsRow {
         label: "Active window opacity: " + Services.HyprlandDecorations.activeOpacity.toFixed(2)
 
-        Slider {
-            Layout.preferredWidth: 200
-            from: 0; to: 1; stepSize: 0.01
+        NumberField {
+            from: 0; to: 1; stepSize: 0.01; decimals: 2
             value: Services.HyprlandDecorations.activeOpacity
             onMoved: Services.HyprlandDecorations.activeOpacity = value
         }
@@ -125,9 +120,8 @@ ColumnLayout {
     SettingsRow {
         label: "Inactive window opacity: " + Services.HyprlandDecorations.inactiveOpacity.toFixed(2)
 
-        Slider {
-            Layout.preferredWidth: 200
-            from: 0; to: 1; stepSize: 0.01
+        NumberField {
+            from: 0; to: 1; stepSize: 0.01; decimals: 2
             value: Services.HyprlandDecorations.inactiveOpacity
             onMoved: Services.HyprlandDecorations.inactiveOpacity = value
         }

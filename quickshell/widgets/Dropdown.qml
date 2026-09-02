@@ -37,6 +37,7 @@ ComboBox {
         y: root.topPadding + (root.availableHeight - height) / 2
         text: "▾"
         color: Settings.textColorOnContainer
+        font.pixelSize: Looks.Fonts.size +4
     }
 
     popup: Popup {
@@ -64,7 +65,7 @@ ComboBox {
         id: delegateItem
         required property var modelData
         required property int index
-        width: root.width
+        width: ListView.view.width
 
         highlighted: root.highlightedIndex === delegateItem.index
 
@@ -77,6 +78,7 @@ ComboBox {
 
         background: Rectangle {
             color: delegateItem.highlighted ? Looks.Colors.md3.secondary_container : "transparent"
+            radius: Looks.Decorations.decor.radius
         }
     }
 }
