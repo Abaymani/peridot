@@ -15,6 +15,11 @@ Scope {
     Window {
         id: window
         visible: GlobalStates.isSettingsOpen
+        // Closing the window through any means other than this binding (WM
+        // close, a keybind, etc.) writes `visible` directly, which severs
+        // the binding above - without this, isSettingsOpen would stay stuck
+        // on true and the next toggle press would silently do nothing.
+        onVisibleChanged: GlobalStates.isSettingsOpen = visible
         width: 880
         height: 600
         minimumWidth: 640

@@ -67,7 +67,7 @@ Scope {
 								case 2: Quickshell.execDetached(["sh", "-c", "~/peridot/peridot/scripts/screenshot.sh"]); break;
 								case 3: Hyprland.dispatch("hl.dsp.exec_cmd('blueman-manager')"); break;
 								case 4: Settings.gradientBgEnabled = !Settings.gradientBgEnabled; break;
-								case 5: GlobalStates.isSettingsOpen = !GlobalStates.isSettingsOpen; break;
+								case 5: GlobalStates.toggleSettings(); break;
 							}
 						}
 					}

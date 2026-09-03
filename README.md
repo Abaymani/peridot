@@ -1,6 +1,6 @@
 # PERIDOT(-files)
 
-Personal 'WIP' dotfiles for Arch/Hyprland using Quickshell. With bits and pieces taken/inspired from [end4-dots](https://github.com/end-4/dots-hyprland), [ML4W](https://github.com/mylinuxforwork/dotfiles) and [Caelestia](https://github.com/caelestia-dots/shell). Project aim is just to learn quickshell and make something useable for myself by the end.
+Personal dotfiles for Arch/Hyprland using Quickshell. With bits and pieces taken/inspired from [end4-dots](https://github.com/end-4/dots-hyprland), [ML4W](https://github.com/mylinuxforwork/dotfiles) and [Caelestia](https://github.com/caelestia-dots/shell). Project aim is just to learn quickshell and make something useable for myself by the end.
 
 ![Peridot](peridot/peridot.jpg "Peridot topbar and control center")
 
@@ -43,7 +43,8 @@ echo "/home/$USER/.config/peridot/peridot.jpg" > ~/.config/peridot/settings/curr
 - [x] Popup notifications
 - [x] images, icons and all other information is shown
 - [x] Do-not-disturb toggle
-- [ ] Notifications save to and are loaded from file
+- [x] Notifications save to and are loaded from file
+- [ ] Notification grouping
 
 **Scripts & Utils**
 - [x] Screenshot utility
