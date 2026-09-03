@@ -13,3 +13,4 @@ quickshell/common/looks/colors.json
 /quickshell/.qmlls.ini
 hypr/colors.lua
 .luarc.json
+peridot/.cache/
