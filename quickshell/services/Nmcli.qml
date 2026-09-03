@@ -31,6 +31,8 @@ Singleton {
   property list<var> ethernetDevices: []
   readonly property var activeEthernet: ethernetDevices.find(d => d.connected) ?? null
   property list<var> activeProcesses: []
+  property list<var> activeVpnConnections: []
+  readonly property bool vpnActive: activeVpnConnections.length > 0
 
   readonly property alias connectionCheckTimer: connectionCheckTimer
   readonly property alias immediateCheckTimer: immediateCheckTimer
@@ -39,6 +41,8 @@ Singleton {
   readonly property string deviceTypeWifi: "wifi"
   readonly property string deviceTypeEthernet: "ethernet"
   readonly property string connectionTypeWireless: "802-11-wireless"
+  readonly property string connectionTypeVpn: "vpn"
+  readonly property string connectionTypeWireguard: "wireguard"
   readonly property string nmcliCommandDevice: "device"
   readonly property string nmcliCommandConnection: "connection"
   readonly property string nmcliCommandWifi: "wifi"
@@ -298,6 +302,30 @@ Singleton {
       }
       if (callback)
         callback(result);
+    });
+  }
+
+  function getActiveVpn(callback: var): void {
+    executeCommand(["-t", "-f", "NAME,TYPE,DEVICE", root.nmcliCommandConnection, "show", "--active"], result => {
+      if (!result.success) {
+        root.activeVpnConnections = [];
+        if (callback)
+          callback([]);
+        return;
+      }
+
+      const connections = result.output.trim().split("\n").filter(line => line.length > 0).map(line => {
+        const parts = line.split(":");
+        return {
+          name: parts[0] || "",
+          type: parts[1] || "",
+          device: parts[2] || ""
+        };
+      }).filter(c => c.type === root.connectionTypeVpn || c.type === root.connectionTypeWireguard);
+
+      root.activeVpnConnections = connections;
+      if (callback)
+        callback(connections);
     });
   }
 
@@ -1030,6 +1058,7 @@ Singleton {
   }
 
   function refreshOnConnectionChange(): void {
+    getActiveVpn(() => {});
     getNetworks(networks => {
       const newActive = root.active;
 
@@ -1074,6 +1103,7 @@ Singleton {
     getNetworks(() => {});
     loadSavedConnections(() => {});
     getEthernetInterfaces(() => {});
+    getActiveVpn(() => {});
 
     delay(() => {
       if (root.wirelessInterfaces.length > 0) {

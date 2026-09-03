@@ -4,3 +4,4 @@ if status is-interactive
 end
 fastfetch
 starship init fish | source
+alias ws windscribe-cli

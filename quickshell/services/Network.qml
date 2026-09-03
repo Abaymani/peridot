@@ -20,6 +20,10 @@ Singleton {
   readonly property var pendingConnection: Nmcli.pendingConnection
   readonly property var wirelessDeviceDetails: Nmcli.wirelessDeviceDetails
 
+  // --- VPN state ---
+  readonly property bool vpnActive: Nmcli.vpnActive
+  readonly property var activeVpnConnections: Nmcli.activeVpnConnections
+
   // --- Saved connections ---
   readonly property var savedConnections: Nmcli.savedConnections
   readonly property var savedConnectionSsids: Nmcli.savedConnectionSsids

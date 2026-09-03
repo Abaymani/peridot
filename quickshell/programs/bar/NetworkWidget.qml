@@ -24,6 +24,13 @@ Pill {
       text: Services.Network.activeEthernet ? "󰈀" : "" 
     }
 
+        // Shows a VPN icon when a VPN (or WireGuard) connection is active
+    Looks.ClearText {
+      visible: Services.Network.vpnActive
+      color: Settings.textColorOnContainer
+      text: ""
+    }
+    
     //Shows "Wired" or the SSID of the WiFi
     Looks.ClearText {
       font.pixelSize: Looks.Fonts.size - 2

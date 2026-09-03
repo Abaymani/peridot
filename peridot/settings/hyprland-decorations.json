@@ -3,7 +3,7 @@
     "allowTearing": false,
     "animationsEnabled": true,
     "blurEnabled": true,
-    "borderSize": 1,
+    "borderSize": 2,
     "gapsIn": 2,
     "gapsOut": 6,
     "inactiveOpacity": 0.92,
