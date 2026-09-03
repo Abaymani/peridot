@@ -11,8 +11,9 @@ import qs
 Rectangle {
   required property string notifId
   property var notifObject: Notifications.getNotification(notifId)
-  property var modelData: notifObject.notif
+  property var modelData: notifObject.data
   property var timeReceived: notifObject.timeReceived
+  property bool isLive: notifObject.notif !== null
   property var isPopup: false
 
   width: ListView.view.width
@@ -161,18 +162,20 @@ Rectangle {
           
           orientation: ListView.Horizontal
           spacing: 8
-          
-          model: modelData.actions 
-          
-          delegate: Item { 
+
+          // Actions can only be invoked on the live DBus notification, which
+          // no longer exists for a notification restored from disk.
+          model: isLive ? modelData.actions : []
+
+          delegate: Item {
             required property var modelData
             width: innerButton.width
             height: innerButton.height
             Button {
               id: innerButton
               fontSizeModifier: -1
-              buttonText: parent.modelData.text 
-              onClicked: parent.modelData.invoke()
+              buttonText: parent.modelData.text
+              onClicked: Notifications.invokeAction(notifId, parent.modelData.identifier)
             }
           }
         }
