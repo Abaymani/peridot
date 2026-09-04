@@ -53,63 +53,79 @@ Scope {
 				anchors.margins: 8
 
 				RowLayout {
-					id: quicktools
-					spacing: 2
-					
-					Uptime { }
-					Item { Layout.fillWidth: true }
-					BtnGroup{
-						options: ["󰈊", "", "", "󰂯", "󱝊", ""]
-						onNewClick: (idx) => {
-							switch (idx) {
-								case 0: Quickshell.execDetached(["sh", "-c", "hyprpicker -a"]); break;
-								case 1: GlobalStates.isClipboardOpen = !GlobalStates.isClipboardOpen; break;
-								case 2: Quickshell.execDetached(["sh", "-c", "~/peridot/peridot/scripts/screenshot.sh"]); break;
-								case 3: Hyprland.dispatch("hl.dsp.exec_cmd('blueman-manager')"); break;
-								case 4: Settings.gradientBgEnabled = !Settings.gradientBgEnabled; break;
-								case 5: GlobalStates.toggleSettings(); break;
-							}
-						}
+					id: topSection
+					Layout.fillWidth: true
+					spacing: 8
+
+					UserProfile {
+						Layout.fillHeight: true
+						Layout.preferredWidth: 110
 					}
-				}
-					
-				Rectangle { 
-					Layout.fillWidth: true; 
-					
-					implicitHeight: dashboard.implicitHeight
-					color: Looks.Colors.md3.surface_container
-					gradient: Settings.gradientBgEnabled 
-						? Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
-						: null
-					radius: Looks.Decorations.decor.radius
 
 					ColumnLayout {
-						id: dashboard
-						anchors.fill: parent
-						anchors.margins: 8
+						Layout.fillWidth: true
+						spacing: 12
 
-						Brightness { Layout.fillWidth: true }
-							
-						RadioBtnGroup {
-							Layout.fillWidth: true 
-							color: "transparent"
-							options: ["󱤅", "", ""]
-							selectedIndex: 1
-							onPrimaryBg: true
-							
-							enabled: Settings.userOverridePowerProfile
-							opacity: Settings.userOverridePowerProfile ? 1.0 : 0.5
+						RowLayout {
+							id: quicktools
+							Layout.fillWidth: true
+							spacing: 2
 
-							onSelectionChanged: {
-								if (this.selectedIndex === 0) BatteryService.updatePowerProfile("power-saver")
-								else if (this.selectedIndex === 1) BatteryService.updatePowerProfile("balanced")
-								else if (this.selectedIndex === 2) BatteryService.updatePowerProfile("performance")
+							Item { Layout.fillWidth: true }
+							BtnGroup{
+								options: ["󰈊", "", "", "󰂯", "󱝊", ""]
+								onNewClick: (idx) => {
+									switch (idx) {
+										case 0: Quickshell.execDetached(["sh", "-c", "hyprpicker -a"]); break;
+										case 1: GlobalStates.isClipboardOpen = !GlobalStates.isClipboardOpen; break;
+										case 2: Quickshell.execDetached(["sh", "-c", "~/peridot/peridot/scripts/screenshot.sh"]); break;
+										case 3: Hyprland.dispatch("hl.dsp.exec_cmd('blueman-manager')"); break;
+										case 4: Settings.gradientBgEnabled = !Settings.gradientBgEnabled; break;
+										case 5: GlobalStates.toggleSettings(); break;
+									}
+								}
 							}
 						}
 
-						Item{
-							height: 10
-							Layout.fillHeight: true
+						Rectangle {
+							Layout.fillWidth: true
+							implicitHeight: dashboard.implicitHeight
+
+							color: Looks.Colors.md3.surface_container
+							gradient: Settings.gradientBgEnabled
+								? Looks.Gradients.library[Settings.activeSecondaryGradient].createObject()
+								: null
+							radius: Looks.Decorations.decor.radius
+
+							ColumnLayout {
+								id: dashboard
+								anchors.fill: parent
+								anchors.margins: 8
+
+								Brightness { Layout.fillWidth: true }
+
+								RadioBtnGroup {
+									Layout.fillWidth: true
+									color: "transparent"
+									options: ["󱤅", "", ""]
+									selectedIndex: 1
+									onPrimaryBg: true
+
+									enabled: Settings.userOverridePowerProfile
+									opacity: Settings.userOverridePowerProfile ? 1.0 : 0.5
+
+									onSelectionChanged: {
+										if (this.selectedIndex === 0) BatteryService.updatePowerProfile("power-saver")
+										else if (this.selectedIndex === 1) BatteryService.updatePowerProfile("balanced")
+										else if (this.selectedIndex === 2) BatteryService.updatePowerProfile("performance")
+									}
+								}
+
+								Item{
+									height: 10
+									Layout.fillHeight: true
+								}
+							}
 						}
 					}
 				}

@@ -34,6 +34,7 @@ Scope {
             {
                 name: "Shell",
                 items: [
+                    {name: "Profile", icon: "\u{f0004}", page: profilePageComponent},
                     {name: "Appearance", icon: "\u{f174a}", page: appearancePageComponent},
                     {name: "Power", icon: "\u{f1905}", page: powerPageComponent},
                     {name: "Audio", icon: "\u{f057e}", page: audioPageComponent}
@@ -49,6 +50,7 @@ Scope {
         ]
         property var selectedCategory: sections[0].items[0]
 
+        Component { id: profilePageComponent; ProfilePage {} }
         Component { id: appearancePageComponent; AppearancePage {} }
         Component { id: powerPageComponent; PowerPage {} }
         Component { id: hyprlandDecorationsPageComponent; HyprlandDecorationsPage {} }

@@ -47,6 +47,9 @@ Singleton {
     //AUDIO
     property alias audioIncrement: jsonAdapter.audioIncrement
 
+    //PROFILE
+    property alias profilePicture: jsonAdapter.profilePicture
+
     // --- Persistence ---
     // Properties above are the live/draft state - every change (e.g. from a
     // future settings UI) applies immediately, same as today. Nothing is
@@ -83,6 +86,8 @@ Singleton {
             property int matugenSourceColorIndex: 0
 
             property real audioIncrement: 5
+
+            property string profilePicture: ""
         }
     }
 }
