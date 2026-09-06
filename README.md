@@ -2,7 +2,8 @@
 
 Personal dotfiles for Arch/Hyprland using Quickshell. With bits and pieces taken/inspired from [end4-dots](https://github.com/end-4/dots-hyprland), [ML4W](https://github.com/mylinuxforwork/dotfiles) and [Caelestia](https://github.com/caelestia-dots/shell). Project aim is just to learn quickshell and make something useable for myself by the end.
 
-![Peridot](peridot/peridot.jpg "Peridot topbar and control center")
+![Peridot_clear](peridot/images/Showcase_gradient.jpg "Peridot topbar and control center")
+![Peridot_solid](peridot/images/Showcase_solid.jpg "Peridot topbar and control center")
 
 ## Setup
 To make git tracking easier, clone this repo to a folder separate from *~/.config* and create a symlink instead. This way, your git repo won't start tracking random app config folders.
@@ -36,7 +37,7 @@ echo "/home/$USER/.config/peridot/peridot.jpg" > ~/.config/peridot/settings/curr
 
 **Control Center**
 - [x] Power profile override
-- [ ] Show user profile picture and name instead next to uptime.
+- [x] Show user profile picture and name instead next to uptime.
 
 **Notifications**
 - [x] Rudimentary functionality (notifications visible in control center)
