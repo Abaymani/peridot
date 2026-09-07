@@ -189,9 +189,12 @@ Scope {
 									spacing: 6
 									clip: true
 
-									model: Notifications.model
-									
-									delegate: NotificationItem {}
+									model: Notifications.appNameList
+
+									delegate: NotificationGroup {
+										required property string modelData
+										appName: modelData
+									}
 
 									add: Transition {
 										NumberAnimation { 

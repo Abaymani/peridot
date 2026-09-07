@@ -15,19 +15,23 @@ Rectangle {
   property var timeReceived: notifObject.timeReceived
   property bool isLive: notifObject.notif !== null
   property var isPopup: false
+  // Actions are dropped when restored from disk, so hasActions only ever
+  // applies to live notifications.
+  readonly property bool hasActions: isLive && modelData.actions.length > 0
 
-  width: ListView.view.width
-  height: mainLayout.implicitHeight + 20
+  // Falls back to parent.width for grouped notifications (a Repeater child,
+  // not a ListView delegate).
+  width: ListView.view?.width ?? parent.width
+  Layout.fillWidth: true
+
+  // Layouts size non-fillHeight children from implicitHeight, while ListView
+  // reads height directly (which defaults to implicitHeight) - this satisfies both.
+  implicitHeight: mainLayout.implicitHeight + 20
   color: Looks.Colors.md3.secondary_container
   gradient: Settings.gradientBgEnabled 
     ? Looks.Gradients.library[Settings.activeGradient].createObject()
     : null
   radius: Looks.Decorations.decor.radius
-
-  // Behavior instead of ListView.displaced: keeps retargeting while this item's own height is still animating (e.g. expanded + pushed down by a new notification).
-  Behavior on y {
-    NumberAnimation { duration: 300; easing.type: Easing.OutQuad }
-  }
 
   HoverHandler {
     id: cardHover
@@ -48,25 +52,21 @@ Rectangle {
       Layout.preferredHeight: 36
       Layout.leftMargin: 10
       Layout.rightMargin: -10
-      // Hide the whole container in case no appropriate image exists
       visible: mainImage.source.toString() !== "" || badgeIcon.source.toString() !== ""
 
-      // Main Image
       Image {
         id: mainImage
         anchors.fill: parent
-        // Use the attached image first, fallback to the standard icon
         source: modelData.image || (modelData.appIcon ? Quickshell.iconPath(modelData.appIcon) : "")
         fillMode: Image.PreserveAspectFit
       }
 
-      // AppIcon
       Rectangle {
         id: badgeContainer
         anchors.top: parent.top
         anchors.left: parent.left
 
-        // slightly outside the main image
+        // negative margins sit it slightly outside the main image
         anchors.topMargin: -4
         anchors.leftMargin: -4
         
@@ -75,9 +75,8 @@ Rectangle {
         radius: 10
         color: "transparent"
         
-        // Only show badge if distinct app icon and has a main image.
-        // Hide the badge if they are the same.
-        visible: mainImage.source.toString() !== "" && 
+        // Hide the badge when it's the same icon as the main image
+        visible: mainImage.source.toString() !== "" &&
                  badgeIcon.source.toString() !== "" && 
                  mainImage.source.toString() !== badgeIcon.source.toString()
 
@@ -118,6 +117,34 @@ Rectangle {
           color: Settings.textColorOnContainer
           elide: Text.ElideRight
         }
+
+        // Inline dismiss for notifications with nothing to act on, in
+        // place of the actionRow reveal below.
+        Button {
+          buttonText: ""
+          widthPadding: 10
+          readonly property bool show: !isPopup && !hasActions && cardHover.hovered
+          fontSizeModifier: 4
+
+          opacity: show ? 1.0 : 0.0
+          visible: opacity > 0
+          clip: true
+
+          Layout.preferredWidth: show ? implicitWidth : 0
+          Layout.preferredHeight: show ? Looks.Decorations.decor.elementHeight -9 : 0
+
+          Behavior on opacity {
+            NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
+          }
+          Behavior on Layout.preferredWidth {
+            NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
+          }
+          Behavior on Layout.preferredHeight {
+            NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
+          }
+
+          onClicked: Notifications.dismiss(notifId)
+        }
       }
 
       Looks.ClearText {
@@ -133,7 +160,7 @@ Rectangle {
       
       RowLayout {
         id: actionRow
-        property bool showActions: !isPopup && cardHover.hovered
+        property bool showActions: !isPopup && hasActions && cardHover.hovered
 
         opacity: showActions ? 1.0 : 0.0
         visible: opacity > 0
@@ -163,8 +190,7 @@ Rectangle {
           orientation: ListView.Horizontal
           spacing: 8
 
-          // Actions can only be invoked on the live DBus notification, which
-          // no longer exists for a notification restored from disk.
+          // Actions only exist on the live DBus notification, not persisted ones.
           model: isLive ? modelData.actions : []
 
           delegate: Item {

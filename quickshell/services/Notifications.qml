@@ -10,11 +10,36 @@ Singleton {
   property alias model: notificationModel
   property alias popupModel: popupListModel
 
+  // Recomputed in persistNotifications() and once after the initial disk
+  // load. notifIds stays newest-first, matching notificationModel.
+  property var groupsByAppName: ({})
+  property var appNameList: []
+
+  function updateGroups() {
+    const groups = {}
+    for (let i = 0; i < notificationModel.count; i++) {
+      const notifId = notificationModel.get(i).notifId
+      const entry = root.objectMap[notifId]
+      if (!entry) continue
+
+      const appName = entry.data.appName || ""
+      if (!groups[appName]) {
+        groups[appName] = {
+          "appName": appName,
+          "appIcon": entry.data.appIcon,
+          "notifIds": [],
+          "latestTime": entry.timeReceived
+        }
+      }
+      groups[appName].notifIds.push(notifId)
+    }
+
+    root.groupsByAppName = groups
+    root.appNameList = Object.keys(groups).sort((a, b) => groups[b].latestTime - groups[a].latestTime)
+  }
+
   // objectMap[internalId] = { data: <plain serializable snapshot>, notif: <live Notification or null>, timeReceived }
-  // `data` is what the UI reads (works the same whether the notification just
-  // arrived this session or was restored from disk); `notif` is only present
-  // for notifications received this session and is what lets dismiss()/action
-  // invocation reach back into the real DBus notification.
+  // `notif` is null for notifications restored from disk - `data` is what the UI reads either way.
   property var objectMap: ({})
   property int _idCounter: 0
 
@@ -58,6 +83,24 @@ Singleton {
     onNotification: (notification) => {
       notification.tracked = true
 
+      // keepOnReload replays onNotification for still-open notifications
+      // after a hot-reload rebuilds the component tree - rebind the existing
+      // entry instead of inserting a duplicate.
+      const existingId = root.findExistingInternalId(notification)
+      if (existingId !== null) {
+        const entry = root.objectMap[existingId]
+        entry.notif = notification
+        entry.data = root.toRecord(notification, entry.timeReceived)
+
+        notification.closed.connect(() => {
+          root.removeFromModels(existingId)
+          delete root.objectMap[existingId]
+          root.persistNotifications()
+        })
+        root.persistNotifications()
+        return
+      }
+
       let internalId = (_idCounter++).toString()
       const timeReceived = Date.now()
       root.objectMap[internalId] = {
@@ -66,7 +109,6 @@ Singleton {
         "timeReceived": timeReceived
       }
 
-      // Insert to show newest notifications on top of others.
       notificationModel.insert(0, {"notifId": internalId})
       root.persistNotifications()
 
@@ -74,7 +116,6 @@ Singleton {
         popupListModel.insert(0, {"notifId": internalId})
         popupTimerComponent.createObject(root, {"targetId": internalId})
       }
-      // Also remove notifications in our reversed list.
       notification.closed.connect(() => {
         root.removeFromModels(internalId)
         delete root.objectMap[internalId]
@@ -83,12 +124,22 @@ Singleton {
     }
   }
 
-  // Snapshots every field Quickshell's Notification exposes into a plain,
-  // JSON-serializable object - this is what gets persisted to disk and what
-  // the UI reads from (see NotificationItem.qml), so restored notifications
-  // render identically to live ones. `tracked`/`lastGeneration` are DBus
-  // session bookkeeping rather than notification content, so they're not
-  // part of the snapshot.
+  // Ids are only unique per sending app's session, hence the appName check.
+  function findExistingInternalId(notification) {
+    const ids = Object.keys(root.objectMap)
+    for (let i = 0; i < ids.length; i++) {
+      const entry = root.objectMap[ids[i]]
+      if (entry.data.id === notification.id && entry.data.appName === notification.appName) {
+        return ids[i]
+      }
+    }
+    return null
+  }
+
+  // Snapshots into a plain, JSON-serializable object so restored
+  // notifications render identically to live ones. `tracked`/`lastGeneration`
+  // are DBus session bookkeeping, not notification content, so they're
+  // excluded.
   function toRecord(notification, timeReceived) {
     let safeHints = {}
     try {
@@ -144,12 +195,10 @@ Singleton {
     if (!entry) return
 
     if (entry.notif) {
-      // Triggers the real DBus dismissal; removal + persistence happens in
-      // the closed handler above once the server confirms it.
+      // Removal + persistence happens in the closed handler once confirmed.
       entry.notif.dismiss()
     } else {
-      // Restored notification - there's no live backing to dismiss, so just
-      // drop it here.
+      // Restored notification - no live backing to dismiss.
       root.removeFromModels(internalId)
       delete root.objectMap[internalId]
       root.persistNotifications()
@@ -176,12 +225,10 @@ Singleton {
   }
 
   // --- Persistence ---
-  // Notifications survive quickshell/computer restarts until dismissed. The
-  // JSON file is the single source of truth for restored notifications;
-  // notificationModel is rebuilt from it (newest first, matching how live
-  // notifications get inserted) on startup. If the file is missing/deleted,
-  // JsonAdapter just falls back to its declared default (an empty list).
+  // notificationModel is rebuilt from the JSON file on startup, newest first.
   function persistNotifications() {
+    root.updateGroups()
+
     const records = []
     for (let i = 0; i < notificationModel.count; i++) {
       const entry = root.objectMap[notificationModel.get(i).notifId]
@@ -203,17 +250,15 @@ Singleton {
       }
       notificationModel.append({"notifId": internalId})
     }
+    root.updateGroups()
   }
 
   FileView {
     id: notificationsFile
     path: Quickshell.env("HOME") + "/.config/peridot/.cache/notifications.json"
 
-    // FileView loads asynchronously - restoring on Component.onCompleted
-    // would race the read and always find the adapter still empty. onLoaded
-    // only fires once the file has actually been read (a missing file fires
-    // onLoadFailed instead, which needs no handling since the adapter's
-    // declared default - an empty list - already covers that case).
+    // FileView loads asynchronously - Component.onCompleted would race the
+    // read and always find the adapter still empty.
     onLoaded: root.loadPersistedNotifications()
 
     JsonAdapter {
@@ -223,3 +268,4 @@ Singleton {
     }
   }
 }
+
