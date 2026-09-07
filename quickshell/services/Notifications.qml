@@ -58,6 +58,29 @@ Singleton {
     onNotification: (notification) => {
       notification.tracked = true
 
+      // keepOnReload keeps a still-open notification alive on the DBus side
+      // across a quickshell hot-reload, but the component tree (and every
+      // Notification wrapper object) is destroyed and rebuilt, so the server
+      // re-fires onNotification for it on the new tree to hand back a live
+      // reference. That replay carries the same DBus id/appName as an entry
+      // we already recorded - rebind that entry instead of inserting a
+      // duplicate. Ids are only unique per sending app's session, hence the
+      // appName check.
+      const existingId = root.findExistingInternalId(notification)
+      if (existingId !== null) {
+        const entry = root.objectMap[existingId]
+        entry.notif = notification
+        entry.data = root.toRecord(notification, entry.timeReceived)
+
+        notification.closed.connect(() => {
+          root.removeFromModels(existingId)
+          delete root.objectMap[existingId]
+          root.persistNotifications()
+        })
+        root.persistNotifications()
+        return
+      }
+
       let internalId = (_idCounter++).toString()
       const timeReceived = Date.now()
       root.objectMap[internalId] = {
@@ -81,6 +104,20 @@ Singleton {
         root.persistNotifications()
       })
     }
+  }
+
+  // Finds an objectMap entry already tracking this DBus notification (same
+  // id + appName), used to fold a reload replay into the existing entry
+  // instead of creating a duplicate. Returns null if none is tracked.
+  function findExistingInternalId(notification) {
+    const ids = Object.keys(root.objectMap)
+    for (let i = 0; i < ids.length; i++) {
+      const entry = root.objectMap[ids[i]]
+      if (entry.data.id === notification.id && entry.data.appName === notification.appName) {
+        return ids[i]
+      }
+    }
+    return null
   }
 
   // Snapshots every field Quickshell's Notification exposes into a plain,
