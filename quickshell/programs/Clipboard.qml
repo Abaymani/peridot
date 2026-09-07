@@ -108,74 +108,84 @@ Scope {
           Layout.fillHeight: true
           spacing: 8
 
-          ListView {
+          Item {
+            id: listViewContainer
             Layout.fillWidth: true
             Layout.fillHeight: true
-            clip: true
-            id: listView
-            model: ClipboardService.model
-            spacing: 8
 
-            ScrollBar.vertical: ScrollBar { 
-              parent: listView.parent
-              Layout.fillHeight: true
-              visible: size < 1.0
-              policy: ScrollBar.AlwaysOn
-              active: true 
+            ListView {
+              anchors.fill: parent
+              clip: true
+              id: listView
+              model: ClipboardService.model
+              spacing: 8
+
+              ScrollBar.vertical: ScrollBar {
+                parent: listViewContainer.parent
+                Layout.fillHeight: true
+                visible: size < 1.0
+                policy: ScrollBar.AlwaysOn
+                active: true
+              }
+
+              delegate: Rectangle {
+                width: ListView.view.width
+                height: delegateText.implicitHeight + 20
+                color: Looks.Colors.md3.surface_container
+                gradient: Settings.gradientBgEnabled 
+                  ? Looks.Gradients.library[Settings.activeGradient].createObject()
+                  : null
+                radius: Looks.Decorations.decor.radius
+              
+                RowLayout{
+                  anchors.fill: parent
+                  anchors.margins: 8
+
+                  Looks.ClearText {
+                    id: delegateId
+
+                    text: clipId
+                    color: Settings.textColorOnContainer
+                    elide: Text.ElideRight
+                    maximumLineCount: 3
+                    wrapMode: Text.WordWrap
+                    verticalAlignment: Text.AlignVCenter
+                  }
+
+                  Looks.Separator { verticalPadding: 1}
+
+                  Looks.ClearText {
+                    id: delegateText
+                    Layout.fillWidth: true
+                    verticalAlignment: Text.AlignVCenter
+                    leftPadding: 10
+
+                    text: clipContent
+                    color: Settings.textColorOnContainer
+                    elide: Text.ElideRight
+                    maximumLineCount: 3
+                    wrapMode: Text.WordWrap
+                    textFormat: Text.PlainText
+                  
+                  }
+                
+                }
+                MouseArea {
+                  id: itemMouseArea
+                  anchors.fill: parent
+                  hoverEnabled: true
+                  cursorShape: Qt.PointingHandCursor
+                  onClicked: {
+                    ClipboardService.copyItem(clipId, clipContent)
+                    GlobalStates.isClipboardOpen = false // Hide the overlay after copying
+                  }
+                }
+              }
             }
 
-            delegate: Rectangle {
-              width: ListView.view.width
-              height: delegateText.implicitHeight + 20
-              color: Looks.Colors.md3.surface_container
-              gradient: Settings.gradientBgEnabled 
-                ? Looks.Gradients.library[Settings.activeGradient].createObject()
-                : null
-              radius: Looks.Decorations.decor.radius
-              
-              RowLayout{
-                anchors.fill: parent
-                anchors.margins: 8
-
-                Looks.ClearText {
-                  id: delegateId
-
-                  text: clipId
-                  color: Settings.textColorOnContainer
-                  elide: Text.ElideRight
-                  maximumLineCount: 3
-                  wrapMode: Text.WordWrap
-                  verticalAlignment: Text.AlignVCenter
-                }
-
-                Looks.Separator { verticalPadding: 1}
-
-                Looks.ClearText {
-                  id: delegateText
-                  Layout.fillWidth: true
-                  verticalAlignment: Text.AlignVCenter
-                  leftPadding: 10
-
-                  text: clipContent
-                  color: Settings.textColorOnContainer
-                  elide: Text.ElideRight
-                  maximumLineCount: 3
-                  wrapMode: Text.WordWrap
-                  textFormat: Text.PlainText
-                  
-                }
-                
-              }
-              MouseArea {
-                id: itemMouseArea
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                  ClipboardService.copyItem(clipId, clipContent)
-                  GlobalStates.isClipboardOpen = false // Hide the overlay after copying
-                }
-              }
+            FastScrollArea {
+              anchors.fill: parent
+              target: listView
             }
           }
         }

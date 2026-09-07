@@ -73,6 +73,20 @@ ColumnLayout {
         }
     }
 
+    SettingsRow {
+        label: "Shell scroll speed: " + Settings.scrollSpeedMultiplier
+        description: "How fast the mouse wheel scrolls through lists and settings pages."
+
+        Slider {
+            Layout.preferredWidth: 160
+            from: 1
+            to: 100
+            stepSize: 1
+            value: Settings.scrollSpeedMultiplier
+            onMoved: Settings.scrollSpeedMultiplier = value
+        }
+    }
+
     ColumnLayout {
         Layout.fillWidth: true
         spacing: 8

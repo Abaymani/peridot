@@ -33,10 +33,10 @@ Slider {
                 return;
             }
             if (event.angleDelta.y > 0) {
-                root.value = Math.min(root.value + root.stepSize*2, 1)
+                root.value = Math.min(root.value + root.stepSize*2, root.to)
                 root.moved()
             } else {
-                root.value = Math.max(root.value - root.stepSize*2, 0)
+                root.value = Math.max(root.value - root.stepSize*2, root.from)
                 root.moved()
             }
         }

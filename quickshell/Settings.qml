@@ -50,6 +50,9 @@ Singleton {
     //PROFILE
     property alias profilePicture: jsonAdapter.profilePicture
 
+    //SHELL BEHAVIOR
+    property alias scrollSpeedMultiplier: jsonAdapter.scrollSpeedMultiplier
+
     // --- Persistence ---
     // Properties above are the live/draft state - every change (e.g. from a
     // future settings UI) applies immediately, same as today. Nothing is
@@ -88,6 +91,8 @@ Singleton {
             property real audioIncrement: 5
 
             property string profilePicture: ""
+
+            property real scrollSpeedMultiplier: 30
         }
     }
 }

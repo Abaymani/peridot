@@ -185,26 +185,36 @@ Scope {
                         Layout.margins: 20
                         spacing: 8
 
-                        Flickable {
-                            id: contentFlickable
+                        Item {
+                            id: flickableContainer
                             Layout.fillWidth: true
                             Layout.fillHeight: true
-                            clip: true
-                            contentWidth: pageLoader.width
-                            contentHeight: pageLoader.height
 
-                            Loader {
-                                id: pageLoader
-                                width: contentFlickable.width
-                                sourceComponent: window.selectedCategory.page
+                            Flickable {
+                                id: contentFlickable
+                                anchors.fill: parent
+                                clip: true
+                                contentWidth: pageLoader.width
+                                contentHeight: pageLoader.height
+
+                                Loader {
+                                    id: pageLoader
+                                    width: contentFlickable.width
+                                    sourceComponent: window.selectedCategory.page
+                                }
+
+                                ScrollBar.vertical: ScrollBar {
+                                    parent: flickableContainer.parent
+                                    Layout.fillHeight: true
+                                    visible: size < 1.0
+                                    policy: ScrollBar.AlwaysOn
+                                    active: true
+                                }
                             }
 
-                            ScrollBar.vertical: ScrollBar {
-                                parent: contentFlickable.parent
-                                Layout.fillHeight: true
-                                visible: size < 1.0
-                                policy: ScrollBar.AlwaysOn
-                                active: true
+                            FastScrollArea {
+                                anchors.fill: parent
+                                target: contentFlickable
                             }
                         }
                     }

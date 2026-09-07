@@ -8,5 +8,7 @@
     "matugenSourceColorIndex": 0,
     "onBatteryPowerProfile": "power-saver",
     "onChargerPowerProfile": "performance",
+    "profilePicture": "",
+    "scrollSpeedMultiplier": 30,
     "userOverridePowerProfile": true
 }
