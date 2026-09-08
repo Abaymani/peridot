@@ -37,9 +37,13 @@ output_path = '~/.config/qt6ct/colors/matugen.conf'
 input_path = '~/.config/matugen/templates/quickshell.json'
 output_path = '~/.config/quickshell/common/looks/colors.json'
 
-# [templates.starship]
-# input_path = '~/.config/matugen/templates/starship-colors.toml'
-# output_path = '~/.config/starship.toml'
+[templates.starship]
+input_path = '~/.config/matugen/templates/starship-colors.toml'
+output_path = '~/.config/starship.toml'
+
+[templates.fish]
+input_path = '~/.config/matugen/templates/fish-colors.fish'
+output_path = '~/.config/fish/conf.d/matugen-colors.fish'
 
 [templates.yazi]
 input_path = '~/.config/matugen/templates/yazi-theme.toml'
