@@ -14,3 +14,4 @@ quickshell/common/looks/colors.json
 hypr/colors.lua
 .luarc.json
 peridot/.cache/
+sddm/peridot-sddm/colors.json

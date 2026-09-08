@@ -18,6 +18,8 @@ In order for most config files to work properly, matugen needs to run at least o
 echo "/home/$USER/.config/peridot/peridot.jpg" > ~/.config/peridot/settings/current_wallpaper.txt
 ```
 
+You also need to run the install script for the SDDM theme, found in /peridot/sddm/peridot-sddm/install.sh.
+
 
 ## TODO
 ### Quickshell Widgets & Applets
@@ -28,6 +30,7 @@ echo "/home/$USER/.config/peridot/peridot.jpg" > ~/.config/peridot/settings/curr
 - [ ] Google calendar / ical integration
 
 **Misc.**
+- [x] SDDM theme
 - [ ] [Workspace overview / alt-tab](https://www.windowslatest.com/wp-content/uploads/2020/07/Alt-Tab-with-browser-tabs.jpg)
 - [ ] Launcher (Rofi/Wofi replacement)
 - [x] Unified settings app
@@ -45,7 +48,7 @@ echo "/home/$USER/.config/peridot/peridot.jpg" > ~/.config/peridot/settings/curr
 - [x] images, icons and all other information is shown
 - [x] Do-not-disturb toggle
 - [x] Notifications save to and are loaded from file
-- [ ] Notification grouping
+- [x] Notification grouping
 
 **Scripts & Utils**
 - [x] Screenshot utility
