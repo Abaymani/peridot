@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 import qs.common.looks as Looks
+import qs.widgets
 
 RowLayout {
   id: trayRoot
@@ -19,6 +20,10 @@ RowLayout {
       color: "transparent"
       radius: 4
 
+      // Attached here, not on the popup: QsWindow resolves the window of the
+      // item it is attached to, and MenuPopup is itself a window.
+      readonly property var hostWindow: QsWindow.window
+
       IconImage {
         anchors.centerIn: parent
         width: parent.width 
@@ -27,11 +32,11 @@ RowLayout {
         source: modelData.icon
       }
 
-      QsMenuAnchor {
-        id: trayMenuAnchor
-        menu: modelData.menu 
-        
-        anchor.window: rootWindow
+      MenuPopup {
+        id: trayMenu
+        menuHandle: modelData.menu
+        anchorItem: itemRect
+        anchorWindow: itemRect.hostWindow
       }
 
       MouseArea {
@@ -49,16 +54,7 @@ RowLayout {
           }
           else if (mouse.button === Qt.RightButton) {
             if (modelData.hasMenu) {
-              var pos = trayRoot.mapToItem(rootWindow.contentItem, 0, 0);
-              
-              trayMenuAnchor.anchor.rect = Qt.rect(
-                pos.x, 
-                pos.y, 
-                trayRoot.width, 
-                trayRoot.height
-              );
-              
-              trayMenuAnchor.open();
+              trayMenu.visible = true;
             }
           }
         }
