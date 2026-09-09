@@ -12,7 +12,7 @@
 }
 {
     "label" : "logout",
-    "action" : "hyprctl dispatch exit",
+    "action" : "uwsm stop || hyprctl dispatch 'hl.dsp.exit()'",
     "text" : "Logout",
     "keybind" : "e"
 }
