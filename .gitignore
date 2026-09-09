@@ -14,7 +14,6 @@ quickshell/common/looks/colors.json
 hypr/colors.lua
 .luarc.json
 peridot/.cache/
-sddm/peridot-sddm/colors.json
 starship.toml
 fish/conf.d/matugen-colors.fish
 peridot/settings/current_wallpaper.txt
