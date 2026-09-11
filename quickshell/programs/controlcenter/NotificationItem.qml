@@ -15,6 +15,8 @@ Rectangle {
   property var timeReceived: notifObject.timeReceived
   property bool isLive: notifObject.notif !== null
   property var isPopup: false
+  // Lets a stacked group hide the text of the cards behind the top one.
+  property real contentOpacity: 1
   // Actions are dropped when restored from disk, so hasActions only ever
   // applies to live notifications.
   readonly property bool hasActions: isLive && modelData.actions.length > 0
@@ -42,6 +44,7 @@ Rectangle {
 
   RowLayout {
     id: mainLayout
+    opacity: contentOpacity
     anchors.top: parent.top
     anchors.left: parent.left
     anchors.right: parent.right

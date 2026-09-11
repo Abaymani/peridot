@@ -14,6 +14,9 @@ Singleton {
   // load. notifIds stays newest-first, matching notificationModel.
   property var groupsByAppName: ({})
   property var appNameList: []
+  // Groups pinned open in the control center. Kept here rather than on the
+  // group delegates, which the list rebuilds whenever the group order changes.
+  property var pinnedAppNames: []
 
   function updateGroups() {
     const groups = {}
@@ -35,7 +38,23 @@ Singleton {
     }
 
     root.groupsByAppName = groups
-    root.appNameList = Object.keys(groups).sort((a, b) => groups[b].latestTime - groups[a].latestTime)
+
+    // A new array resets the control center's list, rebuilding every group
+    // and collapsing a hovered stack - so only replace it when it changed.
+    const appNames = Object.keys(groups).sort((a, b) => groups[b].latestTime - groups[a].latestTime)
+    if (JSON.stringify(appNames) !== JSON.stringify(root.appNameList))
+      root.appNameList = appNames
+
+    // A pin goes with its group.
+    const pinned = root.pinnedAppNames.filter(appName => groups[appName])
+    if (pinned.length !== root.pinnedAppNames.length)
+      root.pinnedAppNames = pinned
+  }
+
+  function togglePinned(appName) {
+    root.pinnedAppNames = root.pinnedAppNames.includes(appName)
+      ? root.pinnedAppNames.filter(name => name !== appName)
+      : root.pinnedAppNames.concat([appName])
   }
 
   // objectMap[internalId] = { data: <plain serializable snapshot>, notif: <live Notification or null>, timeReceived }
@@ -203,6 +222,14 @@ Singleton {
       delete root.objectMap[internalId]
       root.persistNotifications()
     }
+  }
+
+  function dismissGroup(appName) {
+    const group = root.groupsByAppName[appName]
+    if (!group) return
+
+    for (const notifId of group.notifIds)
+      root.dismiss(notifId)
   }
 
   function invokeAction(internalId, identifier) {

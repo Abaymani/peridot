@@ -88,19 +88,6 @@ ColumnLayout {
     }
 
     SettingsRow {
-        label: "Control fill"
-        description: "Dark keeps the text on buttons and dropdowns readable on gradient surfaces."
-
-        Button {
-            toggleButton: true
-            checked: Settings.darkControlFill
-            buttonText: checked ? "Dark" : "Light"
-            fontSizeModifier: -1
-            onClicked: Settings.darkControlFill = !Settings.darkControlFill
-        }
-    }
-
-    SettingsRow {
         label: "Shell scroll speed: " + Settings.scrollSpeedMultiplier
         description: "How fast the mouse wheel scrolls through lists and settings pages."
 

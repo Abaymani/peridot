@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import qs.common.looks as Looks
+import qs.common.functions
 import qs.widgets
 import qs.services as Services
 import qs
@@ -33,7 +34,7 @@ ColumnLayout {
 
             background: Rectangle {
                 color: Settings.gradientBgEnabled
-                    ? Settings.gradientControlFill
+                    ? ColorUtils.setAlphaColor(Looks.Colors.md3.secondary, 0.5)
                     : Looks.Colors.md3.secondary_container
                 radius: Looks.Decorations.decor.radius
                 border.width: 1
