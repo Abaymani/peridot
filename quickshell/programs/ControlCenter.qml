@@ -43,7 +43,7 @@ Scope {
 
 			color: Looks.Colors.md3.secondary_container
 			gradient: Settings.gradientBgEnabled 
-				? Looks.Gradients.library[Settings.activebackgroundGradient].createObject() 
+				? Looks.Gradients.library[Settings.activeSecondaryGradient].createObject() 
 				: null
 			
 			BackdropFloor {}

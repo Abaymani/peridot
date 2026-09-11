@@ -106,7 +106,7 @@ Scope {
             anchors.fill: parent
             color: Looks.Colors.md3.background
             gradient: Settings.gradientBgEnabled
-                ? Looks.Gradients.library[Settings.activebackgroundGradient].createObject()
+                ? Looks.Gradients.library[Settings.activeSecondaryGradient].createObject()
                 : null
 
             BackdropFloor {}
