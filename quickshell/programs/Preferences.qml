@@ -152,10 +152,10 @@ Scope {
                             Repeater {
                                 model: sectionDelegate.modelData.items
 
-                                delegate: Rectangle {
+                                delegate: Item {
                                     id: categoryDelegate
                                     required property var modelData
-                                    readonly property bool isSelected: window.selectedCategory === categoryDelegate.modelData
+                                    readonly property bool isSelected: window.selectedCategory.page === categoryDelegate.modelData.page
                                     readonly property bool hasUnsaved: {
                                         const unsaved = categoryDelegate.modelData.store.unsavedKeys;
                                         const keys = categoryDelegate.modelData.keys;
@@ -164,11 +164,31 @@ Scope {
 
                                     Layout.fillWidth: true
                                     implicitHeight: Looks.Decorations.decor.elementHeight + 10
-                                    radius: Looks.Decorations.decor.radius
-                                    color: isSelected ? Looks.Colors.md3.secondary_container : "transparent"
-                                    gradient: (isSelected && Settings.gradientBgEnabled)
-                                        ? Looks.Gradients.library[Settings.activeGradient].createObject()
-                                        : null
+
+                                    Rectangle {
+                                        anchors.fill: parent
+                                        radius: Looks.Decorations.decor.radius
+                                        color: Looks.Colors.md3.secondary_container
+                                        gradient: Settings.gradientBgEnabled
+                                            ? Looks.Gradients.library[Settings.activeGradient].createObject()
+                                            : null
+                                        opacity: categoryDelegate.isSelected ? 1 : 0
+
+                                        Behavior on opacity {
+                                            NumberAnimation { duration: 120; easing.type: Easing.OutQuad }
+                                        }
+                                    }
+
+                                    Rectangle {
+                                        anchors.fill: parent
+                                        radius: Looks.Decorations.decor.radius
+                                        color: Settings.textColorOnContainer
+                                        opacity: hoverArea.containsMouse ? 0.08 : 0
+
+                                        Behavior on opacity {
+                                            NumberAnimation { duration: 120; easing.type: Easing.OutQuad }
+                                        }
+                                    }
 
                                     Item {
                                         anchors.fill: parent
@@ -208,7 +228,9 @@ Scope {
                                     }
 
                                     MouseArea {
+                                        id: hoverArea
                                         anchors.fill: parent
+                                        hoverEnabled: true
                                         cursorShape: Qt.PointingHandCursor
                                         onClicked: window.selectedCategory = categoryDelegate.modelData
                                     }
