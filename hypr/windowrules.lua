@@ -93,10 +93,18 @@ hl.window_rule({
     name = "peridot-settings-rule",
     size = { 880, 600 },
     min_size = { 640, 420 },
-    max_size = { 1000, 1200 },
     float = true,
     center = true,
     match = { title = "^Peridot Settings$" },
+})
+
+hl.window_rule({
+    name = "missioncenter-rule",
+    size = { 1280, 720 },
+    min_size = { 800, 600 },
+    float = true,
+    center = true,
+    match = { title = "^Mission Center$" },
 })
 
 ---- LAYERRULES ----

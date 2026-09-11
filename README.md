@@ -122,6 +122,7 @@ man-db
 **matugen**
 mesa-utils
 mpv
+mission-center
 nano
 nautilus
 ncdu

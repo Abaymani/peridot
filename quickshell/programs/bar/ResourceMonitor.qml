@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Hyprland
 import qs.common.looks as Looks
 import qs.services as Services
 import qs.widgets
@@ -59,6 +60,6 @@ Pill {
   MouseArea{
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
-    onClicked: {Quickshell.execDetached(["kitty", "htop"])}
+    onClicked: Hyprland.dispatch("hl.dsp.exec_cmd('missioncenter')")
   }
 }
