@@ -110,6 +110,7 @@ hl.window_rule({
 ---- LAYERRULES ----
 hl.layer_rule({
     blur = true,
+    blur_popups = true,
     ignore_alpha = 0,
     match = { namespace = "quickshell"},
 })
