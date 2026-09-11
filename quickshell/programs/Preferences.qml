@@ -19,7 +19,11 @@ Scope {
         // close, a keybind, etc.) writes `visible` directly, which severs
         // the binding above - without this, isSettingsOpen would stay stuck
         // on true and the next toggle press would silently do nothing.
-        onVisibleChanged: GlobalStates.isSettingsOpen = visible
+        // Closing, by any means, also discards unsaved changes.
+        onVisibleChanged: {
+            GlobalStates.isSettingsOpen = visible;
+            if (!visible) revertAll();
+        }
         width: 880
         height: 600
         minimumWidth: 640
@@ -30,25 +34,55 @@ Scope {
         title: "Peridot Settings"
         color: "transparent"
 
+        // Each page names the SettingsStore it edits; Save, Revert, the unsaved
+        // count and discard-on-close go through these. `keys`: for pages sharing
+        // a store, the settings that page edits (drives its unsaved dot).
         property var sections: [
             {
                 name: "Shell",
                 items: [
-                    {name: "Profile", icon: "\u{f0004}", page: profilePageComponent},
-                    {name: "Appearance", icon: "\u{f174a}", page: appearancePageComponent},
-                    {name: "Power", icon: "\u{f1905}", page: powerPageComponent},
-                    {name: "Audio", icon: "\u{f057e}", page: audioPageComponent}
+                    {name: "Profile", icon: "\u{f0004}", page: profilePageComponent,
+                        store: Settings.store, keys: ["profilePicture"]},
+                    {name: "Appearance", icon: "\u{f174a}", page: appearancePageComponent,
+                        store: Settings.store, keys: ["gradientBgEnabled", "isDarkMode", "activeGradient", "activeSecondaryGradient",
+                            "activebackgroundGradient", "scrollSpeedMultiplier", "matugenSourceColorIndex"]},
+                    {name: "Power", icon: "\u{f1905}", page: powerPageComponent,
+                        store: Settings.store, keys: ["userOverridePowerProfile", "onBatteryPowerProfile", "onChargerPowerProfile"]},
+                    {name: "Audio", icon: "\u{f057e}", page: audioPageComponent,
+                        store: Settings.store, keys: ["audioIncrement"]}
                 ]
             },
             {
                 name: "Hyprland",
                 items: [
-                    {name: "Decorations", icon: "", page: hyprlandDecorationsPageComponent},
-                    {name: "Input", icon: "", page: hyprlandInputPageComponent}
+                    {name: "Decorations", icon: "\u{f53f}", page: hyprlandDecorationsPageComponent,
+                        store: Services.HyprlandDecorations.store},
+                    {name: "Input", icon: "\u{f11c}", page: hyprlandInputPageComponent,
+                        store: Services.HyprlandInput.store}
                 ]
             }
         ]
         property var selectedCategory: sections[0].items[0]
+
+        readonly property var stores: {
+            const result = [];
+            for (const section of sections)
+                for (const item of section.items)
+                    if (!result.includes(item.store)) result.push(item.store);
+            return result;
+        }
+        readonly property int unsavedCount: stores.reduce((count, store) => count + store.unsavedKeys.length, 0)
+
+        function saveAll(): void {
+            for (const store of stores)
+                if (store.unsavedKeys.length > 0) store.save();
+        }
+
+        function revertAll(): void {
+            for (const store of stores)
+                store.revert();
+            refreshActivePage();
+        }
 
         Component { id: profilePageComponent; ProfilePage {} }
         Component { id: appearancePageComponent; AppearancePage {} }
@@ -122,6 +156,11 @@ Scope {
                                     id: categoryDelegate
                                     required property var modelData
                                     readonly property bool isSelected: window.selectedCategory === categoryDelegate.modelData
+                                    readonly property bool hasUnsaved: {
+                                        const unsaved = categoryDelegate.modelData.store.unsavedKeys;
+                                        const keys = categoryDelegate.modelData.keys;
+                                        return keys ? unsaved.some(key => keys.includes(key)) : unsaved.length > 0;
+                                    }
 
                                     Layout.fillWidth: true
                                     implicitHeight: Looks.Decorations.decor.elementHeight + 10
@@ -155,6 +194,16 @@ Scope {
                                             anchors.verticalCenter: parent.verticalCenter
                                             text: categoryDelegate.modelData.name
                                             color: Settings.textColorOnContainer
+                                        }
+
+                                        Rectangle {
+                                            anchors.right: parent.right
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            width: 6
+                                            height: 6
+                                            radius: 3
+                                            color: Looks.Colors.md3.tertiary
+                                            visible: categoryDelegate.hasUnsaved
                                         }
                                     }
 
@@ -224,38 +273,34 @@ Scope {
                         Layout.margins: 12
                         spacing: 8
 
-                        Item { Layout.fillWidth: true }
+                        Looks.ClearText {
+                            Layout.fillWidth: true
+                            Layout.leftMargin: 8
+                            text: window.unsavedCount === 0
+                                ? "All changes saved"
+                                : window.unsavedCount + " unsaved change" + (window.unsavedCount === 1 ? "" : "s")
+                            font.pixelSize: Looks.Fonts.size - 1
+                            opacity: 0.65
+                            color: Settings.textColorOnContainer
+                        }
 
                         Button {
                             buttonText: "Revert"
                             fontSizeModifier: -1
-                            onClicked: {
-                                Settings.revert();
-                                Services.HyprlandDecorations.revert();
-                                Services.HyprlandInput.revert();
-                                pageRefreshTimer.restart();
-                            }
+                            enabled: window.unsavedCount > 0
+                            onClicked: window.revertAll()
                         }
 
                         Button {
                             buttonText: "Save"
                             fontSizeModifier: -1
                             onPrimaryBg: true
-                            onClicked: {
-                                Settings.save();
-                                Services.HyprlandDecorations.save();
-                                Services.HyprlandInput.save();
-                            }
+                            enabled: window.unsavedCount > 0
+                            onClicked: window.saveAll()
                         }
                     }
                 }
             }
-        }
-
-        Timer {
-            id: pageRefreshTimer
-            interval: 50
-            onTriggered: window.refreshActivePage()
         }
     }
 }

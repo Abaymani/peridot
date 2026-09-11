@@ -5,6 +5,7 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
 pragma ComponentBehavior: Bound
+import qs.common
 import qs.common.looks as Looks
 import qs.services
 
@@ -54,24 +55,10 @@ Singleton {
     property alias scrollSpeedMultiplier: jsonAdapter.scrollSpeedMultiplier
 
     // --- Persistence ---
-    // Properties above are the live/draft state - every change (e.g. from a
-    // future settings UI) applies immediately, same as today. Nothing is
-    // written to disk until save() is called; revert() discards in-memory
-    // changes and reloads the last-saved state (asynchronously - properties
-    // update reactively once the reload completes, not on the same tick).
-    function save(): void {
-        settingsFile.writeAdapter();
-    }
-
-    function revert(): void {
-        settingsFile.reload();
-    }
-
-    FileView {
-        id: settingsFile
+    // The aliases above live in settings.json: changes apply live, and `store`
+    // saves or reverts them (see SettingsStore).
+    readonly property SettingsStore store: SettingsStore {
         path: Quickshell.env("HOME") + "/.config/peridot/settings/settings.json"
-        watchChanges: true
-        onFileChanged: reload()
 
         JsonAdapter {
             id: jsonAdapter

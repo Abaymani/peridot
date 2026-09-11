@@ -27,7 +27,7 @@ Rectangle {
       ? Looks.Colors.md3.secondary_container
       : Looks.Colors.md3.surface_container
   implicitWidth: btnText.implicitWidth + widthPadding
-  opacity: toggleButton ? (checked ? 1 : 0.4) : 1
+  opacity: !enabled ? 0.4 : toggleButton ? (checked ? 1 : 0.4) : 1
   radius: Looks.Decorations.decor.radius
   height: Looks.Decorations.decor.elementHeight
 
