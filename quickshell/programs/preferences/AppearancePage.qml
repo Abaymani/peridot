@@ -74,6 +74,33 @@ ColumnLayout {
     }
 
     SettingsRow {
+        label: "Backdrop dimming: " + Math.round(Settings.backdropFloorOpacity * 100) + "%"
+        description: "Darkens what shows through gradient surfaces, so text stays readable over bright windows."
+
+        Slider {
+            Layout.preferredWidth: 160
+            from: 0
+            to: 1
+            stepSize: 0.05
+            value: Settings.backdropFloorOpacity
+            onMoved: Settings.backdropFloorOpacity = Math.round(value * 100) / 100
+        }
+    }
+
+    SettingsRow {
+        label: "Control fill"
+        description: "Dark keeps the text on buttons and dropdowns readable on gradient surfaces."
+
+        Button {
+            toggleButton: true
+            checked: Settings.darkControlFill
+            buttonText: checked ? "Dark" : "Light"
+            fontSizeModifier: -1
+            onClicked: Settings.darkControlFill = !Settings.darkControlFill
+        }
+    }
+
+    SettingsRow {
         label: "Shell scroll speed: " + Settings.scrollSpeedMultiplier
         description: "How fast the mouse wheel scrolls through lists and settings pages."
 

@@ -6,6 +6,7 @@ import Quickshell.Io
 import Quickshell.Hyprland
 pragma ComponentBehavior: Bound
 import qs.common
+import qs.common.functions
 import qs.common.looks as Looks
 import qs.services
 
@@ -26,6 +27,8 @@ Singleton {
     property alias activeGradient: jsonAdapter.activeGradient
     property alias activeSecondaryGradient: jsonAdapter.activeSecondaryGradient
     property alias activebackgroundGradient: jsonAdapter.activebackgroundGradient
+    property alias backdropFloorOpacity: jsonAdapter.backdropFloorOpacity
+    property alias darkControlFill: jsonAdapter.darkControlFill
 
     property color textColorOnContainer: gradientBgEnabled
         ? Looks.Colors.palette.neutral100
@@ -38,6 +41,18 @@ Singleton {
     property color textColorOnLight: gradientBgEnabled
         ? Looks.Colors.palette.neutral100
         : Looks.Colors.palette.neutral20
+
+    // Under gradient surfaces that sit on the backdrop (BackdropFloor), so a
+    // bright window behind them can't wash out the white text. Barely shows
+    // over dark backdrops. A palette tone, so it's dark in light mode too.
+    property color backdropFloor: ColorUtils.setAlphaColor(Looks.Colors.palette.neutral10, backdropFloorOpacity)
+
+    // Buttons, dropdowns and fields in gradient mode. Half of a light tone
+    // under white text caps it near 3:1 even over black; the dark palette
+    // tone reads everywhere, and stays dark in light mode too.
+    property color gradientControlFill: darkControlFill
+        ? ColorUtils.setAlphaColor(Looks.Colors.palette.secondary30, 0.6)
+        : ColorUtils.setAlphaColor(Looks.Colors.md3.secondary, 0.5)
 
     //MATUGEN
     property alias isDarkMode: jsonAdapter.isDarkMode
@@ -71,6 +86,8 @@ Singleton {
             property string activeGradient: "PrimaryH3C"
             property string activeSecondaryGradient: "PrimaryV2C"
             property string activebackgroundGradient: "WeakH2C"
+            property real backdropFloorOpacity: 0.6
+            property bool darkControlFill: true
 
             property bool isDarkMode: true
             property int matugenSourceColorIndex: 0

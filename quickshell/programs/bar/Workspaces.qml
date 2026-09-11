@@ -6,6 +6,7 @@ import QtQuick.Layouts
 import qs.common.looks as Looks
 import qs
 import qs.common.functions
+import qs.widgets
 
 RowLayout {
 	spacing: 6
@@ -43,6 +44,9 @@ RowLayout {
 			gradient: Settings.gradientBgEnabled && isActive
 				? Looks.Gradients.library[Settings.activeGradient].createObject()
 				: null
+
+			// Empty workspaces are bare numbers, with no pill to put a floor under.
+			BackdropFloor { active: wsRect.isActive || !!wsRect.ws }
 
 			Looks.ClearText {
 				id: wsText

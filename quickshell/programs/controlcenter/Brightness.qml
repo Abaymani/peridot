@@ -9,6 +9,8 @@ import qs.common.looks as Looks
 Pill {
     id: root
     property bool hovering: false
+    // Inside the control center, which already has its own floor.
+    onBackdrop: false
 
     Process {
         id: brilloProc

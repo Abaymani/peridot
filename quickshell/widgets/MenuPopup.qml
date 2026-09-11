@@ -217,6 +217,8 @@ PopupWindow {
     border.width: 1
     border.color: ColorUtils.setAlphaColor(Looks.Colors.palette.neutral100, 0.12)
 
+    BackdropFloor {}
+
     ColumnLayout {
       id: content
       anchors.fill: parent

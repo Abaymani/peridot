@@ -10,6 +10,9 @@ Rectangle {
   id: root
 
   property string gradientKey: Settings.activeGradient
+  // Bar pills sit straight on the wallpaper; set false for one nested in
+  // another surface.
+  property bool onBackdrop: true
 
   implicitHeight: Looks.Decorations.decor.elementHeight
   radius: Looks.Decorations.decor.radius
@@ -17,4 +20,6 @@ Rectangle {
   gradient: Settings.gradientBgEnabled
     ? Looks.Gradients.library[gradientKey].createObject()
     : null
+
+  BackdropFloor { active: root.onBackdrop }
 }

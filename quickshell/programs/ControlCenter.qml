@@ -46,6 +46,8 @@ Scope {
 				? Looks.Gradients.library[Settings.activebackgroundGradient].createObject() 
 				: null
 			
+			BackdropFloor {}
+
 			ColumnLayout {
 				anchors.fill: parent
 				id: contentColumn

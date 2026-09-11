@@ -50,6 +50,8 @@ Scope {
         : null
       radius: Looks.Decorations.decor.radius
 
+      BackdropFloor {}
+
       MouseArea {
         anchors.fill: parent
         // Prevents the click from reaching the background MouseArea

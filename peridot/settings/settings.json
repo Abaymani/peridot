@@ -3,6 +3,8 @@
     "activeSecondaryGradient": "PrimaryV2C",
     "activebackgroundGradient": "WeakH2C",
     "audioIncrement": 2,
+    "backdropFloorOpacity": 0.3,
+    "darkControlFill": true,
     "gradientBgEnabled": true,
     "isDarkMode": true,
     "matugenSourceColorIndex": 0,

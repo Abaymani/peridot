@@ -45,7 +45,8 @@ Scope {
                         store: Settings.store, keys: ["profilePicture"]},
                     {name: "Appearance", icon: "\u{f174a}", page: appearancePageComponent,
                         store: Settings.store, keys: ["gradientBgEnabled", "isDarkMode", "activeGradient", "activeSecondaryGradient",
-                            "activebackgroundGradient", "scrollSpeedMultiplier", "matugenSourceColorIndex"]},
+                            "activebackgroundGradient", "backdropFloorOpacity", "darkControlFill", "scrollSpeedMultiplier",
+                            "matugenSourceColorIndex"]},
                     {name: "Power", icon: "\u{f1905}", page: powerPageComponent,
                         store: Settings.store, keys: ["userOverridePowerProfile", "onBatteryPowerProfile", "onChargerPowerProfile"]},
                     {name: "Audio", icon: "\u{f057e}", page: audioPageComponent,
@@ -107,6 +108,8 @@ Scope {
             gradient: Settings.gradientBgEnabled
                 ? Looks.Gradients.library[Settings.activebackgroundGradient].createObject()
                 : null
+
+            BackdropFloor {}
 
             RowLayout {
                 anchors.fill: parent

@@ -5,10 +5,10 @@
 
     "barHeight": 25,
     "barMarginTop": 6,
-    "barMarginLeft": 12,
-    "barMarginRight": 12,
+    "barMarginLeft": 10,
+    "barMarginRight": 10,
 
-    "controlCenterMarginRight": 12,
+    "controlCenterMarginRight": 8,
     "controlCenterMarginTop": 8,
     "controlCenterWidth": 360
   }

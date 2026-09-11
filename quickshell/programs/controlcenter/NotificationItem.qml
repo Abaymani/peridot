@@ -33,6 +33,9 @@ Rectangle {
     : null
   radius: Looks.Decorations.decor.radius
 
+  // Only popups sit on the backdrop; in the control center the card is nested.
+  BackdropFloor { active: isPopup }
+
   HoverHandler {
     id: cardHover
   }
