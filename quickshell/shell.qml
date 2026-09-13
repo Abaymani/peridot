@@ -6,7 +6,6 @@ Scope {
 	Bar {}
 	ControlCenter {}
 	NotificationOverlay {}
-	Clipboard {}
 	Launcher {}
 	Preferences {}
 }

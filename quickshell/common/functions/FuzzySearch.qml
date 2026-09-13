@@ -30,7 +30,9 @@ Singleton {
       const positions = []
       for (let i = 0; i < q.length; i++) positions.push(at + i)
       const bonus = at === 0 ? 40 : wordStart(at) ? 25 : 0
-      return { score: 100 + bonus + q.length * 4 - at * 0.5 - t.length * 0.1, positions: positions }
+      // Penalties are capped, so a match deep in a long text (a clipboard
+      // entry, say) still scores above 0.
+      return { score: 100 + bonus + q.length * 4 - Math.min(at, 60) * 0.5 - Math.min(t.length, 200) * 0.1, positions: positions }
     }
     if (substringOnly) return { score: 0, positions: [] }
 

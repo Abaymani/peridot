@@ -15,16 +15,21 @@ Singleton {
         onPressed: isControlCenterOpen = !isControlCenterOpen
     }
 
-    property bool isClipboardOpen: false
-    property var toggleClipboard: GlobalShortcut {
-        name: "toggleClipboard"
-        onPressed: isClipboardOpen = !isClipboardOpen
-    }
-
     property bool isLauncherOpen: false
+    // Asks the launcher for a mode (0 apps, 1 files, 2 clipboard). It opens
+    // on that mode, switches to it, or closes if it's already showing it.
+    signal launcherModeRequested(int mode)
     property var toggleLauncher: GlobalShortcut {
         name: "toggleLauncher"
-        onPressed: isLauncherOpen = !isLauncherOpen
+        onPressed: {
+            if (root.isLauncherOpen) root.isLauncherOpen = false
+            else root.launcherModeRequested(0)
+        }
+    }
+    // The clipboard is the launcher's third mode.
+    property var toggleClipboard: GlobalShortcut {
+        name: "toggleClipboard"
+        onPressed: root.launcherModeRequested(2)
     }
 
     property bool isSettingsOpen: false
