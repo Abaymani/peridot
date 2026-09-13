@@ -4,13 +4,13 @@
     "activebackgroundGradient": "WeakH2C",
     "audioIncrement": 2,
     "backdropFloorOpacity": 0.3,
-    "darkControlFill": true,
     "gradientBgEnabled": true,
     "isDarkMode": true,
+    "launcherDetailsPane": true,
     "matugenSourceColorIndex": 0,
     "onBatteryPowerProfile": "power-saver",
     "onChargerPowerProfile": "performance",
     "profilePicture": "",
-    "scrollSpeedMultiplier": 30,
+    "scrollSpeedMultiplier": 60,
     "userOverridePowerProfile": true
 }

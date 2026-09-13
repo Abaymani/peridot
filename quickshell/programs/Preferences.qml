@@ -50,7 +50,9 @@ Scope {
                     {name: "Power", icon: "\u{f1905}", page: powerPageComponent,
                         store: Settings.store, keys: ["userOverridePowerProfile", "onBatteryPowerProfile", "onChargerPowerProfile"]},
                     {name: "Audio", icon: "\u{f057e}", page: audioPageComponent,
-                        store: Settings.store, keys: ["audioIncrement"]}
+                        store: Settings.store, keys: ["audioIncrement"]},
+                    {name: "Launcher", icon: "\u{f003b}", page: launcherPageComponent,
+                        store: Settings.store, keys: ["launcherDetailsPane"]}
                 ]
             },
             {
@@ -91,6 +93,7 @@ Scope {
         Component { id: hyprlandDecorationsPageComponent; HyprlandDecorationsPage {} }
         Component { id: hyprlandInputPageComponent; HyprlandInputPage {} }
         Component { id: audioPageComponent; AudioPage {} }
+        Component { id: launcherPageComponent; LauncherPage {} }
 
         // Forces the active page to be recreated from scratch, giving every
         // control inside it a fresh binding to Settings. Needed because

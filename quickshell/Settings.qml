@@ -61,6 +61,9 @@ Singleton {
     //SHELL BEHAVIOR
     property alias scrollSpeedMultiplier: jsonAdapter.scrollSpeedMultiplier
 
+    //LAUNCHER
+    property alias launcherDetailsPane: jsonAdapter.launcherDetailsPane
+
     // --- Persistence ---
     // The aliases above live in settings.json: changes apply live, and `store`
     // saves or reverts them (see SettingsStore).
@@ -88,6 +91,8 @@ Singleton {
             property string profilePicture: ""
 
             property real scrollSpeedMultiplier: 30
+
+            property bool launcherDetailsPane: true
         }
     }
 }

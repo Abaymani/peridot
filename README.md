@@ -32,7 +32,7 @@ You also need to run the install script for the SDDM theme, found in /peridot/sd
 **Misc.**
 - [x] SDDM theme
 - [ ] [Workspace overview / alt-tab](https://www.windowslatest.com/wp-content/uploads/2020/07/Alt-Tab-with-browser-tabs.jpg)
-- [ ] Launcher (Rofi/Wofi replacement)
+- [x] Launcher (Rofi/Wofi replacement)
 - [x] Unified settings app
 - [ ] On-screen Keyboard
 - [ ] Emoji picker
@@ -166,7 +166,6 @@ wget
 **wl-clipboard**
 **wlogout**
 wlr-randr
-wofi
 xclip
 xdg-desktop-portal-hyprland
 **yay**

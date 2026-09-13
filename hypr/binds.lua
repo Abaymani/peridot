@@ -27,7 +27,8 @@ hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager .. " --new-window"))
-hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("wofi --show drun"))
+-- Shell now handles launching apps
+-- hl.bind(mainMod .. " + SHIFT + D", hl.dsp.exec_cmd("wofi --show drun"))
 hl.bind(mainMod .. " + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + section", hl.dsp.exec_cmd(editor))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
@@ -42,6 +43,7 @@ hl.bind("switch:off:Lid", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"), { locke
 -- Quickshell
 hl.bind(mainMod .. " + A", hl.dsp.global("quickshell:toggleControlCenter"))
 hl.bind(mainMod .. " + V", hl.dsp.global("quickshell:toggleClipboard"))
+hl.bind(mainMod .. " + D", hl.dsp.global("quickshell:toggleLauncher"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
