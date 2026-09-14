@@ -603,9 +603,6 @@ Item {
     }
 
     // ========== ON-SCREEN KEYBOARD ==========
-    // peridot's own keyboard (the shell's layouts and look), typing straight
-    // into the password field. It starts on the physical keyboard's layout
-    // when it has that one, and sits above the toolbars so they stay usable.
     OnScreenKeyboard {
         id: onScreenKeyboard
         anchors.horizontalCenter: parent.horizontalCenter

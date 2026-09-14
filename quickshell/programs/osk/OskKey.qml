@@ -4,9 +4,7 @@ import qs.common.functions
 import qs.services
 import qs
 
-// One on-screen key: the shell's button fill (quieter for special keys) and
-// what it types now, with a character's other forms small in the corners
-// like a printed keycap - Shift's top left, AltGr's bottom right.
+
 Item {
   id: root
 

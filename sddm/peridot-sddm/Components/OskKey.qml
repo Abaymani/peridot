@@ -1,9 +1,5 @@
 import QtQuick
 
-// One key of the login screen's on-screen keyboard (see OnScreenKeyboard.qml)
-// with peridot's key look: rounded, a quieter fill for special keys, and a
-// character's Shift and AltGr forms small in the corners. Backspace and the
-// arrows repeat while held.
 Item {
     id: root
 

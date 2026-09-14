@@ -3,10 +3,7 @@
 // On-screen keyboard layouts, shared by the shell's keyboard (services/Osk,
 // programs/osk) and the login screen's (sddm/peridot-sddm links this file
 // into its Components).
-//
-// A layout is rows of keys, each row 15 units wide (`width` defaults to 1).
-// A `tall` key also covers the slot below it, which the next row leaves as a
-// "gap" - the ISO Enter.
+
 //   kind   "char" types a character: `label` plain, `shift` with Shift (a
 //          letter's capital if missing), `altgr` with AltGr. `dead` marks an
 //          accent that combines with the next letter.
