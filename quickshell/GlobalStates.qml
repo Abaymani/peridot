@@ -32,6 +32,30 @@ Singleton {
         onPressed: root.launcherModeRequested(2)
     }
 
+    property bool isOskOpen: false
+    property var toggleOsk: GlobalShortcut {
+        name: "toggleOsk"
+        onPressed: root.isOskOpen = !root.isOskOpen
+    }
+    
+    property bool screenLocked: false
+    property var lockIpc: IpcHandler {
+        target: "lock"
+
+        function locked(): void {
+            root.screenLocked = true
+        }
+
+        function unlocked(): void {
+            root.screenLocked = false
+        }
+    }
+    property var lockCheck: Process {
+        command: ["pidof", "hyprlock"]
+        running: true
+        onExited: (exitCode, exitStatus) => root.screenLocked = exitCode === 0
+    }
+
     property bool isSettingsOpen: false
 
     function toggleSettings(): void {

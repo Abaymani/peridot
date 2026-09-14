@@ -75,11 +75,11 @@ Scope {
 
 							Item { Layout.fillWidth: true }
 							BtnGroup{
-								options: ["󰈊", "", "", "󰂯", "󱝊", ""]
+								options: ["󰈊", "\u{f030c}", "", "󰂯", "󱝊", ""]
 								onNewClick: (idx) => {
 									switch (idx) {
 										case 0: Quickshell.execDetached(["sh", "-c", "hyprpicker -a"]); break;
-										case 1: GlobalStates.isControlCenterOpen = false; GlobalStates.launcherModeRequested(2); break;
+										case 1: GlobalStates.isControlCenterOpen = false; GlobalStates.isOskOpen = !GlobalStates.isOskOpen; break;
 										case 2: Quickshell.execDetached(["sh", "-c", "~/peridot/peridot/scripts/screenshot.sh"]); break;
 										case 3: Hyprland.dispatch("hl.dsp.exec_cmd('blueman-manager')"); break;
 										case 4: Settings.gradientBgEnabled = !Settings.gradientBgEnabled; Settings.store.saveKey("gradientBgEnabled"); break;

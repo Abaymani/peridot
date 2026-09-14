@@ -117,6 +117,13 @@ hl.layer_rule({
 
 hl.layer_rule({
     blur = true,
+    ignore_alpha = 0,
+    above_lock = 2,
+    match = { namespace = "peridot-osk" },
+})
+
+hl.layer_rule({
+    blur = true,
     ignore_alpha = 0.4,
     match = { namespace = "logout_dialog"},
 })

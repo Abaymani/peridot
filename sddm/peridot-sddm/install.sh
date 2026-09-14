@@ -27,6 +27,10 @@ cp "$SCRIPT_DIR"/metadata.desktop "$THEME_DIR/"
 cp "$SCRIPT_DIR"/theme.conf "$THEME_DIR/"
 cp "$SCRIPT_DIR"/colors.json "$THEME_DIR/"
 cp "$SCRIPT_DIR"/Components/*.qml "$THEME_DIR/Components/"
+# KeyboardLayouts.js links into peridot's quickshell config; -L copies the file.
+cp -L "$SCRIPT_DIR"/Components/*.js "$THEME_DIR/Components/"
+# Replaced by OnScreenKeyboard.qml.
+rm -f "$THEME_DIR/Components/VirtualKeyboard.qml"
 cp "$SCRIPT_DIR"/Backgrounds/* "$THEME_DIR/Backgrounds/" 2>/dev/null
 chmod -R a+rX "$THEME_DIR"
 

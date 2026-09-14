@@ -7,6 +7,7 @@ Scope {
 	ControlCenter {}
 	NotificationOverlay {}
 	Launcher {}
+	OnScreenKeyboard {}
 	Preferences {}
 }
 

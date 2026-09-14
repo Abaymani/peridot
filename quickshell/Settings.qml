@@ -64,6 +64,11 @@ Singleton {
     //LAUNCHER
     property alias launcherDetailsPane: jsonAdapter.launcherDetailsPane
 
+    //ON-SCREEN KEYBOARD
+    property alias oskLayout: jsonAdapter.oskLayout
+    property alias oskFunctionRow: jsonAdapter.oskFunctionRow
+    property alias oskPinned: jsonAdapter.oskPinned
+
     // --- Persistence ---
     // The aliases above live in settings.json: changes apply live, and `store`
     // saves or reverts them (see SettingsStore).
@@ -93,6 +98,10 @@ Singleton {
             property real scrollSpeedMultiplier: 30
 
             property bool launcherDetailsPane: true
+
+            property string oskLayout: "se"
+            property bool oskFunctionRow: true
+            property bool oskPinned: false
         }
     }
 }

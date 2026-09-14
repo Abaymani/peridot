@@ -37,13 +37,15 @@ hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ action = "toggle", mode = "maximized"}))
 hl.bind(mainMod .. " + delete", hl.dsp.exec_cmd("missioncenter"))
 
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind("switch:off:Lid", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"), { locked = true })
+-- lock.sh runs hyprlock with opt. on-screen keyboard
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(peridot_scripts .. "/lock.sh"))
+hl.bind("switch:off:Lid", hl.dsp.exec_cmd(peridot_scripts .. "/lock.sh"), { locked = true })
 
 -- Quickshell
 hl.bind(mainMod .. " + A", hl.dsp.global("quickshell:toggleControlCenter"))
 hl.bind(mainMod .. " + V", hl.dsp.global("quickshell:toggleClipboard"))
 hl.bind(mainMod .. " + D", hl.dsp.global("quickshell:toggleLauncher"))
+hl.bind(mainMod .. " + K", hl.dsp.global("quickshell:toggleOsk"), { locked = true })
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))

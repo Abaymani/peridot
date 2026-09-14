@@ -9,6 +9,7 @@ Rectangle {
   // List of buttons to generate
   property var options: []
   property bool onPrimaryBg: false
+  property int widthPadding: 20
   signal newClick(int index)
 
   implicitHeight: buttonRow.implicitHeight
@@ -36,6 +37,7 @@ Rectangle {
 
         buttonText: modelData
         onPrimaryBg: root.onPrimaryBg
+        widthPadding: root.widthPadding
 
         onClicked: {
           newClick(this.index)

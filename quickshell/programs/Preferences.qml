@@ -52,7 +52,9 @@ Scope {
                     {name: "Audio", icon: "\u{f057e}", page: audioPageComponent,
                         store: Settings.store, keys: ["audioIncrement"]},
                     {name: "Launcher", icon: "\u{f003b}", page: launcherPageComponent,
-                        store: Settings.store, keys: ["launcherDetailsPane"]}
+                        store: Settings.store, keys: ["launcherDetailsPane"]},
+                    {name: "Keyboard", icon: "\u{f030c}", page: keyboardPageComponent,
+                        store: Settings.store, keys: ["oskLayout", "oskFunctionRow", "oskPinned"]}
                 ]
             },
             {
@@ -94,6 +96,7 @@ Scope {
         Component { id: hyprlandInputPageComponent; HyprlandInputPage {} }
         Component { id: audioPageComponent; AudioPage {} }
         Component { id: launcherPageComponent; LauncherPage {} }
+        Component { id: keyboardPageComponent; KeyboardPage {} }
 
         // Forces the active page to be recreated from scratch, giving every
         // control inside it a fresh binding to Settings. Needed because

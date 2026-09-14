@@ -602,46 +602,30 @@ Item {
         passwordField.forceActiveFocus()
     }
 
-    // ========== VIRTUAL KEYBOARD ==========
-    Loader {
-        id: virtualKeyboardLoader
-        source: "Components/VirtualKeyboard.qml"
+    // ========== ON-SCREEN KEYBOARD ==========
+    // peridot's own keyboard (the shell's layouts and look), typing straight
+    // into the password field. It starts on the physical keyboard's layout
+    // when it has that one, and sits above the toolbars so they stay usable.
+    OnScreenKeyboard {
+        id: onScreenKeyboard
         anchors.horizontalCenter: parent.horizontalCenter
-        width: parent.width * 0.5
-        y: parent.height
+        width: Math.min(implicitWidth, parent.width - 40)
+        y: root.virtualKeyboardVisible ? root.height - height - leftIsland.height - 32 : root.height
+        visible: y < root.height
+        target: passwordField
+        layoutId: root.getKeyboardLayout().toLowerCase()
+        colSurface: root.colSurfaceContainer
+        colSecondary: root.colSecondary
+        colPrimary: root.colPrimary
+        colText: root.colOnSurfaceVariant
+        gradientEnabled: root.gradientBgEnabled
+        radius: root.decorRadius
+        fontFamily: root.fontFamily
+        fontSize: root.fontSize
+        onCloseRequested: root.virtualKeyboardVisible = false
 
-        onItemChanged: {
-            if (item) {
-                item.activated = Qt.binding(function() { return root.virtualKeyboardVisible })
-                // Sync back: if user closes via Qt's built-in hide button
-                item.activeChanged.connect(function() {
-                    if (!item.active && root.virtualKeyboardVisible) {
-                        root.virtualKeyboardVisible = false
-                    }
-                })
-            }
-        }
-
-        state: root.virtualKeyboardVisible ? "visible" : "hidden"
-        states: [
-            State {
-                name: "hidden"
-                PropertyChanges { target: virtualKeyboardLoader; y: root.height }
-            },
-            State {
-                name: "visible"
-                PropertyChanges {
-                    target: virtualKeyboardLoader
-                    y: root.height - virtualKeyboardLoader.height
-                }
-            }
-        ]
-        transitions: Transition {
-            NumberAnimation {
-                property: "y"
-                duration: 200
-                easing.type: Easing.InOutQuad
-            }
+        Behavior on y {
+            NumberAnimation { duration: 200; easing.type: Easing.InOutQuad }
         }
     }
 }

@@ -12,5 +12,8 @@
     "onChargerPowerProfile": "performance",
     "profilePicture": "",
     "scrollSpeedMultiplier": 60,
-    "userOverridePowerProfile": true
+    "userOverridePowerProfile": true,
+    "oskFunctionRow": true,
+    "oskLayout": "se",
+    "oskPinned": false
 }

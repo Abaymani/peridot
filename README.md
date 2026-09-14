@@ -170,4 +170,4 @@ xclip
 xdg-desktop-portal-hyprland
 **yay**
 yay-debug
-yazi
+ydotool
