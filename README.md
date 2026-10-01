@@ -165,7 +165,6 @@ vulkan-tools
 waypaper-git
 wget
 **wl-clipboard**
-**wlogout**
 wlr-randr
 xclip
 xdg-desktop-portal-hyprland

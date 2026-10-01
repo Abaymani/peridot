@@ -56,6 +56,8 @@ Singleton {
         onExited: (exitCode, exitStatus) => root.screenLocked = exitCode === 0
     }
 
+    property bool isPowerMenuOpen: false
+
     property bool isSettingsOpen: false
 
     function toggleSettings(): void {

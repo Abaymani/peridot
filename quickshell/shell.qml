@@ -8,6 +8,7 @@ Scope {
 	NotificationOverlay {}
 	Launcher {}
 	Switcher {}
+	PowerMenu {}
 	OnScreenKeyboard {}
 	Preferences {}
 }

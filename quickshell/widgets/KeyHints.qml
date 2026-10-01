@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.common.looks as Looks
-import qs.common.functions
 import qs
 
 // A row of keyboard hints: each a key cap, then what the key does.
@@ -22,19 +21,8 @@ RowLayout {
       required property var modelData
       spacing: 5
 
-      Rectangle {
-        implicitWidth: cap.implicitWidth + 10
-        implicitHeight: 18
-        radius: 5
-        color: ColorUtils.setAlphaColor(Looks.Colors.palette.neutral100, 0.12)
-
-        Looks.ClearText {
-          id: cap
-          anchors.centerIn: parent
-          text: hint.modelData[0]
-          font.pixelSize: Looks.Fonts.size - 2
-          color: Settings.textColorOnContainer
-        }
+      KeyCap {
+        text: hint.modelData[0]
       }
 
       Looks.ClearText {
