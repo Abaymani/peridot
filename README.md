@@ -31,7 +31,7 @@ You also need to run the install script for the SDDM theme, found in /peridot/sd
 
 **Misc.**
 - [x] SDDM theme
-- [ ] [Workspace overview / alt-tab](https://www.windowslatest.com/wp-content/uploads/2020/07/Alt-Tab-with-browser-tabs.jpg)
+- [x] Workspace switcher / overview
 - [x] Launcher (Rofi/Wofi replacement)
 - [x] Unified settings app
 - [x] On-screen Keyboard

@@ -63,8 +63,10 @@ hl.bind(mainMod .. " + ALT + up", hl.dsp.window.resize({ x = 0, y = -100, relati
 hl.bind(mainMod .. " + Tab", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + SHIFT + Tab", hl.dsp.focus({ workspace = "e-1" }))
 
--- Cycle window (Old `binde` translates to the `repeating = true` flag)
-hl.bind("ALT + Tab", hl.dsp.window.cycle_next(), { repeating = true })
+-- Workspace switcher. The Alt release bind must be transparent, or Hyprland skips it while Alt+Tab is held.
+hl.bind("ALT + Tab", hl.dsp.global("quickshell:switcherNext"))
+hl.bind("ALT + SHIFT + Tab", hl.dsp.global("quickshell:switcherPrev"))
+hl.bind("Alt_L", hl.dsp.global("quickshell:switcherAlt"), { ignore_mods = true, non_consuming = true, release = true, transparent = true })
 
 -- Custom scripts
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(peridot_scripts .. "/screenshot.sh"))

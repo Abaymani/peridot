@@ -46,6 +46,12 @@ Singleton {
     return hits.sort((a, b) => b.score - a.score)
   }
 
+  // The desktop entry of a window's app, from its class (app id), or null.
+  function forClass(appClass) {
+    DesktopEntries.applications.values // re-evaluate once entries load
+    return appClass ? DesktopEntries.heuristicLookup(appClass) : null
+  }
+
   function launch(entry) {
     if (entry.runInTerminal) {
       Quickshell.execDetached({

@@ -54,7 +54,9 @@ Scope {
                     {name: "Launcher", icon: "\u{f003b}", page: launcherPageComponent,
                         store: Settings.store, keys: ["launcherDetailsPane"]},
                     {name: "Keyboard", icon: "\u{f030c}", page: keyboardPageComponent,
-                        store: Settings.store, keys: ["oskLayout", "oskFunctionRow", "oskPinned"]}
+                        store: Settings.store, keys: ["oskLayout", "oskFunctionRow", "oskPinned"]},
+                    {name: "Switcher", icon: "\u{f056c}", page: switcherPageComponent,
+                        store: Settings.store, keys: ["switcherPreviews"]}
                 ]
             },
             {
@@ -97,6 +99,7 @@ Scope {
         Component { id: audioPageComponent; AudioPage {} }
         Component { id: launcherPageComponent; LauncherPage {} }
         Component { id: keyboardPageComponent; KeyboardPage {} }
+        Component { id: switcherPageComponent; SwitcherPage {} }
 
         // Forces the active page to be recreated from scratch, giving every
         // control inside it a fresh binding to Settings. Needed because
