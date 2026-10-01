@@ -10,10 +10,10 @@
     "matugenSourceColorIndex": 0,
     "onBatteryPowerProfile": "power-saver",
     "onChargerPowerProfile": "performance",
+    "oskFunctionRow": false,
+    "oskLayout": "se",
+    "oskPinned": false,
     "profilePicture": "",
     "scrollSpeedMultiplier": 60,
-    "userOverridePowerProfile": true,
-    "oskFunctionRow": true,
-    "oskLayout": "se",
-    "oskPinned": false
+    "userOverridePowerProfile": true
 }

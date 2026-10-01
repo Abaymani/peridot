@@ -3,6 +3,11 @@
 input_path = "~/.config/matugen/templates/firefox-colors.css"
 output_path = "~/.config/mozilla/firefox/7l4qjhrw.default-release/chrome/colors.css"
 
+[templates.pywalfox]
+input_path = '~/.config/matugen/templates/pywalfox-colors.json'
+output_path = '~/.cache/wal/colors.json'
+post_hook = 'pywalfox {{mode}}; pywalfox update'
+
 [templates.gtk3]
 input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-3.0/colors.css'
@@ -49,9 +54,9 @@ output_path = '~/.config/fish/conf.d/matugen-colors.fish'
 input_path = '~/.config/matugen/templates/yazi-theme.toml'
 output_path = '~/.config/yazi/theme.toml'
 
-[templates.wofi]
-input_path = "./colors.css"
-output_path = "~/.config/wofi/colors.css"
+[templates.obsidian]
+input_path = '~/.config/matugen/templates/obsidian.css'
+output_path = '~/Documents/Obsidian/.obsidian/snippets/matugen.css'
 
 [templates.obs]
 input_path = '~/.config/matugen/templates/matugen.obt'
