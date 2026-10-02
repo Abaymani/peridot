@@ -23,10 +23,16 @@ Singleton {
   // Apps matching `query`, best first, with bookmarked ones boosted, as
   // { entry, namePositions, subtitlePositions }. Names match fuzzily;
   // descriptions and keywords only as a whole substring, since loose matches
-  // in long text are mostly noise. An empty query lists every app.
+  // in long text are mostly noise. An empty query lists every app, the most
+  // launched first; bookmarks aren't moved up, they have their own row.
   function search(query) {
-    if (query === "")
-      return all.map(entry => ({ entry: entry, namePositions: [], subtitlePositions: [] }))
+    if (query === "") {
+      const frequent = all
+        .filter(entry => AppUsage.count(entry.id) > 0 && !AppBookmarks.has(entry.id))
+        .sort((a, b) => AppUsage.count(b.id) - AppUsage.count(a.id) || a.name.localeCompare(b.name))
+      const rest = all.filter(entry => !frequent.includes(entry))
+      return frequent.concat(rest).map(entry => ({ entry: entry, namePositions: [], subtitlePositions: [] }))
+    }
 
     const hits = []
     for (const entry of all) {
@@ -53,6 +59,7 @@ Singleton {
   }
 
   function launch(entry) {
+    AppUsage.record(entry.id)
     if (entry.runInTerminal) {
       Quickshell.execDetached({
         command: [root.terminal, "-e"].concat(Array.from(entry.command)),

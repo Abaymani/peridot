@@ -371,6 +371,7 @@ Item {
       target: root.current
       onOpenRequested: modifiers => root.open(root.current, modifiers)
       onActionTriggered: action => {
+        AppUsage.record(root.current.app.id)
         root.closeRequested()
         action.execute()
       }
