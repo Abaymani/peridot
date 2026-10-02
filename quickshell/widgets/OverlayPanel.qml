@@ -23,6 +23,8 @@ PanelWindow {
   property real cardHeight: 300
   // Moves the card up (negative) or down from the screen's center.
   property real verticalOffset: 0
+  // The card's top-left instead of centring it, if set (x >= 0).
+  property point cardPosition: Qt.point(-1, -1)
   default property alias content: card.data
 
   signal dismissed()
@@ -33,7 +35,8 @@ PanelWindow {
   screen: Quickshell.screens.find(s => s.name === Hyprland.focusedMonitor?.name) ?? null
   WlrLayershell.layer: WlrLayer.Overlay
   WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
-  exclusiveZone: 0
+  // Not exclusiveZone: setting that forces this to Normal, over a user's override.
+  exclusionMode: ExclusionMode.Normal
   color: "transparent"
 
   anchors {
@@ -58,8 +61,10 @@ PanelWindow {
 
     PopupCard {
       id: card
-      anchors.centerIn: parent
+      anchors.centerIn: root.cardPosition.x >= 0 ? undefined : parent
       anchors.verticalCenterOffset: root.verticalOffset
+      x: root.cardPosition.x
+      y: root.cardPosition.y
       // No Behavior here: content that animates its own size (like the
       // launcher's details pane) would get a card lagging behind it.
       width: root.cardWidth

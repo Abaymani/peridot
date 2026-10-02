@@ -35,7 +35,7 @@ You also need to run the install script for the SDDM theme, found in /peridot/sd
 - [x] Launcher (Rofi/Wofi replacement)
 - [x] Unified settings app
 - [x] On-screen Keyboard
-- [ ] Emoji picker
+- [x] Emoji picker
 - [x] Clipboard history viewer
 
 **Control Center**

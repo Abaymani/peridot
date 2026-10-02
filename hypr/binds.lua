@@ -46,6 +46,7 @@ hl.bind(mainMod .. " + A", hl.dsp.global("quickshell:toggleControlCenter"))
 hl.bind(mainMod .. " + V", hl.dsp.global("quickshell:toggleClipboard"))
 hl.bind(mainMod .. " + D", hl.dsp.global("quickshell:toggleLauncher"))
 hl.bind(mainMod .. " + K", hl.dsp.global("quickshell:toggleOsk"), { locked = true })
+hl.bind(mainMod .. " + F6", hl.dsp.global("quickshell:toggleEmojiPicker"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))

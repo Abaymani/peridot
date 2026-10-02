@@ -32,6 +32,12 @@ Singleton {
         onPressed: root.launcherModeRequested(2)
     }
 
+    property bool isEmojiPickerOpen: false
+    property var toggleEmojiPicker: GlobalShortcut {
+        name: "toggleEmojiPicker"
+        onPressed: root.isEmojiPickerOpen = !root.isEmojiPickerOpen
+    }
+
     property bool isOskOpen: false
     property var toggleOsk: GlobalShortcut {
         name: "toggleOsk"
