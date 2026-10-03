@@ -11,6 +11,7 @@ import qs.services as Services
 Pill {
   id: root
   implicitWidth: mainLayout.implicitWidth + 20
+  visible: Settings.barNetworkStatus || Settings.barNetworkSpeed
 
   RowLayout {
     id: mainLayout
@@ -20,19 +21,21 @@ Pill {
 
     // Icon Logic: Shows Ethernet icon if wired, otherwise WiFi icon
     Looks.ClearText {
+      visible: Settings.barNetworkStatus
       color: Settings.textColorOnContainer
       text: Services.Network.activeEthernet ? "󰈀" : "" 
     }
 
         // Shows a VPN icon when a VPN (or WireGuard) connection is active
     Looks.ClearText {
-      visible: Services.Network.vpnActive
+      visible: Settings.barNetworkStatus && Services.Network.vpnActive
       color: Settings.textColorOnContainer
       text: ""
     }
     
     //Shows "Wired" or the SSID of the WiFi
     Looks.ClearText {
+      visible: Settings.barNetworkStatus
       font.pixelSize: Looks.Fonts.size - 2
       color: Settings.textColorOnContainer
       text: {
@@ -43,11 +46,13 @@ Pill {
     }
 
     Looks.Separator {
+      visible: Settings.barNetworkStatus && Settings.barNetworkSpeed
       color: Settings.textColorOnContainer
     }
 
     // Download speed
     Looks.ClearText {
+      visible: Settings.barNetworkSpeed
       font.pixelSize: Looks.Fonts.size -2
       color: Settings.textColorOnContainer
       property var stats: Services.NetworkUsage.formatBytes(Services.NetworkUsage.downloadSpeed)
@@ -55,11 +60,13 @@ Pill {
     }
 
     Looks.Separator {
+      visible: Settings.barNetworkSpeed
       color: Settings.textColorOnContainer
     }
 
     // Upload speed
     Looks.ClearText {
+      visible: Settings.barNetworkSpeed
       font.pixelSize: Looks.Fonts.size -2
       color: Settings.textColorOnContainer
       property var stats: Services.NetworkUsage.formatBytes(Services.NetworkUsage.uploadSpeed)

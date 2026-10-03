@@ -4,6 +4,33 @@
     "activebackgroundGradient": "WeakH2C",
     "audioIncrement": 2,
     "backdropFloorOpacity": 0.3,
+    "barCpuUsage": true,
+    "barDateFormat": "",
+    "barLayout": {
+        "center": [
+            "clock"
+        ],
+        "hidden": [
+            "updates"
+        ],
+        "left": [
+            "workspaces",
+            "activeWindow"
+        ],
+        "right": [
+            "resources",
+            "audio",
+            "media",
+            "tray",
+            "network",
+            "battery",
+            "power"
+        ]
+    },
+    "barMemoryDisplay": "percent",
+    "barNetworkSpeed": false,
+    "barNetworkStatus": true,
+    "barTimeFormat": "HH:mm",
     "gradientBgEnabled": true,
     "isDarkMode": true,
     "launcherDetailsPane": true,
@@ -15,5 +42,6 @@
     "oskPinned": false,
     "profilePicture": "",
     "scrollSpeedMultiplier": 60,
+    "switcherPreviews": "live",
     "userOverridePowerProfile": true
 }

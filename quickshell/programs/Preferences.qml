@@ -47,6 +47,9 @@ Scope {
                         store: Settings.store, keys: ["gradientBgEnabled", "isDarkMode", "activeGradient", "activeSecondaryGradient",
                             "activebackgroundGradient", "backdropFloorOpacity", "scrollSpeedMultiplier",
                             "matugenSourceColorIndex"]},
+                    {name: "Bar", icon: "\u{f06fc}", page: barPageComponent,
+                        store: Settings.store, keys: ["barLayout", "barMemoryDisplay", "barCpuUsage", "barNetworkStatus", "barNetworkSpeed",
+                            "barDateFormat", "barTimeFormat"]},
                     {name: "Power", icon: "\u{f1905}", page: powerPageComponent,
                         store: Settings.store, keys: ["userOverridePowerProfile", "onBatteryPowerProfile", "onChargerPowerProfile"]},
                     {name: "Audio", icon: "\u{f057e}", page: audioPageComponent,
@@ -93,6 +96,7 @@ Scope {
 
         Component { id: profilePageComponent; ProfilePage {} }
         Component { id: appearancePageComponent; AppearancePage {} }
+        Component { id: barPageComponent; BarPage {} }
         Component { id: powerPageComponent; PowerPage {} }
         Component { id: hyprlandDecorationsPageComponent; HyprlandDecorationsPage {} }
         Component { id: hyprlandInputPageComponent; HyprlandInputPage {} }

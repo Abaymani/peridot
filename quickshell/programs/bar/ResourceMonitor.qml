@@ -8,7 +8,10 @@ import qs
 
 Pill {
   id: root
+  readonly property bool showsMemory: Settings.barMemoryDisplay !== "hidden"
+
   implicitWidth: mainLayout.implicitWidth + 20
+  visible: showsMemory || Settings.barCpuUsage
 
   RowLayout {
     id: mainLayout
@@ -17,16 +20,20 @@ Pill {
     spacing: 4
 
     Looks.ClearText {
+      visible: root.showsMemory
       color: Settings.textColorOnContainer
       text: ""
     }
     Looks.ClearText {
       id: memoryText
+      visible: root.showsMemory
 
       font.pixelSize: Looks.Fonts.size -2
       color: Settings.textColorOnContainer
 
       text: {
+        if (Settings.barMemoryDisplay === "percent")
+          return (Services.ResourceUsage.memoryUsedPercentage * 100).toFixed(1).padStart(4, ' ') + "%";
         let usage = Services.ResourceUsage.memoryUsed.toFixed(2).padStart(5, ' ');
         let total = Services.ResourceUsage.memoryTotal.toFixed(2);
         return `${usage}/${total} GiB`
@@ -34,18 +41,21 @@ Pill {
     }
 
     Looks.Separator {
+      visible: root.showsMemory && Settings.barCpuUsage
       Layout.leftMargin: 2
       Layout.rightMargin: 3
       color: Settings.textColorOnContainer
     }
 
     Looks.ClearText {
+      visible: Settings.barCpuUsage
       color: Settings.textColorOnContainer
       text: ""
     }
 
     Looks.ClearText {
       id: cpuText
+      visible: Settings.barCpuUsage
 
       font.pixelSize: Looks.Fonts.size -2
       color: Settings.textColorOnContainer

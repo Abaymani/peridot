@@ -58,6 +58,16 @@ Singleton {
     //PROFILE
     property alias profilePicture: jsonAdapter.profilePicture
 
+    //BAR
+    property alias barLayout: jsonAdapter.barLayout // see BarWidgets
+    property alias barMemoryDisplay: jsonAdapter.barMemoryDisplay // "amount", "percent" or "hidden"
+    property alias barCpuUsage: jsonAdapter.barCpuUsage
+    property alias barNetworkStatus: jsonAdapter.barNetworkStatus
+    property alias barNetworkSpeed: jsonAdapter.barNetworkSpeed
+    // Qt date/time formats; "" hides that part.
+    property alias barDateFormat: jsonAdapter.barDateFormat
+    property alias barTimeFormat: jsonAdapter.barTimeFormat
+
     //SHELL BEHAVIOR
     property alias scrollSpeedMultiplier: jsonAdapter.scrollSpeedMultiplier
 
@@ -99,6 +109,14 @@ Singleton {
             property string profilePicture: ""
 
             property real scrollSpeedMultiplier: 30
+
+            property var barLayout: ({})
+            property string barMemoryDisplay: "amount"
+            property bool barCpuUsage: true
+            property bool barNetworkStatus: true
+            property bool barNetworkSpeed: true
+            property string barDateFormat: "dddd, MM/dd"
+            property string barTimeFormat: "hh:mm"
 
             property bool launcherDetailsPane: true
 

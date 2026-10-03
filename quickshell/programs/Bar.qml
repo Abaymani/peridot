@@ -37,24 +37,9 @@ Scope {
 				color: "transparent"
 				clip: true
 
-				RowLayout {
+				// Which widgets go where is set in Preferences › Bar.
+				BarContent {
 					anchors.fill: parent
-					spacing: 8
-
-					Updates { Layout.fillWidth: false }
-					Workspaces { Layout.fillWidth: false }
-					ActiveWindow { Layout.fillWidth: false}
-					
-					Item { Layout.fillWidth: true }
-					
-					NetworkWidget {}
-					ResourceMonitor {}
-					AudioControls {}
-					Mpris { Layout.fillWidth: false }
-					Tray { Layout.alignment: Qt.AlignVCenter }
-					BatteryWidget {}
-					ClockWidget {}
-					Logout {}
 				}
 			}
 		}
