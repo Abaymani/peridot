@@ -86,6 +86,7 @@ Since I don't have an install script (yet) and have multiple setups, here are al
 7zip
 **adw-gtk-theme**
 awww
+adwsteamgtk
 **brillo**
 bibata-cursor-theme-bin
 **blueman**

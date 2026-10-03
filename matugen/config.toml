@@ -65,3 +65,8 @@ output_path = '~/.config/obs-studio/themes/matugen.obt'
 [templates.waypaper]
 input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/waypaper/colors.css'
+
+[templates.steam]
+input_path = '~/.config/matugen/templates/steam.css'
+output_path = '~/.config/AdwSteamGtk/custom.css'
+post_hook =  'adwaita-steam-gtk -i'
