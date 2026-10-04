@@ -7,10 +7,9 @@ import qs.widgets
 import qs.services
 import qs
 
-// Profile card: picture with username/uptime to its right, anchored to the
-// top so the rest of the card is free for future additions. Sized to span
-// the combined height of the quick-tools button row and the dashboard box
-// beside it (see ControlCenter.qml).
+// Profile card: picture, username and uptime at the top, lock and power
+// buttons at the bottom. Sized to span the quick-tools row and the dashboard
+// box beside it (see ControlCenter.qml).
 Rectangle {
   id: root
 
@@ -58,6 +57,20 @@ Rectangle {
         color: Settings.textColorOnContainer
         elide: Text.ElideRight
       }
+    }
+  }
+
+  BtnGroup {
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    anchors.margins: 8
+    onPrimaryBg: true
+    options: ["\u{f033e}", "\u{f0425}"]
+    onNewClick: index => {
+      GlobalStates.isControlCenterOpen = false
+      if (index === 0) Session.lock()
+      else GlobalStates.isPowerMenuOpen = true
     }
   }
 }

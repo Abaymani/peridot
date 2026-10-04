@@ -13,11 +13,13 @@ Rectangle {
   signal newClick(int index)
 
   implicitHeight: buttonRow.implicitHeight
-  implicitWidth: buttonRow.width
+  implicitWidth: buttonRow.implicitWidth
   color: "transparent"
 
+  // Buttons share out any width beyond their own.
   RowLayout {
     id: buttonRow
+    anchors.fill: parent
     spacing: 2
 
     Repeater {
@@ -35,6 +37,7 @@ Rectangle {
         topRightRadius: isLast ? Decorations.decor.radius : 0
         bottomRightRadius: isLast ? Decorations.decor.radius : 0
 
+        Layout.fillWidth: true
         buttonText: modelData
         onPrimaryBg: root.onPrimaryBg
         widthPadding: root.widthPadding

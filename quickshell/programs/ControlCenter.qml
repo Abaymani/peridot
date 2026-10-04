@@ -106,21 +106,29 @@ Scope {
 
 								Brightness { Layout.fillWidth: true }
 
-								RadioBtnGroup {
+								RowLayout {
 									Layout.fillWidth: true
-									color: "transparent"
-									options: ["󱤅", "", ""]
-									selectedIndex: 1
-									onPrimaryBg: true
+									spacing: 5
 
-									enabled: Settings.userOverridePowerProfile
-									opacity: Settings.userOverridePowerProfile ? 1.0 : 0.5
+									RadioBtnGroup {
+										color: "transparent"
+										options: ["󱤅", "", ""]
+										selectedIndex: 1
+										onPrimaryBg: true
 
-									onSelectionChanged: {
-										if (this.selectedIndex === 0) BatteryService.updatePowerProfile("power-saver")
-										else if (this.selectedIndex === 1) BatteryService.updatePowerProfile("balanced")
-										else if (this.selectedIndex === 2) BatteryService.updatePowerProfile("performance")
+										enabled: Settings.userOverridePowerProfile
+										opacity: Settings.userOverridePowerProfile ? 1.0 : 0.5
+
+										onSelectionChanged: {
+											if (this.selectedIndex === 0) BatteryService.updatePowerProfile("power-saver")
+											else if (this.selectedIndex === 1) BatteryService.updatePowerProfile("balanced")
+											else if (this.selectedIndex === 2) BatteryService.updatePowerProfile("performance")
+										}
 									}
+
+									Item { Layout.fillWidth: true }
+
+									ResourceRings {}
 								}
 
 								Item{

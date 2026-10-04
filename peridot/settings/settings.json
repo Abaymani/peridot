@@ -11,20 +11,20 @@
             "clock"
         ],
         "hidden": [
-            "updates"
+            "updates",
+            "power",
+            "media",
+            "resources"
         ],
         "left": [
             "workspaces",
             "activeWindow"
         ],
         "right": [
-            "resources",
-            "audio",
-            "media",
             "tray",
+            "audio",
             "network",
-            "battery",
-            "power"
+            "battery"
         ]
     },
     "barMemoryDisplay": "percent",
