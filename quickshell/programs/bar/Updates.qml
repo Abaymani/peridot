@@ -31,9 +31,15 @@ Pill {
 
 		// --- Update Count ---
 		Looks.ClearText {
-			text: Services.UpdateService.isChecking ? "..." : Services.UpdateService.count
+			visible: !Services.UpdateService.isChecking
+			text: Services.UpdateService.count
 			font.pixelSize: Looks.Fonts.size -1
 			color: Settings.textColorOnContainer
+		}
+
+		LoadingDots {
+			visible: Services.UpdateService.isChecking
+			pixelSize: Looks.Fonts.size - 1
 		}
 	}
 

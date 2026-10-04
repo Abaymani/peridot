@@ -9,6 +9,7 @@ Singleton {
   id: root
 
   property int count: 0
+  readonly property bool isChecking: updateProcess.running
 
   Process {
     id: updateProcess
