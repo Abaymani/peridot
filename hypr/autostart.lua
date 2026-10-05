@@ -6,8 +6,8 @@ hl.on("hyprland.start", function ()
     -- Start shell and wallpaper
     hl.exec_cmd("qs & waypaper --restore")
 
-    -- Start hypridle
-    hl.exec_cmd("hypridle")
+    -- Start hypridle, unless its systemd user service already does
+    hl.exec_cmd("systemctl --user -q is-enabled hypridle.service || hypridle")
 
     -- Start cliphist to watch text and images
     hl.exec_cmd("wl-paste --type text --watch cliphist store")
