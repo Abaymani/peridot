@@ -39,7 +39,7 @@ hl.bind(mainMod .. " + delete", hl.dsp.exec_cmd("missioncenter"))
 
 -- lock.sh runs hyprlock with opt. on-screen keyboard
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(peridot_scripts .. "/lock.sh"))
-hl.bind("switch:off:Lid", hl.dsp.exec_cmd(peridot_scripts .. "/lock.sh"), { locked = true })
+hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd(peridot_scripts .. "/lock.sh"), { locked = true })
 
 -- Quickshell
 hl.bind(mainMod .. " + A", hl.dsp.global("quickshell:toggleControlCenter"))
