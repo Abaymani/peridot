@@ -150,6 +150,7 @@ polkit-kde-agent
 qbittorrent
 **qt5ct**
 **qt6ct**
+**qt6-imageformats**
 **quickshell**
 sddm
 **slurp**

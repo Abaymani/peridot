@@ -10,6 +10,10 @@ ColumnLayout {
     width: parent.width
     spacing: 24
 
+    readonly property string imagePatterns: ["png", "jpg", "jpeg", "jfif", "webp", "bmp", "gif"]
+        .map(ext => "*." + ext.split("").map(c => "[" + c + c.toUpperCase() + "]").join(""))
+        .join(" ")
+
     Looks.ClearText {
         text: "Profile"
         font.pixelSize: Looks.Fonts.size + 8
@@ -58,7 +62,7 @@ ColumnLayout {
 
     Process {
         id: pickerProc
-        command: ["zenity", "--file-selection", "--title=Choose profile picture", "--file-filter=Images | *.png *.jpg *.jpeg *.webp *.bmp *.gif"]
+        command: ["zenity", "--file-selection", "--title=Choose profile picture", "--file-filter=Images | " + root.imagePatterns]
         running: false
 
         stdout: StdioCollector {

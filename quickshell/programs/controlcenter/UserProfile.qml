@@ -26,7 +26,10 @@ Rectangle {
     anchors.top: parent.top
     anchors.left: parent.left
     anchors.right: parent.right
-    anchors.margins: 8
+    anchors.topMargin: 4
+    anchors.leftMargin: 8
+    anchors.rightMargin: 8
+    anchors.bottomMargin: 4
     spacing: 6
 
     CircleImage {

@@ -51,7 +51,7 @@ Scope {
 			ColumnLayout {
 				anchors.fill: parent
 				id: contentColumn
-				spacing: 12 // Space between rows
+				spacing: 8 // Space between rows
 				anchors.margins: 8
 
 				RowLayout {
@@ -66,7 +66,7 @@ Scope {
 
 					ColumnLayout {
 						Layout.fillWidth: true
-						spacing: 12
+						spacing: 8
 
 						RowLayout {
 							id: quicktools

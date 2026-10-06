@@ -1,6 +1,6 @@
 {
-    "activeGradient": "PrimaryH3C",
-    "activeSecondaryGradient": "PrimaryV2C",
+    "activeGradient": "WeakH2C",
+    "activeSecondaryGradient": "WeakH2C",
     "activebackgroundGradient": "WeakH2C",
     "audioIncrement": 2,
     "backdropFloorOpacity": 0.3,
