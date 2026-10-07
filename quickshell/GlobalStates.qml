@@ -96,9 +96,12 @@ Singleton {
     }
 
     property bool isPowerMenuOpen: false
+    property var togglePowerMenu: GlobalShortcut {
+        name: "togglePowerMenu"
+        onPressed: root.isPowerMenuOpen = !root.isPowerMenuOpen
+    }
 
     property bool isSettingsOpen: false
-
     function toggleSettings(): void {
         const win = Hyprland.toplevels.values.find(t => t.title === "Peridot Settings")
 
