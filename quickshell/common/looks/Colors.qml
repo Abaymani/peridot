@@ -73,6 +73,25 @@ Singleton {
 		property string tertiary_container: "transparent"
 		property string tertiary_fixed: "transparent"
 		property string tertiary_fixed_dim: "transparent"
+		// Calendar colors, from config.custom_colors in matugen/config.toml.
+		property string cal_red: "transparent"
+		property string cal_red_container: "transparent"
+		property string on_cal_red_container: "transparent"
+		property string cal_amber: "transparent"
+		property string cal_amber_container: "transparent"
+		property string on_cal_amber_container: "transparent"
+		property string cal_green: "transparent"
+		property string cal_green_container: "transparent"
+		property string on_cal_green_container: "transparent"
+		property string cal_teal: "transparent"
+		property string cal_teal_container: "transparent"
+		property string on_cal_teal_container: "transparent"
+		property string cal_blue: "transparent"
+		property string cal_blue_container: "transparent"
+		property string on_cal_blue_container: "transparent"
+		property string cal_purple: "transparent"
+		property string cal_purple_container: "transparent"
+		property string on_cal_purple_container: "transparent"
 	}
 
 	component Palette: JsonObject {

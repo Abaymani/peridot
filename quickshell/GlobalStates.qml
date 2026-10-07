@@ -62,6 +62,39 @@ Singleton {
         onExited: (exitCode, exitStatus) => root.screenLocked = exitCode === 0
     }
 
+    // The calendar opens under the clock that asked for it: on that clock's
+    // screen, centred on calendarAnchorX (screen coordinates; -1 centres it
+    // on the screen, e.g. when the clock is hidden).
+    property bool isCalendarOpen: false
+    property string calendarScreen: ""
+    property real calendarAnchorX: -1
+    // Asks the clock on `screenName` for calendarAnchorX.
+    signal calendarAnchorRequested(string screenName)
+
+    function toggleCalendarAt(screenName: string, anchorX: real): void {
+        if (root.isCalendarOpen && root.calendarScreen === screenName) {
+            root.isCalendarOpen = false
+            return
+        }
+        root.calendarScreen = screenName
+        root.calendarAnchorX = anchorX
+        root.isCalendarOpen = true
+    }
+
+    property var toggleCalendar: GlobalShortcut {
+        name: "toggleCalendar"
+        onPressed: {
+            if (root.isCalendarOpen) {
+                root.isCalendarOpen = false
+                return
+            }
+            const screenName = Hyprland.focusedMonitor?.name ?? ""
+            root.calendarAnchorX = -1
+            root.calendarAnchorRequested(screenName)
+            root.toggleCalendarAt(screenName, root.calendarAnchorX)
+        }
+    }
+
     property bool isPowerMenuOpen: false
 
     property bool isSettingsOpen: false

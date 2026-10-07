@@ -26,6 +26,8 @@ PanelWindow {
   // The card's top-left instead of centring it, if set (x >= 0).
   property point cardPosition: Qt.point(-1, -1)
   default property alias content: card.data
+  // Where the click that dismissed the panel landed; (-1, -1) for Escape.
+  property point dismissPoint: Qt.point(-1, -1)
 
   signal dismissed()
   // Each time the panel appears - focus your input here.
@@ -50,14 +52,20 @@ PanelWindow {
 
   MouseArea {
     anchors.fill: parent
-    onClicked: root.dismissed()
+    onClicked: mouse => {
+      root.dismissPoint = Qt.point(mouse.x, mouse.y)
+      root.dismissed()
+    }
   }
 
   // Escape reaches this from whichever child has focus, unless it used it.
   FocusScope {
     anchors.fill: parent
     focus: true
-    Keys.onEscapePressed: root.dismissed()
+    Keys.onEscapePressed: {
+      root.dismissPoint = Qt.point(-1, -1)
+      root.dismissed()
+    }
 
     PopupCard {
       id: card

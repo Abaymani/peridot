@@ -79,8 +79,16 @@ QtObject {
         return value !== null && typeof value === "object" ? JSON.parse(JSON.stringify(value)) : value;
     }
 
+    // Key order doesn't count: the file comes back with its keys sorted, while
+    // objects built in QML keep the order they were written in.
     function same(a, b): bool {
-        return a === b || JSON.stringify(a) === JSON.stringify(b);
+        return a === b || canonical(a) === canonical(b);
+    }
+
+    function canonical(value): string {
+        return JSON.stringify(value, (key, v) => v !== null && typeof v === "object" && !Array.isArray(v)
+            ? Object.keys(v).sort().reduce((sorted, k) => { sorted[k] = v[k]; return sorted; }, {})
+            : v);
     }
 
     readonly property FileView file: FileView {

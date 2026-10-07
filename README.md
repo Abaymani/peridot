@@ -26,8 +26,8 @@ You also need to run the install script for the SDDM theme, found in /peridot/sd
 **Topbar ✅**
 
 **Calendar**
-- [ ] Simple calendar view
-- [ ] Google calendar / ical integration
+- [x] Simple calendar view
+- [x] Google calendar / ical integration
 
 **Misc.**
 - [x] SDDM theme
@@ -145,6 +145,8 @@ openssh
 **pavucontrol**
 pipewire-pulse
 python-pywalfox
+python-icalendar 
+python-recurring-ical-events
 polkit-kde-agent
 **power-profiles-daemon**
 qbittorrent

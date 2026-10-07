@@ -17,3 +17,4 @@ peridot/.cache/
 starship.toml
 fish/conf.d/matugen-colors.fish
 peridot/settings/current_wallpaper.txt
+peridot/settings/calendars.json

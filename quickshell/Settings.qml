@@ -82,6 +82,9 @@ Singleton {
     //WORKSPACE SWITCHER
     property alias switcherPreviews: jsonAdapter.switcherPreviews // "live", "still" or "off"
 
+    //CALENDAR
+    property alias calendarView: jsonAdapter.calendarView // "month" or "week"; saved as soon as it's switched
+
     // --- Persistence ---
     // The aliases above live in settings.json: changes apply live, and `store`
     // saves or reverts them (see SettingsStore).
@@ -125,6 +128,8 @@ Singleton {
             property bool oskPinned: false
 
             property string switcherPreviews: "live"
+
+            property string calendarView: "month"
         }
     }
 }

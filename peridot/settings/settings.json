@@ -3,7 +3,7 @@
     "activeSecondaryGradient": "WeakH2C",
     "activebackgroundGradient": "WeakH2C",
     "audioIncrement": 2,
-    "backdropFloorOpacity": 0.3,
+    "backdropFloorOpacity": 0.2,
     "barCpuUsage": true,
     "barDateFormat": "",
     "barLayout": {
@@ -31,6 +31,7 @@
     "barNetworkSpeed": false,
     "barNetworkStatus": true,
     "barTimeFormat": "HH:mm",
+    "calendarView": "week",
     "gradientBgEnabled": true,
     "isDarkMode": true,
     "launcherDetailsPane": true,

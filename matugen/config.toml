@@ -1,4 +1,15 @@
 [config]
+
+# Calendar colors (quickshell/programs/calendar). Blended toward the wallpaper;
+# hues closer than these come out alike (red, orange and pink all turn pink).
+[config.custom_colors]
+cal_red = "#d50000"
+cal_amber = "#f6bf26"
+cal_green = "#0b8043"
+cal_teal = "#009688"
+cal_blue = "#039be5"
+cal_purple = "#8e24aa"
+
 [templates.firefox-website-colors]
 input_path = "~/.config/matugen/templates/firefox-colors.css"
 output_path = "~/.config/mozilla/firefox/7l4qjhrw.default-release/chrome/colors.css"
