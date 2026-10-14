@@ -43,22 +43,25 @@ hl.curve("standardDecel", {type = "bezier", points = {{0, 0}, {0, 1}}})
 hl.curve("menu_decel", {type = "bezier", points = {{0.1, 1}, {0, 1}}})
 hl.curve("menu_accel", {type = "bezier", points = {{0.52, 0.03}, {0.72, 0.08}}})
 hl.curve("stall", {type = "bezier", points = {{1, -0.1}, {0.7, 0.85}}})
+-- Mirrored open/close pair: {a, b}, {c, d} reverses to {1-c, 1-d}, {1-a, 1-b}
+hl.curve("windowOpen", {type = "bezier", points = {{0.25, 1}, {0.5, 1}}})
+hl.curve("windowClose", {type = "bezier", points = {{0.5, 0}, {0.75, 0}}})
 -- windows
-hl.animation({leaf = "windowsIn", enabled = true, speed = 3, bezier = "emphasizedDecel", style = "popin 80%"})
-hl.animation({leaf = "fadeIn", enabled = true, speed = 3, bezier = "emphasizedDecel"})
-hl.animation({leaf = "windowsOut", enabled = true, speed = 2, bezier = "emphasizedDecel", style = "popin 90%"})
+hl.animation({leaf = "windowsIn", enabled = true, speed = 2, bezier = "windowOpen", style = "slide"})
+hl.animation({leaf = "fadeIn", enabled = true, speed = 2, bezier = "emphasizedDecel"})
+hl.animation({leaf = "windowsOut", enabled = true, speed = 2, bezier = "windowClose", style = "slide"})
 hl.animation({leaf = "fadeOut", enabled = true, speed = 2, bezier = "emphasizedDecel"})
-hl.animation({leaf = "windowsMove", enabled = true, speed = 3, bezier = "emphasizedDecel", style = "slide"})
+hl.animation({leaf = "windowsMove", enabled = true, speed = 2, bezier = "emphasizedDecel", style = "slide"})
 hl.animation({leaf = "border", enabled = true, speed = 10, bezier = "emphasizedDecel"})
 
 -- layers
-hl.animation({leaf = "layersIn", enabled = true, speed = 2.7, bezier = "emphasizedDecel", style = "popin 93%"})
-hl.animation({leaf = "layersOut", enabled = true, speed = 2.4, bezier = "menu_accel", style = "popin 94%"})
+hl.animation({leaf = "layersIn", enabled = true, speed = 2, bezier = "emphasizedDecel", style = "slide"})
+hl.animation({leaf = "layersOut", enabled = true, speed = 2, bezier = "menu_accel", style = "slide"})
 -- fade
 hl.animation({leaf = "fadeLayersIn", enabled = true, speed = 0.5, bezier = "menu_decel"})
 hl.animation({leaf = "fadeLayersOut", enabled = true, speed = 2.7, bezier = "stall"})
 -- workspaces
-hl.animation({leaf = "workspaces", enabled = true, speed = 7, bezier = "menu_decel", style = "slide"})
+hl.animation({leaf = "workspaces", enabled = true, speed = 2, bezier = "menu_decel", style = "slide"})
 -- specialWorkspace
 hl.animation({leaf = "specialWorkspaceIn", enabled = true, speed = 2.8, bezier = "emphasizedDecel", style = "slidevert"})
 hl.animation({leaf = "specialWorkspaceOut", enabled = true, speed = 1.2, bezier = "emphasizedAccel", style = "slidevert"})
