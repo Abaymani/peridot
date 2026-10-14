@@ -50,9 +50,9 @@ hl.curve("windowClose", {type = "bezier", points = {{0.5, 0}, {0.75, 0}}})
 hl.animation({leaf = "windowsIn", enabled = true, speed = 2, bezier = "windowOpen", style = "slide"})
 hl.animation({leaf = "fadeIn", enabled = true, speed = 2, bezier = "emphasizedDecel"})
 hl.animation({leaf = "windowsOut", enabled = true, speed = 2, bezier = "windowClose", style = "slide"})
-hl.animation({leaf = "fadeOut", enabled = true, speed = 2, bezier = "emphasizedDecel"})
+hl.animation({leaf = "fadeOut", enabled = true, speed = 10, bezier = "emphasizedDecel"})
 hl.animation({leaf = "windowsMove", enabled = true, speed = 2, bezier = "emphasizedDecel", style = "slide"})
-hl.animation({leaf = "border", enabled = true, speed = 10, bezier = "emphasizedDecel"})
+hl.animation({leaf = "border", enabled = true, speed = 6, bezier = "emphasizedDecel"})
 
 -- layers
 hl.animation({leaf = "layersIn", enabled = true, speed = 2, bezier = "emphasizedDecel", style = "slide"})
