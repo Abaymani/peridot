@@ -77,6 +77,14 @@ mkdir -p ~/.local/share/icons/
 ln -sfn ~/peridot/peridot/icons/YAMIS/ ~/.local/share/icons/YAMIS
 ```
 
+#### Spotify
+Themed with Spicetify (`spotify-launcher` install). Its AUR build also needs `nodejs`. Launching through *spicetify/spotify.sh* re-applies the theme after Spotify updates, so point the desktop entry at it:
+```
+yay -S spicetify-cli
+spicetify backup apply
+sed "s|^Exec=.*|Exec=$HOME/.config/spicetify/spotify.sh %U|" /usr/share/applications/spotify-launcher.desktop > ~/.local/share/applications/spotify-launcher.desktop
+```
+
 ___
 
 Since I don't have an install script (yet) and have multiple setups, here are all the packages I use. **Some are hard-referenced or assumed by scripts**. I think I have bolded required packages below but no guarantee.
