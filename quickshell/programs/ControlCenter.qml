@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Hyprland
+import Quickshell.Services.UPower
 import qs.common.looks as Looks
 import qs.services
 import qs.widgets
@@ -111,9 +112,9 @@ Scope {
 									spacing: 5
 
 									RadioBtnGroup {
+										id: powerProfileSwitch
 										color: "transparent"
 										options: ["󱤅", "", ""]
-										selectedIndex: 1
 										onPrimaryBg: true
 
 										enabled: Settings.userOverridePowerProfile
@@ -124,6 +125,13 @@ Scope {
 											else if (this.selectedIndex === 1) BatteryService.updatePowerProfile("balanced")
 											else if (this.selectedIndex === 2) BatteryService.updatePowerProfile("performance")
 										}
+									}
+
+									Binding {
+										target: powerProfileSwitch
+										property: "selectedIndex"
+										value: [PowerProfile.PowerSaver, PowerProfile.Balanced, PowerProfile.Performance]
+											.indexOf(PowerProfiles.profile)
 									}
 
 									Item { Layout.fillWidth: true }
