@@ -43,6 +43,7 @@ hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd(peridot_scripts .. "/lock.sh"), 
 -- Quickshell
 hl.bind(mainMod .. " + A", hl.dsp.global("quickshell:toggleControlCenter"))
 hl.bind(mainMod .. " + V", hl.dsp.global("quickshell:toggleClipboard"))
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.global("quickshell:toggleCalendar"))
 hl.bind(mainMod .. " + D", hl.dsp.global("quickshell:toggleLauncher"))
 hl.bind(mainMod .. " + K", hl.dsp.global("quickshell:toggleOsk"), { locked = true })
 hl.bind(mainMod .. " + P", hl.dsp.global("quickshell:togglePowerMenu"))

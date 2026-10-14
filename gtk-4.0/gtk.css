@@ -1,1 +1,9 @@
 @import url('colors.css');
+
+/* adw-gtk3's libadwaita-tweaks.css pins the accent to var(--accent-blue);
+   point it back at the matugen colors. */
+:root {
+  --accent-bg-color: @accent_bg_color;
+  --accent-fg-color: @accent_fg_color;
+  --accent-color: @accent_color;
+}
