@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Effects
+import Qt5Compat.GraphicalEffects
 import Quickshell
 import Quickshell.Io
 import qs.common.looks as Looks
@@ -38,74 +38,108 @@ Rectangle {
     }
   }
 
-  // Hover + click feedback, kept below the label so it never obscures the
-  // text. Tinted with textColor rather than a fixed color so it reads
-  // correctly against the button's fill either way - flat surface color or
-  // gradient - since textColor is already chosen to contrast with both.
+  // Hover + click feedback after end-4's RippleButton (dots-hyprland): a
+  // background that takes the hover color and holds the ripple, masked to
+  // root's (possibly per-corner, see BtnGroup) rounded shape by an always-on
+  // layer. The ripple starts on press, grows toward the farthest corner and
+  // fades once released. Its look and timing follow the old ripple: a crisp
+  // 22% circle over 450ms.
   //
-  // Masked to root's exact (possibly per-corner, see BtnGroup) rounded
-  // shape rather than just `clip: true`, since plain clipping only clips to
-  // the bounding rect and would show square corners under a grown ripple.
-  Item {
-    id: feedbackLayer
-    anchors.fill: parent
-    layer.enabled: true
-    visible: false
-
-    Rectangle {
-      anchors.fill: parent
-      color: root.textColor
-      opacity: mouseArea.containsMouse && root.enabled ? 0.08 : 0
-
-      Behavior on opacity {
-        NumberAnimation { duration: 120; easing.type: Easing.OutQuad }
-      }
-    }
-  }
+  // Known issue: in the full shell this layer stops refreshing after a while
+  // (hover and ripple show late or freeze). See the layer-free version.
+  readonly property int rippleDuration: 450
 
   Rectangle {
-    id: feedbackMask
+    id: feedbackBackground
     anchors.fill: parent
     radius: root.radius
     topLeftRadius: root.topLeftRadius
     topRightRadius: root.topRightRadius
     bottomLeftRadius: root.bottomLeftRadius
     bottomRightRadius: root.bottomRightRadius
+    // end-4's hover color is 8% of the way from the surface to its text color.
+    color: ColorUtils.setAlphaColor(root.textColor, mouseArea.containsMouse && root.enabled ? 0.08 : 0)
+
+    Behavior on color {
+      ColorAnimation { duration: 200; easing.type: Easing.BezierSpline; easing.bezierCurve: [0.34, 0.80, 0.34, 1.00, 1, 1] }
+    }
+
     layer.enabled: true
-    visible: false
-  }
-
-  MultiEffect {
-    anchors.fill: parent
-    source: feedbackLayer
-    maskEnabled: true
-    maskSource: feedbackMask
-  }
-
-  Component {
-    id: rippleComponent
-
-    Rectangle {
-      id: ripple
-      required property real clickX
-      required property real clickY
-      property real targetDiameter: Math.max(root.width, root.height) * 2
-
-      x: clickX - width / 2
-      y: clickY - height / 2
-      width: 0
-      height: 0
-      radius: width / 2
-      color: root.textColor
-      opacity: 0.22
-
-      ParallelAnimation {
-        running: true
-        NumberAnimation { target: ripple; properties: "width,height"; to: ripple.targetDiameter; duration: 450; easing.type: Easing.OutQuad }
-        NumberAnimation { target: ripple; property: "opacity"; to: 0; duration: 450; easing.type: Easing.OutQuad }
-        onStopped: ripple.destroy()
+    layer.effect: OpacityMask {
+      maskSource: Rectangle {
+        width: feedbackBackground.width
+        height: feedbackBackground.height
+        radius: root.radius
+        topLeftRadius: root.topLeftRadius
+        topRightRadius: root.topRightRadius
+        bottomLeftRadius: root.bottomLeftRadius
+        bottomRightRadius: root.bottomRightRadius
       }
     }
+
+    Item {
+      id: ripple
+      property real size: 0
+      width: size
+      height: size
+      opacity: 0
+      visible: size > 0
+
+      // The gradient's 0.5 is the item's edge, so this is a solid circle.
+      RadialGradient {
+        anchors.fill: parent
+        gradient: Gradient {
+          GradientStop { position: 0.0; color: ColorUtils.setAlphaColor(root.textColor, 0.22) }
+          GradientStop { position: 0.49; color: ColorUtils.setAlphaColor(root.textColor, 0.22) }
+          GradientStop { position: 0.5; color: ColorUtils.setAlphaColor(root.textColor, 0) }
+        }
+      }
+
+      transform: Translate {
+        x: -ripple.width / 2
+        y: -ripple.height / 2
+      }
+    }
+  }
+
+  function startRipple(x: real, y: real): void {
+    rippleGrow.centerX = x
+    rippleGrow.centerY = y
+    rippleGrow.reach = Math.max(
+      Math.hypot(x, y),
+      Math.hypot(root.width - x, y),
+      Math.hypot(x, root.height - y),
+      Math.hypot(root.width - x, root.height - y))
+    rippleFade.complete()
+    rippleGrow.restart()
+  }
+
+  SequentialAnimation {
+    id: rippleGrow
+    property real centerX
+    property real centerY
+    property real reach
+
+    PropertyAction { target: ripple; property: "x"; value: rippleGrow.centerX }
+    PropertyAction { target: ripple; property: "y"; value: rippleGrow.centerY }
+    PropertyAction { target: ripple; property: "opacity"; value: 1 }
+    NumberAnimation {
+      target: ripple
+      property: "size"
+      from: 0
+      to: rippleGrow.reach * 2
+      duration: root.rippleDuration
+      easing.type: Easing.OutQuad
+    }
+  }
+
+  NumberAnimation {
+    id: rippleFade
+    target: ripple
+    property: "opacity"
+    to: 0
+    duration: root.rippleDuration
+    easing.type: Easing.OutQuad
   }
 
   Looks.ClearText {
@@ -124,9 +158,9 @@ Rectangle {
       cursorShape: Qt.PointingHandCursor
       hoverEnabled: true
 
-      onClicked: (mouse) => {
-        rippleComponent.createObject(feedbackLayer, { clickX: mouse.x, clickY: mouse.y })
-        root.clicked()
-      }
+      onPressed: (mouse) => root.startRipple(mouse.x, mouse.y)
+      onReleased: rippleFade.restart()
+      onCanceled: rippleFade.restart()
+      onClicked: root.clicked()
   }
 }
