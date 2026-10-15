@@ -3,8 +3,8 @@
 -----------------
 
 hl.on("hyprland.start", function ()
-    -- Start shell and wallpaper
-    hl.exec_cmd("qs & waypaper --restore")
+    -- Start shell, which also starts awww-daemon to bring the wallpaper back
+    hl.exec_cmd("qs")
 
     -- Start hypridle, unless its systemd user service already does
     hl.exec_cmd("systemctl --user -q is-enabled hypridle.service || hypridle")

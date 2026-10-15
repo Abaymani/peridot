@@ -101,7 +101,26 @@ Singleton {
         onPressed: root.isPowerMenuOpen = !root.isPowerMenuOpen
     }
 
+    property bool isWallpaperPickerOpen: false
+    property var toggleWallpaperPicker: GlobalShortcut {
+        name: "toggleWallpaperPicker"
+        onPressed: root.isWallpaperPickerOpen = !root.isWallpaperPickerOpen
+    }
+
     property bool isSettingsOpen: false
+    // Asks the settings window to show the page with this name.
+    signal settingsPageRequested(string name)
+
+    // Opens the settings window on `page` (a sidebar name, e.g. "Wallpaper"),
+    // bringing it to this workspace if it's open elsewhere.
+    function openSettings(page: string): void {
+        if (page !== "") root.settingsPageRequested(page)
+        root.isSettingsOpen = true
+        const win = Hyprland.toplevels.values.find(t => t.title === "Peridot Settings")
+        if (win && win.workspace?.id !== Hyprland.focusedWorkspace?.id)
+            Hyprland.dispatch("hl.dsp.window.move({workspace = hl.get_active_workspace().id, window = 'title:^(Peridot Settings)$'})")
+    }
+
     function toggleSettings(): void {
         const win = Hyprland.toplevels.values.find(t => t.title === "Peridot Settings")
 

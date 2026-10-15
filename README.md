@@ -12,7 +12,7 @@ Clone this repo to a folder separate from *~/.config* and create a symlink inste
 ln -s ~/peridot/* ~/.config
 ```
 
-In order for most config files to work properly, matugen needs to run at least once. If running waypaper, this will happen as soon as wallpaper is set for the first time. If not, the file *~/.config/peridot/settings/current_wallpaper.txt* needs to be created and given an image path. For example:
+In order for most config files to work properly, matugen needs to run at least once. This happens the first time you set a wallpaper with the shell's wallpaper picker (SUPER + SHIFT + W). To have colors before that, create *~/.config/peridot/settings/current_wallpaper.txt* with an image path in it. For example:
 
 ```
 echo "/home/$USER/.config/peridot/peridot.jpg" > ~/.config/peridot/settings/current_wallpaper.txt
@@ -37,6 +37,7 @@ You also need to run the install script for the SDDM theme, found in /peridot/sd
 - [x] On-screen Keyboard
 - [x] Emoji picker
 - [x] Clipboard history viewer
+- [x] Wallpaper picker (replaces waypaper)
 
 **Control Center**
 - [x] Power profile override
@@ -93,7 +94,7 @@ Since I don't have an install script (yet) and have multiple setups, here are al
 
 7zip
 **adw-gtk-theme**
-awww
+**awww**
 adwsteamgtk
 **brillo**
 bibata-cursor-theme-bin
@@ -104,6 +105,7 @@ cliphist
 cmake
 darkly-bin
 fastfetch
+**ffmpeg**
 ffmpegthumbnailer
 firefox
 fish
@@ -174,7 +176,6 @@ unzip
 uwsm
 visual-studio-code-bin
 vulkan-tools
-waypaper-git
 wget
 **wl-clipboard**
 wlr-randr
@@ -183,3 +184,4 @@ xdg-desktop-portal-hyprland
 **yay**
 yay-debug
 ydotool
+**zenity**

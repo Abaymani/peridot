@@ -85,6 +85,19 @@ Singleton {
     //CALENDAR
     property alias calendarView: jsonAdapter.calendarView // "month" or "week"; saved as soon as it's switched
 
+    //WALLPAPER (see services/Wallpapers)
+    property alias wallpaperFolder: jsonAdapter.wallpaperFolder // "~" for the home folder
+    property alias wallpaperSubfolders: jsonAdapter.wallpaperSubfolders
+    property alias wallpaperOrder: jsonAdapter.wallpaperOrder // "name" or "newest"
+    property alias wallpaperBackend: jsonAdapter.wallpaperBackend // "awww" or "swww"
+    property alias wallpaperScaling: jsonAdapter.wallpaperScaling // "fill", "fit", "center" or "stretch"
+    property alias wallpaperFillColor: jsonAdapter.wallpaperFillColor
+    property alias wallpaperMonitors: jsonAdapter.wallpaperMonitors // "all" or "focused"
+    property alias wallpaperTransition: jsonAdapter.wallpaperTransition // an awww transition type
+    property alias wallpaperTransitionDuration: jsonAdapter.wallpaperTransitionDuration // seconds
+    property alias wallpaperTransitionFps: jsonAdapter.wallpaperTransitionFps
+    property alias wallpaperTransitionAngle: jsonAdapter.wallpaperTransitionAngle // degrees, for wipe and wave
+
     // --- Persistence ---
     // The aliases above live in settings.json: changes apply live, and `store`
     // saves or reverts them (see SettingsStore).
@@ -130,6 +143,18 @@ Singleton {
             property string switcherPreviews: "live"
 
             property string calendarView: "month"
+
+            property string wallpaperFolder: "~/Pictures/Wallpapers"
+            property bool wallpaperSubfolders: false
+            property string wallpaperOrder: "name"
+            property string wallpaperBackend: "awww"
+            property string wallpaperScaling: "fill"
+            property string wallpaperFillColor: "#000000"
+            property string wallpaperMonitors: "all"
+            property string wallpaperTransition: "any"
+            property real wallpaperTransitionDuration: 2
+            property int wallpaperTransitionFps: 60
+            property int wallpaperTransitionAngle: 0
         }
     }
 }

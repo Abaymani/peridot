@@ -47,6 +47,10 @@ Scope {
                         store: Settings.store, keys: ["gradientBgEnabled", "isDarkMode", "activeGradient", "activeSecondaryGradient",
                             "activebackgroundGradient", "backdropFloorOpacity", "scrollSpeedMultiplier",
                             "matugenSourceColorIndex"]},
+                    {name: "Wallpaper", icon: "\u{f0e09}", page: wallpaperPageComponent,
+                        store: Settings.store, keys: ["wallpaperFolder", "wallpaperSubfolders", "wallpaperOrder", "wallpaperBackend",
+                            "wallpaperScaling", "wallpaperFillColor", "wallpaperMonitors", "wallpaperTransition",
+                            "wallpaperTransitionDuration", "wallpaperTransitionFps", "wallpaperTransitionAngle"]},
                     {name: "Bar", icon: "\u{f06fc}", page: barPageComponent,
                         store: Settings.store, keys: ["barLayout", "barMemoryDisplay", "barCpuUsage", "barNetworkStatus", "barNetworkSpeed",
                             "barDateFormat", "barTimeFormat"]},
@@ -75,6 +79,18 @@ Scope {
             }
         ]
         property var selectedCategory: sections[0].items[0]
+
+        // GlobalStates.openSettings() names the page to show.
+        Connections {
+            target: GlobalStates
+
+            function onSettingsPageRequested(name) {
+                for (const section of window.sections) {
+                    const item = section.items.find(item => item.name === name);
+                    if (item) window.selectedCategory = item;
+                }
+            }
+        }
 
         readonly property var stores: {
             const result = [];
@@ -107,6 +123,7 @@ Scope {
         Component { id: launcherPageComponent; LauncherPage {} }
         Component { id: keyboardPageComponent; KeyboardPage {} }
         Component { id: switcherPageComponent; SwitcherPage {} }
+        Component { id: wallpaperPageComponent; WallpaperPage {} }
 
         // Forces the active page to be recreated from scratch, giving every
         // control inside it a fresh binding to Settings. Needed because

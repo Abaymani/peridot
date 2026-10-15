@@ -54,15 +54,6 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    -- Waypaper floating
-    name = "waypaper-rule",
-    size = { 900, 900 },
-    float = true,
-    center = true,
-    match = { class = "waypaper" },
-})
-
-hl.window_rule({
     -- Nwg-look floating
     name = "nwg-rule",
     size = { 800, 600 },

@@ -11,6 +11,7 @@ Scope {
 	EmojiPicker {}
 	Switcher {}
 	PowerMenu {}
+	WallpaperPicker {}
 	OnScreenKeyboard {}
 	Preferences {}
 }
