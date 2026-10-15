@@ -27,6 +27,10 @@ QtObject {
     // Always replaced, never mutated, so bindings on it update.
     property var savedValues: ({})
 
+    // True once the file has been read, or found missing: before that the
+    // adapter holds defaults rather than the user's settings.
+    property bool ready: false
+
     // Emitted after save() and saveKey(). Build derived files from savedValues,
     // not live values, so unsaved previews never leak into them.
     signal saved()
@@ -116,13 +120,17 @@ QtObject {
             try {
                 onDisk = JSON.parse(text());
             } catch (e) {
+                root.ready = true;
                 return; // Invalid JSON; the adapter couldn't load it either.
             }
             const values = Object.assign({}, root.savedValues);
             for (const key of root.settingNames())
                 if (key in onDisk) values[key] = root.copy(onDisk[key]);
             root.savedValues = values;
+            root.ready = true;
         }
+
+        onLoadFailed: root.ready = true
     }
 
     // saveKey() writes through this adapter-less view: a FileView re-applies

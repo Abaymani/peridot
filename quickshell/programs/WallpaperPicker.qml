@@ -12,8 +12,6 @@ import qs
 // toggleWallpaperPicker shortcut; closes on Escape, on applying a wallpaper
 // or on a click anywhere else.
 Scope {
-  Component.onCompleted: Wallpapers.init()
-
   PanelWindow {
     id: window
 

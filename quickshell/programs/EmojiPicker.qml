@@ -27,6 +27,8 @@ Scope {
     }
   }
 
+  Component.onCompleted: if (GlobalStates.isEmojiPickerOpen) pointer.running = true
+
   Process {
     id: pointer
     command: ["hyprctl", "cursorpos", "-j"]

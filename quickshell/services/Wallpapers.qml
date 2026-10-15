@@ -9,7 +9,7 @@ import qs
 // The wallpaper folder and the backend that shows it. Lists the folder through
 // peridot/scripts/wallpaper-index.sh, which also keeps the thumbnail cache.
 //
-// The daemon restores the last wallpaper by itself
+// The daemon restores the last wallpaper by itself.
 Singleton {
   id: root
 
@@ -39,9 +39,7 @@ Singleton {
 
   property bool initialized: false
 
-  // Called once when the shell starts.
-  function init(): void {
-    if (initialized) return
+  Component.onCompleted: {
     initialized = true
     backendCheck.running = true
     rescan()
@@ -247,24 +245,6 @@ Singleton {
 
     function onWallpaperSubfoldersChanged() {
       if (root.initialized) rescanTimer.restart()
-    }
-  }
-
-  IpcHandler {
-    target: "wallpaper"
-
-    // Sets this image as the wallpaper.
-    function set(path: string): void {
-      root.apply(root.expandHome(path))
-    }
-
-    // Sets a random wallpaper from the folder.
-    function random(): void {
-      root.applyRandom()
-    }
-
-    function toggle(): void {
-      GlobalStates.isWallpaperPickerOpen = !GlobalStates.isWallpaperPickerOpen
     }
   }
 }

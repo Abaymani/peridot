@@ -3,7 +3,10 @@
 -----------------
 
 hl.on("hyprland.start", function ()
-    -- Start shell, which also starts awww-daemon to bring the wallpaper back
+    -- Wallpaper daemon first: it shows the last wallpaper from its cache
+    hl.exec_cmd(os.getenv("HOME") .. "/.config/peridot/scripts/wallpaper-daemon.sh")
+
+    -- Start shell
     hl.exec_cmd("qs")
 
     -- Start hypridle, unless its systemd user service already does
