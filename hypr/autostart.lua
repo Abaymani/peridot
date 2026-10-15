@@ -3,8 +3,11 @@
 -----------------
 
 hl.on("hyprland.start", function ()
-    -- Start shell and wallpaper
-    hl.exec_cmd("qs & waypaper --restore")
+    -- Wallpaper daemon first: it shows the last wallpaper from its cache
+    hl.exec_cmd(os.getenv("HOME") .. "/.config/peridot/scripts/wallpaper-daemon.sh")
+
+    -- Start shell
+    hl.exec_cmd("qs")
 
     -- Start hypridle, unless its systemd user service already does
     hl.exec_cmd("systemctl --user -q is-enabled hypridle.service || hypridle")

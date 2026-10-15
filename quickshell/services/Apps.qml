@@ -12,8 +12,25 @@ Singleton {
   property string terminal: "kitty"
 
   // Every launchable app (Hidden/NoDisplay entries are left out), by name.
-  readonly property var all: Array.from(DesktopEntries.applications.values)
-    .sort((a, b) => a.name.localeCompare(b.name))
+  // Desktop entries arrive one at a time at startup, waits until they stop coming.
+  property var all: []
+
+  Timer {
+    id: entriesSettled
+    interval: 150
+    onTriggered: root.all = Array.from(DesktopEntries.applications.values)
+      .sort((a, b) => a.name.localeCompare(b.name))
+  }
+
+  Connections {
+    target: DesktopEntries.applications
+
+    function onValuesChanged() {
+      entriesSettled.restart()
+    }
+  }
+
+  Component.onCompleted: entriesSettled.restart()
 
   // The line under an app's name.
   function subtitle(entry) {

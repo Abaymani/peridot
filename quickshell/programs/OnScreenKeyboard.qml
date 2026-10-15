@@ -31,6 +31,8 @@ Scope {
     }
   }
 
+  Component.onCompleted: if (GlobalStates.isOskOpen) Osk.refresh()
+
   PanelWindow {
     visible: GlobalStates.isOskOpen
     screen: Quickshell.screens.find(s => s.name === Hyprland.focusedMonitor?.name) ?? null

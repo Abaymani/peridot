@@ -3,6 +3,7 @@ import Quickshell
 import Quickshell.Io
 pragma Singleton
 import Quickshell.Hyprland
+import qs.services
 pragma ComponentBehavior: Bound
 
 Singleton {
@@ -101,7 +102,44 @@ Singleton {
         onPressed: root.isPowerMenuOpen = !root.isPowerMenuOpen
     }
 
+    property bool isWallpaperPickerOpen: false
+    property var toggleWallpaperPicker: GlobalShortcut {
+        name: "toggleWallpaperPicker"
+        onPressed: root.isWallpaperPickerOpen = !root.isWallpaperPickerOpen
+    }
+
+    property var wallpaperIpc: IpcHandler {
+        target: "wallpaper"
+
+        function set(path: string): void {
+            Wallpapers.apply(Wallpapers.expandHome(path))
+        }
+
+        function random(): void {
+            Wallpapers.applyRandom()
+        }
+
+        function toggle(): void {
+            root.isWallpaperPickerOpen = !root.isWallpaperPickerOpen
+        }
+    }
+
     property bool isSettingsOpen: false
+    // Asks the settings window to show the page with this name.
+    signal settingsPageRequested(string name)
+
+    // Opens the settings window on `page` (a sidebar name, e.g. "Wallpaper"),
+    // bringing it to this workspace if it's open elsewhere.
+    function openSettings(page: string): void {
+        // Open first: the window is only made on first use, and has to exist
+        // to hear which page to show.
+        root.isSettingsOpen = true
+        if (page !== "") root.settingsPageRequested(page)
+        const win = Hyprland.toplevels.values.find(t => t.title === "Peridot Settings")
+        if (win && win.workspace?.id !== Hyprland.focusedWorkspace?.id)
+            Hyprland.dispatch("hl.dsp.window.move({workspace = hl.get_active_workspace().id, window = 'title:^(Peridot Settings)$'})")
+    }
+
     function toggleSettings(): void {
         const win = Hyprland.toplevels.values.find(t => t.title === "Peridot Settings")
 
