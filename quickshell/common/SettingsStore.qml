@@ -85,8 +85,10 @@ QtObject {
         return a === b || canonical(a) === canonical(b);
     }
 
+    // copy() first: lists loaded from the file read back as list wrappers, which
+    // Array.isArray() rejects, so they'd be sorted into {"0": ...} objects.
     function canonical(value): string {
-        return JSON.stringify(value, (key, v) => v !== null && typeof v === "object" && !Array.isArray(v)
+        return JSON.stringify(copy(value), (key, v) => v !== null && typeof v === "object" && !Array.isArray(v)
             ? Object.keys(v).sort().reduce((sorted, k) => { sorted[k] = v[k]; return sorted; }, {})
             : v);
     }
